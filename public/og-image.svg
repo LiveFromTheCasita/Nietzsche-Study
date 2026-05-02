@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Nietzsche Study social preview</title>
+  <desc id="desc">A dark editorial social card for the Nietzsche Study site.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d1511"/>
+      <stop offset="55%" stop-color="#130f0d"/>
+      <stop offset="100%" stop-color="#271a17"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f0b04f"/>
+      <stop offset="100%" stop-color="#d86f4e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1010" cy="120" r="220" fill="#5a2f27" fill-opacity="0.2"/>
+  <circle cx="180" cy="530" r="240" fill="#8d4b1c" fill-opacity="0.18"/>
+
+  <rect x="78" y="74" width="1044" height="482" rx="28" fill="none" stroke="rgba(240,176,79,0.24)"/>
+  <rect x="78" y="74" width="1044" height="8" rx="4" fill="url(#line)"/>
+
+  <text x="120" y="158" fill="#f0b04f" font-size="24" font-family="Georgia, serif" letter-spacing="6">
+    NIETZSCHE STUDY
+  </text>
+  <text x="120" y="286" fill="#f8f2ea" font-size="84" font-weight="700" font-family="Georgia, serif">
+    Read Nietzsche as a
+  </text>
+  <text x="120" y="376" fill="#f8f2ea" font-size="84" font-weight="700" font-family="Georgia, serif">
+    problem, a provocation,
+  </text>
+  <text x="120" y="466" fill="#f8f2ea" font-size="84" font-weight="700" font-family="Georgia, serif">
+    and a discipline.
+  </text>
+
+  <text x="124" y="536" fill="#d7cfc8" font-size="30" font-family="Arial, sans-serif">
+    Themes, passages, developmental arcs, and conceptual cross-references.
+  </text>
+</svg>
