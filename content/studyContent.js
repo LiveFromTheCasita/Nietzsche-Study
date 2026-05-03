@@ -264,7 +264,6 @@ export const submittedPapersByTheme = {
       slug: "nietzsche-on-master-morality-slave-morality-and-ressentiment",
       fileName: "nietzsche-on-master-morality-slave-morality-and-ressentiment.md",
       title: "Nietzsche on Master Morality, Slave Morality, and Ressentiment",
-      author: "ChatGPT Deep Research",
       submittedOn: "May 3, 2026",
       status: "Submitted",
       type: "Markdown",
