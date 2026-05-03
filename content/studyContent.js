@@ -246,6 +246,21 @@ export const themeMeta = {
   },
 };
 
+export const submittedPapersByTheme = {
+  "master-slave-ressentiment": [],
+  "death-of-god-nihilism": [],
+  "will-to-power-self-overcoming": [],
+  "eternal-recurrence-amor-fati": [],
+  "perspectivism-truth": [],
+  "herd-morality-last-man": [],
+  "nobility-rank-higher-type": [],
+  "bad-conscience-guilt": [],
+  "ascetic-ideal-life-denial": [],
+  "dionysian-tragic-affirmation": [],
+  "revaluation-philosophizing-with-hammer": [],
+  "overman-transformation": [],
+};
+
 export const featuredThemeIds = [
   "death-of-god-nihilism",
   "master-slave-ressentiment",

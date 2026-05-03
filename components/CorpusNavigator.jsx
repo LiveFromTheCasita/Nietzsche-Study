@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 import { relationTypes, themes } from "../content/corpusData";
+import { submittedPapersByTheme } from "../content/studyContent";
 import { getPassageById, getThemePassages, sortPassages, titleCase } from "../lib/corpus";
 
 const createDefaultFilters = () => ({
@@ -139,12 +140,14 @@ function ThemePage({ theme, initialTab }) {
     () => [...new Set(themePassages.map((passage) => passage.period))],
     [themePassages]
   );
+  const submittedPapers = submittedPapersByTheme[theme.id] || [];
 
   const tabs = [
     { id: "overview", label: "Overview" },
     { id: "essential", label: "Essential Path" },
     { id: "corpus", label: `Full Corpus (${themePassages.length})` },
     { id: "arc", label: "Developmental Arc" },
+    { id: "papers", label: "Submitted Papers" },
     { id: "concepts", label: "Concept Net" },
   ];
 
@@ -311,6 +314,43 @@ function ThemePage({ theme, initialTab }) {
               </span>
             ))}
           </div>
+        </section>
+      )}
+
+      {activeTab === "papers" && (
+        <section className="content-panel">
+          <p className="panel-kicker">Submitted Papers</p>
+          <h2>Papers collected under this theme</h2>
+          <p className="panel-copy panel-copy--narrow">
+            This tab is reserved for papers you submit under the current theme.
+          </p>
+
+          {submittedPapers.length === 0 ? (
+            <div className="navigator-empty papers-empty-state">
+              No submitted papers have been added for this theme yet.
+            </div>
+          ) : (
+            <div className="papers-grid">
+              {submittedPapers.map((paper) => (
+                <article key={paper.id} className="paper-card">
+                  <div className="paper-card__header">
+                    <div>
+                      <h3>{paper.title}</h3>
+                      {paper.author ? <p className="paper-card__author">{paper.author}</p> : null}
+                    </div>
+                    {paper.status ? <span className="meta-chip">{paper.status}</span> : null}
+                  </div>
+
+                  <div className="chip-row chip-row--wide">
+                    {paper.submittedOn ? <span className="meta-chip">Submitted {paper.submittedOn}</span> : null}
+                    {paper.type ? <span className="meta-chip">{paper.type}</span> : null}
+                  </div>
+
+                  {paper.summary ? <p>{paper.summary}</p> : null}
+                </article>
+              ))}
+            </div>
+          )}
         </section>
       )}
     </div>
