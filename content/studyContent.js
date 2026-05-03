@@ -247,7 +247,17 @@ export const themeMeta = {
 };
 
 export const submittedPapersByTheme = {
-  "master-slave-ressentiment": [],
+  "master-slave-ressentiment": [
+    {
+      id: "master-morality-slave-morality-ressentiment-paper-1",
+      title: "Master Morality, Slave Morality, and Ressentiment in Nietzsche",
+      submittedOn: "May 3, 2026",
+      status: "Submitted",
+      type: "Markdown",
+      summary:
+        "A paper on Nietzsche’s distinction between master morality and slave morality as two fundamentally different ways of valuing, with ressentiment as the reactive psychological engine that turns suffering, blocked action, and revenge into moral judgment.",
+    },
+  ],
   "death-of-god-nihilism": [],
   "will-to-power-self-overcoming": [],
   "eternal-recurrence-amor-fati": [],
