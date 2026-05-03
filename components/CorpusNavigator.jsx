@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useEffect, useMemo, useState } from "react";
 
 import { relationTypes, themes } from "../content/corpusData";
@@ -347,6 +348,14 @@ function ThemePage({ theme, initialTab }) {
                   </div>
 
                   {paper.summary ? <p>{paper.summary}</p> : null}
+
+                  {paper.slug ? (
+                    <div className="paper-card__actions">
+                      <Link href={`/corpus/papers/${paper.slug}`} className="button button--ghost">
+                        Read paper
+                      </Link>
+                    </div>
+                  ) : null}
                 </article>
               ))}
             </div>

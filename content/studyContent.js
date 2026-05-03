@@ -250,6 +250,8 @@ export const submittedPapersByTheme = {
   "master-slave-ressentiment": [
     {
       id: "master-morality-slave-morality-ressentiment-paper-1",
+      slug: "master-morality-slave-morality-and-ressentiment-in-nietzsche",
+      fileName: "master-morality-slave-morality-and-ressentiment-in-nietzsche.md",
       title: "Master Morality, Slave Morality, and Ressentiment in Nietzsche",
       submittedOn: "May 3, 2026",
       status: "Submitted",
