@@ -1085,6 +1085,59 @@ blockquote {
   color: var(--text-soft);
 }
 
+.paper-prose a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 209, 138, 0.45);
+  text-underline-offset: 0.18em;
+}
+
+.paper-prose ul,
+.paper-prose ol {
+  margin: 0;
+  padding-left: 1.4rem;
+  color: var(--text-soft);
+  display: grid;
+  gap: 0.65rem;
+}
+
+.paper-prose li {
+  line-height: 1.72;
+}
+
+.paper-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+.paper-prose table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  background: rgba(26, 20, 17, 0.92);
+}
+
+.paper-prose th,
+.paper-prose td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-soft);
+}
+
+.paper-prose th {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.96rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.paper-prose tbody tr:last-child td {
+  border-bottom: none;
+}
+
 .theme-navigator-shell {
   gap: 1.15rem;
 }
