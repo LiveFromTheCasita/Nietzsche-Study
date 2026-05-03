@@ -15,8 +15,8 @@ const createDefaultFilters = () => ({
 
 export default function CorpusNavigator({
   initialThemeId = themes[0]?.id ?? "",
+  initialTab = "overview",
   showHero = true,
-  onOpenPassageLibrary = null,
 }) {
   const [themeQuery, setThemeQuery] = useState("");
   const [selectedThemeId, setSelectedThemeId] = useState(initialThemeId || themes[0]?.id || "");
@@ -99,21 +99,21 @@ export default function CorpusNavigator({
         </aside>
 
         <main className="navigator-main">
-          {selectedTheme ? <ThemePage theme={selectedTheme} onOpenPassageLibrary={onOpenPassageLibrary} /> : null}
+          {selectedTheme ? <ThemePage theme={selectedTheme} initialTab={initialTab} /> : null}
         </main>
       </div>
     </section>
   );
 }
 
-function ThemePage({ theme, onOpenPassageLibrary }) {
-  const [activeTab, setActiveTab] = useState("overview");
+function ThemePage({ theme, initialTab }) {
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [filters, setFilters] = useState(createDefaultFilters);
 
   useEffect(() => {
-    setActiveTab("overview");
+    setActiveTab(initialTab);
     setFilters(createDefaultFilters());
-  }, [theme.id]);
+  }, [theme.id, initialTab]);
 
   const themePassages = useMemo(() => getThemePassages(theme), [theme]);
 
@@ -261,15 +261,6 @@ function ThemePage({ theme, onOpenPassageLibrary }) {
                       <strong>Why it matters:</strong> {passage.relevance}
                     </p>
                   )}
-                  {onOpenPassageLibrary && (
-                    <button
-                      type="button"
-                      className="button button--secondary navigator-inline-button"
-                      onClick={() => onOpenPassageLibrary({ themeId: theme.id, passageId: passage.id })}
-                    >
-                      Open in passage library
-                    </button>
-                  )}
                 </div>
               </article>
             ))}
@@ -282,7 +273,7 @@ function ThemePage({ theme, onOpenPassageLibrary }) {
           <p className="panel-kicker">Full Corpus Passage List</p>
           <h2>All related passages for this theme</h2>
           <p className="panel-copy panel-copy--narrow">
-            This is the expanded deep-dive view: core, direct, related, and background passages across Nietzsche’s works.
+            This is the expanded full-corpus view: core, direct, related, and background passages across Nietzsche’s works.
           </p>
 
           <PassageFilters
@@ -304,12 +295,7 @@ function ThemePage({ theme, onOpenPassageLibrary }) {
               <div className="navigator-empty">No passages matched the current filters.</div>
             ) : (
               filteredPassages.map((passage) => (
-                <PassageCard
-                  key={passage.id}
-                  passage={passage}
-                  themeId={theme.id}
-                  onOpenPassageLibrary={onOpenPassageLibrary}
-                />
+                <PassageCard key={passage.id} passage={passage} />
               ))
             )}
           </div>
@@ -427,7 +413,7 @@ function PassageFilters({ filters, setFilters, availableWorks, availablePeriods 
   );
 }
 
-function PassageCard({ passage, themeId, onOpenPassageLibrary }) {
+function PassageCard({ passage }) {
   const [expanded, setExpanded] = useState(false);
   const connectedPassages = (passage.connectedPassageIds || [])
     .map((id) => getPassageById(id))
@@ -488,18 +474,6 @@ function PassageCard({ passage, themeId, onOpenPassageLibrary }) {
             </div>
           )}
 
-          {onOpenPassageLibrary && (
-            <div>
-              <h4>Library</h4>
-              <button
-                type="button"
-                className="button button--secondary navigator-inline-button"
-                onClick={() => onOpenPassageLibrary({ themeId, passageId: passage.id })}
-              >
-                Open this passage in the library
-              </button>
-            </div>
-          )}
         </div>
       )}
     </article>

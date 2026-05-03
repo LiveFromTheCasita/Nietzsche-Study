@@ -6,10 +6,8 @@ import CorpusNavigator from "./CorpusNavigator";
 import {
   aphorisms,
   beginnerReadingPath,
-  deepDiveThemeIds,
   editionNotes,
   featuredThemeIds,
-  lessonModes,
   periods,
   principles,
   startingPoints,
@@ -18,8 +16,8 @@ import {
   themeWeb,
   worksShelf,
 } from "../content/studyContent";
-import { relationTypes, themes, works } from "../content/corpusData";
-import { getLibraryPassages, getPassageById, sortLibraryPassages, titleCase } from "../lib/corpus";
+import { themes, works } from "../content/corpusData";
+import { getPassageById } from "../lib/corpus";
 
 const themeById = new Map(themes.map((theme) => [theme.id, theme]));
 
@@ -31,6 +29,10 @@ function getStudyTheme(themeId) {
 
 function scrollToSection(sectionId) {
   document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function getPhaseLabel(period) {
+  return period === "mature" ? "Late" : period.charAt(0).toUpperCase() + period.slice(1);
 }
 
 function Pill({ children, active = false, onClick }) {
@@ -94,135 +96,14 @@ function ThemeNotes({ theme }) {
   );
 }
 
-function PassageLibraryCard({
-  passage,
-  expanded,
-  onToggle,
-  onOpenLibrary,
-  onOpenNavigator,
-  activeThemeId,
-}) {
-  const activeReference =
-    activeThemeId !== "all"
-      ? passage.themes.find((themeReference) => themeReference.themeId === activeThemeId) || null
-      : null;
-  const leadReference = activeReference || passage.themes[0];
-  const connectedPassages = (passage.connectedPassageIds || [])
-    .map((id) => getPassageById(id))
-    .filter(Boolean);
-  const visibleTags = expanded ? passage.tags || [] : (passage.tags || []).slice(0, 6);
-
-  return (
-    <article className={`library-card ${expanded ? "library-card--expanded" : ""}`}>
-      <div className="library-card__header">
-        <div>
-          <div className="chip-row">
-            <span className={`relation-badge relation-badge--${leadReference?.relation || passage.strongestRelation}`}>
-              {relationTypes[leadReference?.relation || passage.strongestRelation]?.label || "Related"}
-            </span>
-            <span className="meta-chip">{passage.work}</span>
-            <span className="meta-chip">{titleCase(passage.period)}</span>
-            <span className="meta-chip">{passage.themeCount} themes</span>
-          </div>
-          <h3>{passage.title}</h3>
-          <p className="passage-card__citation">
-            <em>{passage.work}</em> {passage.citation}
-          </p>
-        </div>
-
-        <button type="button" className="button button--ghost" onClick={onToggle}>
-          {expanded ? "Hide details" : "Open card"}
-        </button>
-      </div>
-
-      <p>{activeReference?.relevance || passage.summary}</p>
-
-      <div className="chip-row chip-row--wide">
-        {visibleTags.map((tag) => (
-          <span key={tag} className="meta-chip">
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {expanded && (
-        <div className="library-card__details">
-          <div className="library-detail">
-            <h4>Why it matters</h4>
-            <p>{leadReference?.relevance || passage.libraryRelevance}</p>
-          </div>
-
-          <div className="library-detail">
-            <h4>Theme appearances</h4>
-            <div className="theme-reference-list">
-              {passage.themes.map((themeReference) => (
-                <button
-                  key={`${passage.id}-${themeReference.themeId}`}
-                  type="button"
-                  className="theme-reference"
-                  onClick={() => onOpenLibrary(themeReference.themeId, passage.id)}
-                >
-                  <span>{themeReference.themeShortTitle}</span>
-                  <small>{relationTypes[themeReference.relation]?.label || "Related"}</small>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {!!connectedPassages.length && (
-            <div className="library-detail">
-              <h4>Connected passages</h4>
-              <div className="connected-grid">
-                {connectedPassages.map((connectedPassage) => (
-                  <button
-                    key={connectedPassage.id}
-                    type="button"
-                    className="connected-card connected-card--button"
-                    onClick={() => onOpenLibrary(activeThemeId !== "all" ? activeThemeId : "all", connectedPassage.id)}
-                  >
-                    <span>{connectedPassage.title}</span>
-                    <small>
-                      {connectedPassage.work} {connectedPassage.citation}
-                    </small>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div className="library-detail">
-            <h4>Status</h4>
-            <p>{passage.status}</p>
-          </div>
-
-          <div className="library-actions">
-            <button
-              type="button"
-              className="button button--secondary"
-              onClick={() => onOpenNavigator(leadReference?.themeId || passage.primaryThemeId)}
-            >
-              Open primary theme in navigator
-            </button>
-          </div>
-        </div>
-      )}
-    </article>
-  );
-}
-
 export default function NietzscheStudySite() {
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
   const [openThemeId, setOpenThemeId] = useState("death-of-god-nihilism");
   const [selectedNavigatorThemeId, setSelectedNavigatorThemeId] = useState("death-of-god-nihilism");
-  const [libraryQuery, setLibraryQuery] = useState("");
-  const [selectedLibraryThemeId, setSelectedLibraryThemeId] = useState("all");
-  const [selectedLibraryWorkId, setSelectedLibraryWorkId] = useState("all");
-  const [selectedLibraryPeriod, setSelectedLibraryPeriod] = useState("all");
-  const [selectedLibraryRelation, setSelectedLibraryRelation] = useState("all");
-  const [selectedLibrarySort, setSelectedLibrarySort] = useState("coverage");
-  const [expandedLibraryPassageId, setExpandedLibraryPassageId] = useState("");
+  const [selectedNavigatorTab, setSelectedNavigatorTab] = useState("overview");
+  const [selectedWorkId, setSelectedWorkId] = useState(works[0]?.id ?? "");
 
   const studyThemes = useMemo(
     () => themes.map((theme) => ({ ...theme, ...(themeMeta[theme.id] || {}) })),
@@ -243,13 +124,11 @@ export default function NietzscheStudySite() {
     () => featuredThemeIds.map(getStudyTheme).filter(Boolean),
     []
   );
-
-  const deepDiveThemes = useMemo(
-    () => deepDiveThemeIds.map(getStudyTheme).filter(Boolean),
+  const orderedWorks = useMemo(
+    () => [...works].sort((left, right) => left.publicationOrder - right.publicationOrder),
     []
   );
-
-  const libraryPassages = useMemo(() => getLibraryPassages(), []);
+  const selectedWork = orderedWorks.find((work) => work.id === selectedWorkId) || orderedWorks[0] || null;
 
   const filteredThemes = studyThemes.filter((theme) => {
     const matchesTag = selectedTag === "all" || theme.tag === selectedTag;
@@ -272,70 +151,15 @@ export default function NietzscheStudySite() {
     return matchesTag && matchesDifficulty && searchable.includes(query.toLowerCase());
   });
 
-  const filteredLibraryPassages = useMemo(() => {
-    const queryValue = libraryQuery.trim().toLowerCase();
-
-    const filtered = libraryPassages.filter((passage) => {
-      const matchesTheme =
-        selectedLibraryThemeId === "all" || passage.themeIds.includes(selectedLibraryThemeId);
-      const matchesWork = selectedLibraryWorkId === "all" || passage.workId === selectedLibraryWorkId;
-      const matchesPeriod = selectedLibraryPeriod === "all" || passage.period === selectedLibraryPeriod;
-      const matchesRelation =
-        selectedLibraryRelation === "all" ||
-        passage.themes.some((themeReference) => themeReference.relation === selectedLibraryRelation);
-      const matchesQuery =
-        !queryValue ||
-        [
-          passage.title,
-          passage.work,
-          passage.citation,
-          passage.summary,
-          passage.libraryRelevance,
-          ...(passage.tags || []),
-          ...passage.themes.map((themeReference) => themeReference.themeTitle),
-          ...passage.themes.map((themeReference) => themeReference.themeCategory),
-        ]
-          .join(" ")
-          .toLowerCase()
-          .includes(queryValue);
-
-      return matchesTheme && matchesWork && matchesPeriod && matchesRelation && matchesQuery;
-    });
-
-    return sortLibraryPassages(filtered, selectedLibrarySort);
-  }, [
-    libraryPassages,
-    libraryQuery,
-    selectedLibraryPeriod,
-    selectedLibraryRelation,
-    selectedLibrarySort,
-    selectedLibraryThemeId,
-    selectedLibraryWorkId,
-  ]);
-
-  const selectedLibraryTheme =
-    selectedLibraryThemeId === "all" ? null : getStudyTheme(selectedLibraryThemeId);
-
-  const libraryPeriods = useMemo(
-    () => [...new Set(libraryPassages.map((passage) => passage.period))],
-    [libraryPassages]
-  );
-
-  const openPassageLibrary = (themeId = "all", passageId = "") => {
-    setSelectedLibraryThemeId(themeId || "all");
-    setSelectedLibraryWorkId("all");
-    setSelectedLibraryPeriod("all");
-    setSelectedLibraryRelation("all");
-    setSelectedLibrarySort(passageId ? "importance" : "coverage");
-    setLibraryQuery("");
-    setExpandedLibraryPassageId(passageId || "");
-    scrollToSection("passage-library");
-  };
-
-  const openNavigatorTheme = (themeId) => {
+  const openNavigatorTheme = (themeId, tab = "overview") => {
     if (!themeId) return;
+    setOpenThemeId(themeId);
+    setSelectedTag("all");
+    setSelectedDifficulty("all");
+    setQuery("");
     setSelectedNavigatorThemeId(themeId);
-    scrollToSection("corpus-navigator");
+    setSelectedNavigatorTab(tab);
+    scrollToSection("theme-navigator");
   };
 
   return (
@@ -353,12 +177,8 @@ export default function NietzscheStudySite() {
             <a href="#start">Start</a>
             <a href="#development">Development</a>
             <a href="#themes">Themes</a>
-            <a href="#corpus-navigator">Navigator</a>
-            <a href="#passage-library">Passages</a>
-            <a href="#deep-dive">Deep dive</a>
             <a href="#theme-web">Theme web</a>
             <a href="#lessons">Lessons</a>
-            <a href="#works">Works</a>
           </div>
         </div>
       </nav>
@@ -369,7 +189,7 @@ export default function NietzscheStudySite() {
           <div className="hero-copy">
             <div className="eyebrow">A serious guide to Nietzsche, not a slogan machine</div>
             <h1 className="hero-title">
-              Read Nietzsche as a problem, a provocation, and a discipline.
+              Read Nietzsche as a provocation and a discipline.
             </h1>
             <p className="hero-summary">
               A study hub for tracing Nietzsche’s movement from tragedy and art, through the free-spirit critique
@@ -453,8 +273,8 @@ export default function NietzscheStudySite() {
           <div className="section-inner">
             <div className="section-header section-header--split">
               <div>
-                <SectionKicker>Development</SectionKicker>
-                <h2>Nietzsche changes. Track the movement.</h2>
+                <SectionKicker>Development &amp; Works</SectionKicker>
+                <h2>Nietzsche changes. Track the movement through the books.</h2>
               </div>
               <p className="section-sidecopy">
                 The same term can mean different things across the early, middle, and late works. Good reading
@@ -478,6 +298,52 @@ export default function NietzscheStudySite() {
                 </Card>
               ))}
             </div>
+
+            <div className="feature-panel">
+              <div className="feature-panel__header">
+                <div>
+                  <p className="feature-panel__label">Works in order</p>
+                  <h3>Read the books chronologically.</h3>
+                </div>
+                <p className="section-sidecopy">
+                  Click a work to see its phase, its central concern, and why it matters in the sequence.
+                </p>
+              </div>
+
+              <div className="works-grid">
+                {orderedWorks.map((work) => (
+                  <button
+                    key={work.id}
+                    type="button"
+                    className={`navigator-theme-button ${selectedWork?.id === work.id ? "navigator-theme-button--active" : ""}`}
+                    onClick={() => setSelectedWorkId(work.id)}
+                  >
+                    <div className="navigator-theme-button__header">
+                      <h3>
+                        {work.publicationOrder}. {work.title}
+                      </h3>
+                      <span>{getPhaseLabel(work.period)}</span>
+                    </div>
+                    <p className="navigator-theme-button__summary">{worksShelf[work.id]?.note}</p>
+                  </button>
+                ))}
+              </div>
+
+              {selectedWork && (
+                <Card className="card--padded">
+                  <div className="card-header">
+                    <div>
+                      <h3>{selectedWork.title}</h3>
+                      <p>{worksShelf[selectedWork.id]?.note}</p>
+                      <p className="fine-print">{worksShelf[selectedWork.id]?.edition}</p>
+                    </div>
+                    <span className="meta-chip">
+                      {getPhaseLabel(selectedWork.period)} phase
+                    </span>
+                  </div>
+                </Card>
+              )}
+            </div>
           </div>
         </section>
 
@@ -485,11 +351,11 @@ export default function NietzscheStudySite() {
           <div className="section-inner">
             <div className="section-header section-header--grid">
               <div>
-                <SectionKicker>Themes</SectionKicker>
-                <h2>A map of Nietzsche’s central problems.</h2>
+                <SectionKicker>Themes &amp; Navigator</SectionKicker>
+                <h2>Map the themes, then open the passages.</h2>
                 <p className="section-copy">
-                  Each theme includes a guiding question, a compact interpretation, a deliberate reading path,
-                  its development across the corpus, and a misreading to avoid.
+                  Use the theme cards to orient yourself, then jump straight into the passage-based navigator for
+                  the full route through the corpus.
                 </p>
                 <p className="section-count">
                   Showing {filteredThemes.length} of {studyThemes.length} themes.
@@ -605,18 +471,10 @@ export default function NietzscheStudySite() {
 
                         <button
                           type="button"
-                          className="button button--secondary button--full"
-                          onClick={() => openPassageLibrary(theme.id)}
-                        >
-                          Open in passage library
-                        </button>
-
-                        <button
-                          type="button"
                           className="button button--primary button--full"
-                          onClick={() => openNavigatorTheme(theme.id)}
+                          onClick={() => openNavigatorTheme(theme.id, "overview")}
                         >
-                          Open in corpus navigator
+                          Open in theme navigator
                         </button>
                       </div>
                     </Card>
@@ -624,219 +482,26 @@ export default function NietzscheStudySite() {
                 })}
               </div>
             )}
-          </div>
-        </section>
 
-        <section id="corpus-navigator" className="content-section">
-          <div className="section-inner">
-            <div className="section-header section-header--split">
-              <div>
-                <SectionKicker>Corpus navigator</SectionKicker>
-                <h2>Move from theme to passage to cross-reference.</h2>
-              </div>
-              <p className="section-sidecopy">
-                The normalized corpus engine stays intact here: choose a theme, open the essential path, then widen into the full passage list and development arc.
-              </p>
-            </div>
-
-            <CorpusNavigator
-              initialThemeId={selectedNavigatorThemeId}
-              showHero={false}
-              onOpenPassageLibrary={({ themeId, passageId }) => openPassageLibrary(themeId, passageId)}
-            />
-          </div>
-        </section>
-
-        <section id="passage-library" className="content-section section-border section-muted">
-          <div className="section-inner">
-            <div className="section-header section-header--split">
-              <div>
-                <SectionKicker>Passage library</SectionKicker>
-                <h2>Make the passages themselves searchable.</h2>
-              </div>
-              <p className="section-sidecopy">
-                This is the site-wide passage layer: filter by theme, work, period, or relation, then open a passage card to see why it matters and where else it appears.
-              </p>
-            </div>
-
-            <div className="feature-panel feature-panel--compact">
-              <div className="library-toolbar">
-                <div className="search-wrap">
-                  <input
-                    value={libraryQuery}
-                    onChange={(event) => setLibraryQuery(event.target.value)}
-                    placeholder="Search madman, ressentiment, Zarathustra, guilt..."
-                    className="search-field"
-                  />
-                  {libraryQuery && (
-                    <button type="button" className="search-clear" onClick={() => setLibraryQuery("")}>
-                      Clear
-                    </button>
-                  )}
+            <div id="theme-navigator" className="section-inner">
+              <div className="section-header section-header--split">
+                <div>
+                  <SectionKicker>Theme navigator</SectionKicker>
+                  <h2>Move from theme to passage to cross-reference.</h2>
                 </div>
-
-                <select
-                  value={selectedLibraryThemeId}
-                  onChange={(event) => setSelectedLibraryThemeId(event.target.value)}
-                  className="navigator-select"
-                >
-                  <option value="all">All themes</option>
-                  {studyThemes.map((theme) => (
-                    <option key={theme.id} value={theme.id}>
-                      {theme.shortTitle || theme.title}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={selectedLibraryWorkId}
-                  onChange={(event) => setSelectedLibraryWorkId(event.target.value)}
-                  className="navigator-select"
-                >
-                  <option value="all">All works</option>
-                  {works.map((work) => (
-                    <option key={work.id} value={work.id}>
-                      {work.title}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={selectedLibraryPeriod}
-                  onChange={(event) => setSelectedLibraryPeriod(event.target.value)}
-                  className="navigator-select"
-                >
-                  <option value="all">All periods</option>
-                  {libraryPeriods.map((period) => (
-                    <option key={period} value={period}>
-                      {titleCase(period)}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={selectedLibraryRelation}
-                  onChange={(event) => setSelectedLibraryRelation(event.target.value)}
-                  className="navigator-select"
-                >
-                  <option value="all">All relations</option>
-                  {Object.entries(relationTypes).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {value.label}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={selectedLibrarySort}
-                  onChange={(event) => setSelectedLibrarySort(event.target.value)}
-                  className="navigator-select"
-                >
-                  <option value="coverage">Sort: Theme coverage</option>
-                  <option value="importance">Sort: Importance</option>
-                  <option value="workOrder">Sort: Work order</option>
-                  <option value="alphabetical">Sort: Alphabetical</option>
-                </select>
+                <p className="section-sidecopy">
+                  Choose a theme, open the essential path, then widen into the full corpus view and development arc.
+                </p>
               </div>
 
-              <div className="results-meta">
-                <span>
-                  {filteredLibraryPassages.length} of {libraryPassages.length} indexed passages shown
-                </span>
-                <span>
-                  {selectedLibraryTheme
-                    ? `Focused on ${selectedLibraryTheme.shortTitle || selectedLibraryTheme.title}`
-                    : "Viewing all themes"}
-                </span>
-              </div>
-            </div>
-
-            {selectedLibraryTheme && (
-              <div className="callout callout--amber">
-                <strong>Theme focus:</strong> {selectedLibraryTheme.title}. The library is currently filtered to passages that appear inside this theme.
-              </div>
-            )}
-
-            {filteredLibraryPassages.length === 0 ? (
-              <Card className="empty-state">
-                <h3>No matching passages.</h3>
-                <p>Try loosening the filters or searching by work title, concept, or section number.</p>
-              </Card>
-            ) : (
-              <div className="library-list">
-                {filteredLibraryPassages.map((passage) => (
-                  <PassageLibraryCard
-                    key={passage.id}
-                    passage={passage}
-                    expanded={expandedLibraryPassageId === passage.id}
-                    activeThemeId={selectedLibraryThemeId}
-                    onToggle={() =>
-                      setExpandedLibraryPassageId((current) => (current === passage.id ? "" : passage.id))
-                    }
-                    onOpenLibrary={(themeId, passageId) => openPassageLibrary(themeId, passageId)}
-                    onOpenNavigator={(themeId) => openNavigatorTheme(themeId)}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        <section id="deep-dive" className="content-section">
-          <div className="section-inner">
-            <div className="section-header">
-              <SectionKicker>Theme deep dive</SectionKicker>
-              <h2>The themes that need more room.</h2>
-              <p className="section-copy">
-                These are the strongest candidates for standalone pages with passage guides, vocabulary sections, and cross-reference maps.
-              </p>
-            </div>
-
-            <div className="deep-dive-grid">
-              {deepDiveThemes.map((theme) => (
-                <Card key={theme.id} className="deep-dive-card">
-                  <div className="deep-dive-card__header">
-                    <div className="chip-row">
-                      <span className="meta-chip meta-chip--amber">{theme.difficulty}</span>
-                      <span className="meta-chip">{theme.period}</span>
-                      <span className="meta-chip">{theme.tag}</span>
-                    </div>
-                    <h3>{theme.title}</h3>
-                    <p>{theme.question}</p>
-                  </div>
-
-                  <div className="deep-dive-card__grid">
-                    <div>
-                      <p>{theme.overview}</p>
-                      <div className="callout callout--amber">
-                        <strong>Misreading to avoid:</strong> {theme.misreading}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="notes-label">Close-reading route</p>
-                      <ol className="notes-list">
-                        {theme.essentialPassageIds
-                          .map((id) => getPassageById(id))
-                          .filter(Boolean)
-                          .map((passage, index) => (
-                            <li key={passage.id} className="notes-list__item notes-list__item--compact">
-                              <span className="notes-index">{index + 1}</span>
-                              <div>
-                                <p className="notes-title">{passage.title}</p>
-                                <p className="notes-copy">
-                                  <em>{passage.work}</em> {passage.citation}
-                                </p>
-                              </div>
-                            </li>
-                          ))}
-                      </ol>
-                    </div>
-                  </div>
-                </Card>
-              ))}
+              <CorpusNavigator
+                initialThemeId={selectedNavigatorThemeId}
+                initialTab={selectedNavigatorTab}
+                showHero={false}
+              />
             </div>
           </div>
-        </section>
+          </section>
 
         <section id="theme-web" className="content-section section-border section-muted">
           <div className="section-inner">
@@ -858,10 +523,20 @@ export default function NietzscheStudySite() {
                     <p className="feature-panel__label">{node.idea}</p>
                     <h3>{centerTheme?.title}</h3>
                     <p>{node.note}</p>
-                    <div className="chip-row chip-row--wide">
+                    <div className="theme-reference-list">
                       {node.connects.map((themeId) => {
                         const relatedTheme = getStudyTheme(themeId);
-                        return relatedTheme ? <span key={themeId} className="meta-chip">{relatedTheme.title}</span> : null;
+                        return relatedTheme ? (
+                          <button
+                            key={themeId}
+                            type="button"
+                            className="theme-reference"
+                            onClick={() => openNavigatorTheme(themeId, "corpus")}
+                          >
+                            <span>{relatedTheme.title}</span>
+                            <small>Open related passages</small>
+                          </button>
+                        ) : null;
                       })}
                     </div>
                   </Card>
@@ -895,36 +570,11 @@ export default function NietzscheStudySite() {
         <section id="lessons" className="content-section section-border section-muted">
           <div className="section-inner">
             <div className="section-header">
-              <SectionKicker>Lesson mode</SectionKicker>
-              <h2>Turn the study map into teachable lessons.</h2>
-              <p className="section-copy">
-                This prepares the site for your broader educational project: reading passages, guided questions, vocabulary, close-reading prompts, and level-based lesson design.
-              </p>
-            </div>
-
-            <div className="card-grid card-grid--three">
-              {lessonModes.map((mode) => (
-                <Card key={mode.title} className="card--padded">
-                  <div className="card-header">
-                    <h3>{mode.title}</h3>
-                    <span className="meta-chip meta-chip--amber">{mode.level}</span>
-                  </div>
-                  <p>{mode.description}</p>
-                  <div className="mini-panel">
-                    <p className="notes-label">Sample prompt</p>
-                    <p>{mode.sample}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="reading" className="content-section">
-          <div className="section-inner">
-            <div className="section-header">
-              <SectionKicker>Reading tracks</SectionKicker>
+              <SectionKicker>Lessons</SectionKicker>
               <h2>Three ways into Nietzsche.</h2>
+              <p className="section-copy">
+                Keep the lesson section lean by focusing on clear reading paths instead of format templates.
+              </p>
             </div>
 
             <div className="card-grid card-grid--three">
@@ -942,33 +592,6 @@ export default function NietzscheStudySite() {
                         <span>{reading}</span>
                       </div>
                     ))}
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="works" className="content-section section-border section-muted">
-          <div className="section-inner">
-            <div className="section-header">
-              <SectionKicker>Works shelf</SectionKicker>
-              <h2>The corpus at a glance.</h2>
-              <p className="section-copy">
-                Use this shelf to place a passage before interpreting it. Nietzsche’s style changes because his problems change.
-              </p>
-            </div>
-
-            <div className="works-grid">
-              {works.map((work) => (
-                <Card key={work.id} className="card--padded">
-                  <div className="card-header">
-                    <div>
-                      <h3>{work.title}</h3>
-                      <p>{worksShelf[work.id]?.note}</p>
-                      <p className="fine-print">{worksShelf[work.id]?.edition}</p>
-                    </div>
-                    <span className="meta-chip">{work.period}</span>
                   </div>
                 </Card>
               ))}
