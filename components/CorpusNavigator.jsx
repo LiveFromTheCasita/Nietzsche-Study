@@ -339,12 +339,6 @@ function ThemePage({ theme, initialTab }) {
                       <h3>{paper.title}</h3>
                       {paper.author ? <p className="paper-card__author">{paper.author}</p> : null}
                     </div>
-                    {paper.status ? <span className="meta-chip">{paper.status}</span> : null}
-                  </div>
-
-                  <div className="chip-row chip-row--wide">
-                    {paper.submittedOn ? <span className="meta-chip">Submitted {paper.submittedOn}</span> : null}
-                    {paper.type ? <span className="meta-chip">{paper.type}</span> : null}
                   </div>
 
                   {paper.summary ? <p>{paper.summary}</p> : null}
