@@ -336,6 +336,10 @@ export const worksShelf = {
     note: "Art, Greek tragedy, Apollo and Dionysus",
     edition: "Read together with Nietzsche’s later self-criticism in Ecce Homo.",
   },
+  "untimely-meditations": {
+    note: "Culture, history, education, and the uses of untimeliness",
+    edition: "Best read as Nietzsche’s early cultural diagnosis between The Birth of Tragedy and the free-spirit turn.",
+  },
   "human-all-too-human": {
     note: "Free spirits, suspicion, anti-metaphysics",
     edition: "A major break from Wagnerian romanticism and Schopenhauerian consolation.",

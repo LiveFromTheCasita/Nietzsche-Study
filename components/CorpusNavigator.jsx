@@ -18,35 +18,14 @@ export default function CorpusNavigator({
   initialTab = "overview",
   showHero = true,
 }) {
-  const [themeQuery, setThemeQuery] = useState("");
   const [selectedThemeId, setSelectedThemeId] = useState(initialThemeId || themes[0]?.id || "");
 
   useEffect(() => {
     if (initialThemeId) {
-      setThemeQuery("");
       setSelectedThemeId(initialThemeId);
     }
   }, [initialThemeId]);
-
-  const filteredThemes = useMemo(() => {
-    const query = themeQuery.trim().toLowerCase();
-    if (!query) return themes;
-
-    return themes.filter((theme) =>
-      [theme.title, theme.shortTitle, theme.category, theme.shortDescription, theme.overview, ...(theme.aliases || [])]
-        .join(" ")
-        .toLowerCase()
-        .includes(query)
-    );
-  }, [themeQuery]);
-
-  useEffect(() => {
-    if (!filteredThemes.some((theme) => theme.id === selectedThemeId) && filteredThemes[0]) {
-      setSelectedThemeId(filteredThemes[0].id);
-    }
-  }, [filteredThemes, selectedThemeId]);
-
-  const selectedTheme = themes.find((theme) => theme.id === selectedThemeId) || filteredThemes[0] || themes[0];
+  const selectedTheme = themes.find((theme) => theme.id === selectedThemeId) || themes[0];
 
   return (
     <section className={`navigator-shell ${showHero ? "navigator-shell--page" : ""}`}>
@@ -62,40 +41,30 @@ export default function CorpusNavigator({
 
       <div className="navigator-layout">
         <aside className="navigator-sidebar">
-          <label className="navigator-sidebar__label">Search themes</label>
-          <input
-            value={themeQuery}
-            onChange={(event) => setThemeQuery(event.target.value)}
-            placeholder="Try ressentiment, eternal recurrence, nihilism..."
-            className="navigator-search"
-          />
+          <p className="navigator-sidebar__label">Themes</p>
 
           <div className="navigator-sidebar__meta">
             <span>Themes</span>
-            <span>{filteredThemes.length}</span>
+            <span>{themes.length}</span>
           </div>
 
-          {filteredThemes.length === 0 ? (
-            <div className="navigator-empty">No themes matched that search.</div>
-          ) : (
-            <div className="navigator-theme-list">
-              {filteredThemes.map((theme) => (
-                <button
-                  key={theme.id}
-                  type="button"
-                  onClick={() => setSelectedThemeId(theme.id)}
-                  className={`navigator-theme-button ${theme.id === selectedTheme.id ? "navigator-theme-button--active" : ""}`}
-                >
-                  <div className="navigator-theme-button__header">
-                    <h3>{theme.shortTitle || theme.title}</h3>
-                    <span>{theme.passageLinks.length}</span>
-                  </div>
-                  <p className="navigator-theme-button__category">{theme.category}</p>
-                  <p className="navigator-theme-button__summary">{theme.shortDescription}</p>
-                </button>
-              ))}
-            </div>
-          )}
+          <div className="navigator-theme-list">
+            {themes.map((theme) => (
+              <button
+                key={theme.id}
+                type="button"
+                onClick={() => setSelectedThemeId(theme.id)}
+                className={`navigator-theme-button ${theme.id === selectedTheme.id ? "navigator-theme-button--active" : ""}`}
+              >
+                <div className="navigator-theme-button__header">
+                  <h3>{theme.shortTitle || theme.title}</h3>
+                  <span>{theme.passageLinks.length}</span>
+                </div>
+                <p className="navigator-theme-button__category">{theme.category}</p>
+                <p className="navigator-theme-button__summary">{theme.shortDescription}</p>
+              </button>
+            ))}
+          </div>
         </aside>
 
         <main className="navigator-main">

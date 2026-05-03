@@ -269,6 +269,7 @@ export default function NietzscheStudySite() {
                       </h3>
                       <span>{getPhaseLabel(work.period)}</span>
                     </div>
+                    <p className="navigator-theme-button__category">Published {work.publicationYear}</p>
                     <p className="navigator-theme-button__summary">{worksShelf[work.id]?.note}</p>
                   </button>
                 ))}
@@ -279,6 +280,7 @@ export default function NietzscheStudySite() {
                   <div className="card-header">
                     <div>
                       <h3>{selectedWork.title}</h3>
+                      <p className="fine-print">Published {selectedWork.publicationYear}</p>
                       <p>{worksShelf[selectedWork.id]?.note}</p>
                       <p className="fine-print">{worksShelf[selectedWork.id]?.edition}</p>
                     </div>
@@ -350,8 +352,8 @@ export default function NietzscheStudySite() {
               })}
             </div>
 
-            <div id="theme-navigator" className="section-inner">
-              <div className="section-header section-header--split">
+            <div id="theme-navigator" className="section-inner theme-navigator-shell">
+              <div className="section-header section-header--split theme-navigator-header">
                 <div>
                   <SectionKicker>Theme navigator</SectionKicker>
                   <h2>Move from theme to passage to cross-reference.</h2>

@@ -6,16 +6,23 @@ export const relationTypes = {
 };
 
 export const works = [
-  { id: "birth-of-tragedy", title: "The Birth of Tragedy", period: "early", publicationOrder: 1 },
-  { id: "human-all-too-human", title: "Human, All Too Human", period: "middle", publicationOrder: 2 },
-  { id: "daybreak", title: "Daybreak", period: "middle", publicationOrder: 3 },
-  { id: "gay-science", title: "The Gay Science", period: "middle", publicationOrder: 4 },
-  { id: "zarathustra", title: "Thus Spoke Zarathustra", period: "mature", publicationOrder: 5 },
-  { id: "beyond-good-and-evil", title: "Beyond Good and Evil", period: "late", publicationOrder: 6 },
-  { id: "genealogy-of-morals", title: "On the Genealogy of Morals", period: "late", publicationOrder: 7 },
-  { id: "twilight-of-the-idols", title: "Twilight of the Idols", period: "late", publicationOrder: 8 },
-  { id: "antichrist", title: "The Antichrist", period: "late", publicationOrder: 9 },
-  { id: "ecce-homo", title: "Ecce Homo", period: "late", publicationOrder: 10 },
+  { id: "birth-of-tragedy", title: "The Birth of Tragedy", period: "early", publicationOrder: 1, publicationYear: "1872" },
+  {
+    id: "untimely-meditations",
+    title: "Untimely Meditations",
+    period: "early",
+    publicationOrder: 2,
+    publicationYear: "1873–1876",
+  },
+  { id: "human-all-too-human", title: "Human, All Too Human", period: "middle", publicationOrder: 3, publicationYear: "1878" },
+  { id: "daybreak", title: "Daybreak", period: "middle", publicationOrder: 4, publicationYear: "1881" },
+  { id: "gay-science", title: "The Gay Science", period: "middle", publicationOrder: 5, publicationYear: "1882" },
+  { id: "zarathustra", title: "Thus Spoke Zarathustra", period: "mature", publicationOrder: 6, publicationYear: "1883–1885" },
+  { id: "beyond-good-and-evil", title: "Beyond Good and Evil", period: "late", publicationOrder: 7, publicationYear: "1886" },
+  { id: "genealogy-of-morals", title: "On the Genealogy of Morals", period: "late", publicationOrder: 8, publicationYear: "1887" },
+  { id: "twilight-of-the-idols", title: "Twilight of the Idols", period: "late", publicationOrder: 9, publicationYear: "1889" },
+  { id: "antichrist", title: "The Antichrist", period: "late", publicationOrder: 10, publicationYear: "1895" },
+  { id: "ecce-homo", title: "Ecce Homo", period: "late", publicationOrder: 11, publicationYear: "1908" },
 ];
 
 export const passages = [
