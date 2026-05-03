@@ -7,7 +7,6 @@ import {
   aphorisms,
   beginnerReadingPath,
   editionNotes,
-  featuredThemeIds,
   periods,
   principles,
   startingPoints,
@@ -33,18 +32,6 @@ function scrollToSection(sectionId) {
 
 function getPhaseLabel(period) {
   return period === "mature" ? "Late" : period.charAt(0).toUpperCase() + period.slice(1);
-}
-
-function Pill({ children, active = false, onClick }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`pill ${active ? "pill--active" : ""}`}
-    >
-      {children}
-    </button>
-  );
 }
 
 function Card({ children, className = "" }) {
@@ -97,9 +84,6 @@ function ThemeNotes({ theme }) {
 }
 
 export default function NietzscheStudySite() {
-  const [query, setQuery] = useState("");
-  const [selectedTag, setSelectedTag] = useState("all");
-  const [selectedDifficulty, setSelectedDifficulty] = useState("all");
   const [openThemeId, setOpenThemeId] = useState("death-of-god-nihilism");
   const [selectedNavigatorThemeId, setSelectedNavigatorThemeId] = useState("death-of-god-nihilism");
   const [selectedNavigatorTab, setSelectedNavigatorTab] = useState("overview");
@@ -109,54 +93,15 @@ export default function NietzscheStudySite() {
     () => themes.map((theme) => ({ ...theme, ...(themeMeta[theme.id] || {}) })),
     []
   );
-
-  const tags = useMemo(
-    () => ["all", ...Array.from(new Set(studyThemes.map((theme) => theme.tag).filter(Boolean)))],
-    [studyThemes]
-  );
-
-  const difficulties = useMemo(
-    () => ["all", ...Array.from(new Set(studyThemes.map((theme) => theme.difficulty).filter(Boolean)))],
-    [studyThemes]
-  );
-
-  const featuredThemes = useMemo(
-    () => featuredThemeIds.map(getStudyTheme).filter(Boolean),
-    []
-  );
   const orderedWorks = useMemo(
     () => [...works].sort((left, right) => left.publicationOrder - right.publicationOrder),
     []
   );
   const selectedWork = orderedWorks.find((work) => work.id === selectedWorkId) || orderedWorks[0] || null;
 
-  const filteredThemes = studyThemes.filter((theme) => {
-    const matchesTag = selectedTag === "all" || theme.tag === selectedTag;
-    const matchesDifficulty = selectedDifficulty === "all" || theme.difficulty === selectedDifficulty;
-    const searchable = [
-      theme.title,
-      theme.shortTitle,
-      theme.tag,
-      theme.period,
-      theme.difficulty,
-      theme.question,
-      theme.shortDescription,
-      theme.overview,
-      ...(theme.aliases || []),
-      ...(theme.relatedConcepts || []),
-    ]
-      .join(" ")
-      .toLowerCase();
-
-    return matchesTag && matchesDifficulty && searchable.includes(query.toLowerCase());
-  });
-
   const openNavigatorTheme = (themeId, tab = "overview") => {
     if (!themeId) return;
     setOpenThemeId(themeId);
-    setSelectedTag("all");
-    setSelectedDifficulty("all");
-    setQuery("");
     setSelectedNavigatorThemeId(themeId);
     setSelectedNavigatorTab(tab);
     scrollToSection("theme-navigator");
@@ -349,7 +294,7 @@ export default function NietzscheStudySite() {
 
         <section id="themes" className="content-section section-border section-muted">
           <div className="section-inner">
-            <div className="section-header section-header--grid">
+            <div className="section-header">
               <div>
                 <SectionKicker>Themes &amp; Navigator</SectionKicker>
                 <h2>Map the themes, then open the passages.</h2>
@@ -357,131 +302,53 @@ export default function NietzscheStudySite() {
                   Use the theme cards to orient yourself, then jump straight into the passage-based navigator for
                   the full route through the corpus.
                 </p>
-                <p className="section-count">
-                  Showing {filteredThemes.length} of {studyThemes.length} themes.
-                </p>
-              </div>
-
-              <div className="filter-toolbar">
-                <label className="sr-only" htmlFor="theme-search">
-                  Search themes, works, and sections
-                </label>
-                <div className="search-wrap">
-                  <input
-                    id="theme-search"
-                    value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Search nihilism, Genealogy, truth, recurrence..."
-                    className="search-field"
-                  />
-                  {query && (
-                    <button type="button" className="search-clear" onClick={() => setQuery("")}>
-                      Clear
-                    </button>
-                  )}
-                </div>
-
-                <div>
-                  <p className="pill-label">Filter by family</p>
-                  <div className="pill-row">
-                    {tags.map((tag) => (
-                      <Pill key={tag} active={selectedTag === tag} onClick={() => setSelectedTag(tag)}>
-                        {tag}
-                      </Pill>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <p className="pill-label">Filter by difficulty</p>
-                  <div className="pill-row">
-                    {difficulties.map((difficulty) => (
-                      <Pill
-                        key={difficulty}
-                        active={selectedDifficulty === difficulty}
-                        onClick={() => setSelectedDifficulty(difficulty)}
-                      >
-                        {difficulty}
-                      </Pill>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
 
-            <div className="feature-panel feature-panel--compact">
-              <p className="feature-panel__label">Core cluster</p>
-              <div className="pill-grid">
-                {featuredThemes.map((theme) => (
-                  <button
-                    key={theme.id}
-                    type="button"
-                    className="cluster-card"
-                    onClick={() => {
-                      setOpenThemeId(theme.id);
-                      setSelectedTag("all");
-                      setSelectedDifficulty("all");
-                      setQuery("");
-                    }}
-                  >
-                    <span>{theme.title}</span>
-                    <small>{theme.tag}</small>
-                  </button>
-                ))}
-              </div>
-            </div>
+            <div className="theme-grid">
+              {studyThemes.map((theme) => {
+                const isOpen = openThemeId === theme.id;
 
-            {filteredThemes.length === 0 ? (
-              <Card className="empty-state">
-                <h3>No matching themes.</h3>
-                <p>Try searching for nihilism, Genealogy, truth, affirmation, or recurrence.</p>
-              </Card>
-            ) : (
-              <div className="theme-grid">
-                {filteredThemes.map((theme) => {
-                  const isOpen = openThemeId === theme.id;
-
-                  return (
-                    <Card key={theme.id} className="theme-card">
-                      <div className="theme-card__body">
-                        <div className="card-header">
-                          <div>
-                            <h3>{theme.title}</h3>
-                            <p className="theme-card__question">{theme.question}</p>
-                          </div>
-                          <span className="meta-chip meta-chip--amber">{theme.tag}</span>
+                return (
+                  <Card key={theme.id} className="theme-card">
+                    <div className="theme-card__body">
+                      <div className="card-header">
+                        <div>
+                          <h3>{theme.title}</h3>
+                          <p className="theme-card__question">{theme.question}</p>
                         </div>
-
-                        <div className="chip-row">
-                          <span className="meta-chip">{theme.period}</span>
-                          <span className="meta-chip">{theme.difficulty}</span>
-                        </div>
-
-                        <p>{theme.shortDescription}</p>
-
-                        <button
-                          type="button"
-                          className="button button--ghost button--full"
-                          onClick={() => setOpenThemeId(isOpen ? "" : theme.id)}
-                        >
-                          {isOpen ? "Hide study notes" : "Open study notes"}
-                        </button>
-
-                        {isOpen && <ThemeNotes theme={theme} />}
-
-                        <button
-                          type="button"
-                          className="button button--primary button--full"
-                          onClick={() => openNavigatorTheme(theme.id, "overview")}
-                        >
-                          Open in theme navigator
-                        </button>
+                        <span className="meta-chip meta-chip--amber">{theme.tag}</span>
                       </div>
-                    </Card>
-                  );
-                })}
-              </div>
-            )}
+
+                      <div className="chip-row">
+                        <span className="meta-chip">{theme.period}</span>
+                        <span className="meta-chip">{theme.difficulty}</span>
+                      </div>
+
+                      <p>{theme.shortDescription}</p>
+
+                      <button
+                        type="button"
+                        className="button button--ghost button--full"
+                        onClick={() => setOpenThemeId(isOpen ? "" : theme.id)}
+                      >
+                        {isOpen ? "Hide study notes" : "Open study notes"}
+                      </button>
+
+                      {isOpen && <ThemeNotes theme={theme} />}
+
+                      <button
+                        type="button"
+                        className="button button--primary button--full"
+                        onClick={() => openNavigatorTheme(theme.id, "overview")}
+                      >
+                        Open in theme navigator
+                      </button>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
 
             <div id="theme-navigator" className="section-inner">
               <div className="section-header section-header--split">

@@ -843,29 +843,59 @@ blockquote {
   gap: 1rem;
 }
 
+.theme-hero {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+}
+
+.theme-hero .chip-row {
+  gap: 0.55rem;
+}
+
+.theme-hero .meta-chip {
+  padding: 0.3rem 0.68rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+
 .theme-hero h1 {
-  margin-top: 0.9rem;
+  margin-top: 0.45rem;
+  font-size: clamp(1.95rem, 3.3vw, 3.05rem);
+  line-height: 0.96;
+  max-width: 16ch;
 }
 
 .theme-hero p:last-child {
-  margin-top: 0.9rem;
+  max-width: 54rem;
+  margin-top: 0.55rem;
+  font-size: 1.03rem;
+  line-height: 1.58;
 }
 
 .tab-strip {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0.6rem;
-  padding: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-items: start;
+  gap: 0.5rem;
+  padding: 0.55rem;
 }
 
 .tab-button {
-  padding: 0.95rem 0.7rem;
-  border-radius: 18px;
+  min-height: 4.2rem;
+  padding: 0.8rem 0.85rem;
+  border-radius: 16px;
   border: 0;
   background: rgba(11, 9, 8, 0.8);
   color: var(--text-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   font: inherit;
   font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1.18;
   cursor: pointer;
 }
 
