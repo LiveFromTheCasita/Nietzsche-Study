@@ -270,6 +270,17 @@ export const submittedPapersByTheme = {
       summary:
         "A research-style synthesis of Nietzsche’s account of master morality, slave morality, and ressentiment across the corpus, with primary-text references and a dedicated sources section.",
     },
+    {
+      id: "master-morality-slave-morality-ressentiment-paper-3",
+      slug: "master-morality-slave-morality-and-ressentiment-in-nietzsches-thought",
+      fileName: "master-morality-slave-morality-and-ressentiment-in-nietzsches-thought.md",
+      title: "Master Morality, Slave Morality and Ressentiment in Nietzsche’s Thought",
+      submittedOn: "May 3, 2026",
+      status: "Submitted",
+      type: "Markdown",
+      summary:
+        "A longer essay tracing Nietzsche’s genealogical project through master morality, slave morality, herd morality, priestly valuation, and the problem of ressentiment across the major texts.",
+    },
   ],
   "death-of-god-nihilism": [],
   "will-to-power-self-overcoming": [],
