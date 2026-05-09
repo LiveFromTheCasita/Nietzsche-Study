@@ -1,11 +1,15 @@
 import "./globals.css";
 
+import GoogleAnalytics from "../components/GoogleAnalytics";
 import { getSiteUrl, siteDescription, siteKeywords, siteName } from "../lib/site";
 
 const siteUrl = getSiteUrl();
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
+  ...(googleSiteVerification ? { verification: { google: googleSiteVerification } } : {}),
   title: {
     default: siteName,
     template: `%s | ${siteName}`,
@@ -49,7 +53,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <GoogleAnalytics measurementId={gaMeasurementId} />
+      </body>
     </html>
   );
 }
