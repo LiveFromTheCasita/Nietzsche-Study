@@ -9,11 +9,6 @@ export default function sitemap() {
 
   const mainPages = [
     {
-      url: `${siteUrl}/`,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
       url: `${siteUrl}/corpus`,
       changeFrequency: "weekly",
       priority: 1,
