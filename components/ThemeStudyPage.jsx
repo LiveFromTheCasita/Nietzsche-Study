@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { relationTypes } from "../content/corpusData";
 import { submittedPapersByTheme, themeMeta } from "../content/studyContent";
+import { getWillToPowerPassagesForTheme } from "../content/willToPowerData";
 import { getPassageById, getThemeById, getThemePassages, sortPassages, titleCase } from "../lib/corpus";
 
 function RelationBadge({ relation }) {
@@ -47,6 +48,7 @@ export default function ThemeStudyPage({ theme }) {
     .filter(Boolean);
   const corePassageCount = passages.filter((passage) => passage.relation === "core").length;
   const submittedPapers = submittedPapersByTheme[theme.id] || [];
+  const willToPowerReferences = getWillToPowerPassagesForTheme(theme.id);
   const relatedThemes = (meta.relatedThemeIds || [])
     .map((themeId) => getThemeById(themeId))
     .filter(Boolean);
@@ -71,6 +73,7 @@ export default function ThemeStudyPage({ theme }) {
           </Link>
           <div className="site-nav__links">
             <Link href="/themes">Themes</Link>
+            <Link href="/the-will-to-power">Will to Power</Link>
             <Link href="/#theme-navigator">Navigator</Link>
             <Link href="/#lessons">Lessons</Link>
           </div>
@@ -138,6 +141,36 @@ export default function ThemeStudyPage({ theme }) {
             ))}
           </div>
         </section>
+
+        {willToPowerReferences.length > 0 ? (
+          <section className="theme-study-section theme-study-section--network">
+            <div className="theme-study-section__intro">
+              <p className="section-kicker">The Will to Power</p>
+              <h2>Notebook cross-references.</h2>
+              <p>
+                These related sections come from the posthumous compilation and should be read as Nachlass
+                material beside the finished works above.
+              </p>
+              <Link href="/the-will-to-power" className="button button--secondary">
+                Open the work guide
+              </Link>
+            </div>
+
+            <div className="wtp-theme-reference-grid">
+              {willToPowerReferences.map((reference) => (
+                <Link
+                  key={reference.id}
+                  href={`/the-will-to-power#${reference.id}`}
+                  className="theme-study-panel wtp-theme-reference"
+                >
+                  <span className="meta-chip">{reference.citation}</span>
+                  <h3>{reference.title}</h3>
+                  <p>{reference.summary}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className="theme-study-section">
           <div className="theme-study-section__intro">

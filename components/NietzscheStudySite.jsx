@@ -16,6 +16,7 @@ import {
   themeWeb,
   worksShelf,
 } from "../content/studyContent";
+import { willToPowerPassages } from "../content/willToPowerData";
 import { themes, works } from "../content/corpusData";
 import { getPassageById } from "../lib/corpus";
 
@@ -123,6 +124,7 @@ export default function NietzscheStudySite() {
             <a href="#start">Start</a>
             <a href="#development">Development</a>
             <Link href="/themes">Themes</Link>
+            <Link href="/the-will-to-power">Will to Power</Link>
             <a href="#theme-web">Theme web</a>
             <a href="#lessons">Lessons</a>
           </div>
@@ -147,6 +149,9 @@ export default function NietzscheStudySite() {
               </a>
               <Link href="/themes" className="button button--secondary">
                 Explore themes
+              </Link>
+              <Link href="/the-will-to-power" className="button button--secondary">
+                Study The Will to Power
               </Link>
             </div>
           </div>
@@ -292,6 +297,35 @@ export default function NietzscheStudySite() {
                 </Card>
               )}
             </div>
+          </div>
+        </section>
+
+        <section id="will-to-power" className="content-section section-border section-muted">
+          <div className="section-inner section-inner--split">
+            <div>
+              <SectionKicker>Dedicated Work Guide</SectionKicker>
+              <h2>The Will to Power now has its own reading room.</h2>
+              <p className="section-copy">
+                Because the domain names this posthumous compilation, the site now treats it directly: as a
+                powerful notebook archive to read alongside the finished books, not as Nietzsche's completed system.
+              </p>
+            </div>
+
+            <Card className="card--padded">
+              <div className="card-header">
+                <div>
+                  <h3>Passages in conversation</h3>
+                  <p>
+                    Start with mapped sections from The Will to Power, then follow each one into the site's themes
+                    and companion passages from Nietzsche's published works.
+                  </p>
+                </div>
+                <span className="meta-chip meta-chip--amber">{willToPowerPassages.length} notes</span>
+              </div>
+              <Link href="/the-will-to-power" className="button button--primary">
+                Open the guide
+              </Link>
+            </Card>
           </div>
         </section>
 

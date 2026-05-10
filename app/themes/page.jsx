@@ -57,6 +57,7 @@ export default function ThemesPage() {
           </Link>
           <div className="site-nav__links">
             <Link href="/">Corpus</Link>
+            <Link href="/the-will-to-power">Will to Power</Link>
             <Link href="/#theme-navigator">Navigator</Link>
             <Link href="/#lessons">Lessons</Link>
           </div>
