@@ -122,7 +122,7 @@ export default function NietzscheStudySite() {
           <div className="site-nav__links">
             <a href="#start">Start</a>
             <a href="#development">Development</a>
-            <a href="#themes">Themes</a>
+            <Link href="/themes">Themes</Link>
             <a href="#theme-web">Theme web</a>
             <a href="#lessons">Lessons</a>
           </div>
@@ -145,9 +145,9 @@ export default function NietzscheStudySite() {
               <a href="#start" className="button button--primary">
                 Start here
               </a>
-              <a href="#themes" className="button button--secondary">
+              <Link href="/themes" className="button button--secondary">
                 Explore themes
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -406,15 +406,14 @@ export default function NietzscheStudySite() {
                       {node.connects.map((themeId) => {
                         const relatedTheme = getStudyTheme(themeId);
                         return relatedTheme ? (
-                          <button
+                          <Link
                             key={themeId}
-                            type="button"
+                            href={`/themes/${themeId}`}
                             className="theme-reference"
-                            onClick={() => openNavigatorTheme(themeId, "corpus")}
                           >
                             <span>{relatedTheme.title}</span>
-                            <small>Open related passages</small>
-                          </button>
+                            <small>Read theme guide</small>
+                          </Link>
                         ) : null;
                       })}
                     </div>

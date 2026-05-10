@@ -70,7 +70,7 @@ export default function ThemeStudyPage({ theme }) {
             Nietzsche Study
           </Link>
           <div className="site-nav__links">
-            <Link href="/corpus#themes">Themes</Link>
+            <Link href="/themes">Themes</Link>
             <Link href="/corpus#theme-navigator">Navigator</Link>
             <Link href="/corpus#lessons">Lessons</Link>
           </div>
@@ -80,7 +80,7 @@ export default function ThemeStudyPage({ theme }) {
       <section className="theme-study-hero">
         <div className="theme-study-hero__inner">
           <div className="theme-study-hero__copy">
-            <Link href="/corpus#themes" className="text-link">
+            <Link href="/themes" className="text-link">
               Back to all themes
             </Link>
             <div className="chip-row">

@@ -18,6 +18,11 @@ export default function sitemap() {
       changeFrequency: "weekly",
       priority: 1,
     },
+    {
+      url: `${siteUrl}/themes`,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
   ];
 
   const themePages = themes.map((theme) => ({
