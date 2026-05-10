@@ -1,11 +1,13 @@
 import { getSiteUrl } from "../lib/site";
+import { themes } from "../content/corpusData";
+import { getAllSubmittedPapers } from "../lib/papers";
 
 export default function sitemap() {
   const siteUrl = getSiteUrl();
 
   if (!siteUrl) return [];
 
-  return [
+  const mainPages = [
     {
       url: `${siteUrl}/`,
       changeFrequency: "weekly",
@@ -17,4 +19,20 @@ export default function sitemap() {
       priority: 1,
     },
   ];
+
+  const themePages = themes.map((theme) => ({
+    url: `${siteUrl}/themes/${theme.id}`,
+    changeFrequency: "weekly",
+    priority: 0.85,
+  }));
+
+  const paperPages = getAllSubmittedPapers()
+    .filter((paper) => paper.slug)
+    .map((paper) => ({
+      url: `${siteUrl}/corpus/papers/${paper.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.72,
+    }));
+
+  return [...mainPages, ...themePages, ...paperPages];
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useMemo, useState } from "react";
 
 import CorpusNavigator from "./CorpusNavigator";
@@ -316,7 +317,11 @@ export default function NietzscheStudySite() {
                     <div className="theme-card__body">
                       <div className="card-header">
                         <div>
-                          <h3>{theme.title}</h3>
+                          <h3>
+                            <Link href={`/themes/${theme.id}`} className="theme-card__title-link">
+                              {theme.title}
+                            </Link>
+                          </h3>
                           <p className="theme-card__question">{theme.question}</p>
                         </div>
                         <span className="meta-chip meta-chip--amber">{theme.tag}</span>
@@ -339,13 +344,18 @@ export default function NietzscheStudySite() {
 
                       {isOpen && <ThemeNotes theme={theme} />}
 
-                      <button
-                        type="button"
-                        className="button button--primary button--full"
-                        onClick={() => openNavigatorTheme(theme.id, "overview")}
-                      >
-                        Open in theme navigator
-                      </button>
+                      <div className="theme-card__actions">
+                        <Link href={`/themes/${theme.id}`} className="button button--primary button--full">
+                          Read theme page
+                        </Link>
+                        <button
+                          type="button"
+                          className="button button--ghost button--full"
+                          onClick={() => openNavigatorTheme(theme.id, "overview")}
+                        >
+                          Open in theme navigator
+                        </button>
+                      </div>
                     </div>
                   </Card>
                 );
