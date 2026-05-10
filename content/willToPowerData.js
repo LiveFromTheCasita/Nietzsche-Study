@@ -84,6 +84,62 @@ export const willToPowerPassages = [
     companionPassageIds: ["ti-true-world", "gs-343", "eh-clever-9-10"],
   },
   {
+    id: "wtp-22",
+    citation: "§22",
+    notebookDate: "Spring-Fall 1887",
+    book: "Book One: European Nihilism",
+    part: "I. Nihilism",
+    title: "Active and passive nihilism",
+    summary:
+      "Nietzsche distinguishes nihilism as a sign of increased spiritual power from nihilism as exhaustion, retreat, and loss of force.",
+    whyItMatters:
+      "The distinction keeps nihilism from becoming a single mood: the same collapse can become either destruction, fatigue, or preparation.",
+    themeIds: ["death-of-god-nihilism", "will-to-power-self-overcoming"],
+    companionPassageIds: ["gs-343", "gm-iii-27", "ti-maxims-8"],
+  },
+  {
+    id: "wtp-23",
+    citation: "§23",
+    notebookDate: "Spring-Fall 1887",
+    book: "Book One: European Nihilism",
+    part: "I. Nihilism",
+    title: "Nihilism as strength or weakness",
+    summary:
+      "The note treats nihilism as a normal crisis that can reveal either the strength to create new aims or the weakness that seeks anesthesia.",
+    whyItMatters:
+      "It gives the page a more nuanced account of nihilism: Nietzsche is not only diagnosing collapse, but sorting different responses to collapse.",
+    themeIds: ["death-of-god-nihilism", "herd-morality-last-man", "overman-transformation"],
+    companionPassageIds: ["z-prologue-5", "z-three-metamorphoses", "gs-343"],
+  },
+  {
+    id: "wtp-55",
+    citation: "§55",
+    notebookDate: "June 10, 1887",
+    book: "Book One: European Nihilism",
+    part: "I. Nihilism",
+    title: "The crisis after one interpretation collapses",
+    summary:
+      "Nietzsche explains nihilism as the shock produced when a single dominant interpretation of suffering and existence loses authority.",
+    whyItMatters:
+      "This is a major bridge passage: it links the death of God, the need for revaluation, the eternal recurrence, and the sorting of stronger and weaker responses.",
+    themeIds: ["death-of-god-nihilism", "eternal-recurrence-amor-fati", "revaluation-philosophizing-with-hammer"],
+    companionPassageIds: ["gs-341", "gm-iii-27", "eh-clever-9-10"],
+  },
+  {
+    id: "wtp-135",
+    citation: "§135",
+    notebookDate: "March-June 1888",
+    book: "Book Two: Critique of the Highest Values Hitherto",
+    part: "I. Critique of Religion, Genesis of Religions",
+    title: "Religion and strange feelings of power",
+    summary:
+      "Religious explanation is traced to overwhelming states that people misread as the action of a separate divine cause.",
+    whyItMatters:
+      "The note turns religion into psychology: what appears as revelation may be an interpretation of unfamiliar intensities in the body and affects.",
+    themeIds: ["ascetic-ideal-life-denial", "will-to-power-self-overcoming", "perspectivism-truth"],
+    companionPassageIds: ["a-24", "gm-iii-11", "bge-6"],
+  },
+  {
     id: "wtp-254",
     citation: "§254",
     notebookDate: "1885-1886",
@@ -96,6 +152,20 @@ export const willToPowerPassages = [
       "This note connects will to power with genealogy: values need to be judged by the kind of life they serve.",
     themeIds: ["will-to-power-self-overcoming", "revaluation-philosophizing-with-hammer"],
     companionPassageIds: ["gm-preface-6", "bge-36", "z-thousand-one-goals"],
+  },
+  {
+    id: "wtp-259",
+    citation: "§259",
+    notebookDate: "1884",
+    book: "Book Two: Critique of the Highest Values Hitherto",
+    part: "II. Critique of Morality, Origin of Moral Valuations",
+    title: "Evaluation from a definite perspective",
+    summary:
+      "Every evaluation is situated in a perspective of preservation, culture, community, faith, or type, rather than arising from nowhere.",
+    whyItMatters:
+      "This is one of the most useful notebook links between perspectivism and morality: values become legible as partial life-strategies.",
+    themeIds: ["perspectivism-truth", "revaluation-philosophizing-with-hammer", "will-to-power-self-overcoming"],
+    companionPassageIds: ["z-thousand-one-goals", "gm-preface-6", "bge-6"],
   },
   {
     id: "wtp-274",
@@ -126,6 +196,39 @@ export const willToPowerPassages = [
     companionPassageIds: ["z-prologue-5", "bge-199", "bge-257"],
   },
   {
+    id: "wtp-382",
+    citation: "§382",
+    notebookDate: "Spring-Fall 1887; rev. Spring-Fall 1888",
+    book: "Book Two: Critique of the Highest Values Hitherto",
+    part: "III. Critique of Philosophy, Truth and Error of Philosophers",
+    title: "Against Schopenhauer's denial of the will",
+    summary:
+      "Nietzsche opposes Schopenhauer's moralized interpretation of genius and measures spirit by strength, resistance, and the capacity to turn pain to advantage.",
+    whyItMatters:
+      "This passage connects the critique of philosophy to the critique of ascetic values: even high intellect can be interpreted through life-denial or life-enhancement.",
+    themeIds: ["ascetic-ideal-life-denial", "dionysian-tragic-affirmation", "will-to-power-self-overcoming"],
+    companionPassageIds: ["bge-36", "bt-24", "ti-morality-as-anti-nature"],
+  },
+  {
+    id: "wtp-462",
+    citation: "§462",
+    notebookDate: "Spring-Fall 1887",
+    book: "Book Three: Principles of a New Evaluation",
+    part: "I. The Will to Power as Knowledge, Method of Inquiry",
+    title: "Fundamental innovations",
+    summary:
+      "Nietzsche sketches a replacement vocabulary: naturalistic values, forms of domination, a perspective theory of affects, and recurrence as a selective test.",
+    whyItMatters:
+      "It reads like a compact table of contents for late Nietzsche: morality, knowledge, politics, and recurrence are all drawn into one revaluative project.",
+    themeIds: [
+      "revaluation-philosophizing-with-hammer",
+      "perspectivism-truth",
+      "eternal-recurrence-amor-fati",
+      "will-to-power-self-overcoming",
+    ],
+    companionPassageIds: ["gm-preface-6", "bge-211", "gs-341"],
+  },
+  {
     id: "wtp-481",
     citation: "§481",
     notebookDate: "1883-1888",
@@ -138,6 +241,20 @@ export const willToPowerPassages = [
       "This is one of the sharpest notebook formulations of perspectivism and belongs beside Beyond Good and Evil's critique of neutral truth.",
     themeIds: ["perspectivism-truth", "will-to-power-self-overcoming"],
     companionPassageIds: ["bge-22", "bge-34", "bge-6"],
+  },
+  {
+    id: "wtp-493",
+    citation: "§493",
+    notebookDate: "1885",
+    book: "Book Three: Principles of a New Evaluation",
+    part: "I. The Will to Power as Knowledge, Biology of the Drive to Knowledge",
+    title: "Truth as life-preserving error",
+    summary:
+      "Truth is treated as a kind of indispensable error, with its value judged by what a form of life can sustain and require.",
+    whyItMatters:
+      "The note gives perspectivism its sharp biological edge: the decisive question is not whether a belief is pure, but what it makes possible for life.",
+    themeIds: ["perspectivism-truth", "will-to-power-self-overcoming"],
+    companionPassageIds: ["gs-110", "bge-34", "gm-iii-24"],
   },
   {
     id: "wtp-511",
@@ -168,6 +285,20 @@ export const willToPowerPassages = [
     companionPassageIds: ["bge-36", "z-self-overcoming", "a-2"],
   },
   {
+    id: "wtp-794",
+    citation: "§794",
+    notebookDate: "March-June 1888",
+    book: "Book Three: Principles of a New Evaluation",
+    part: "IV. The Will to Power as Art",
+    title: "Art as countermovement",
+    summary:
+      "After naming religion, morality, and philosophy as forms of decadence, Nietzsche sets art against them as a counterforce.",
+    whyItMatters:
+      "This restores an early Nietzschean thread inside the late notebooks: art remains a life-enhancing power against life-denying ideals.",
+    themeIds: ["dionysian-tragic-affirmation", "ascetic-ideal-life-denial", "revaluation-philosophizing-with-hammer"],
+    companionPassageIds: ["bt-24", "gs-107", "ti-morality-as-anti-nature"],
+  },
+  {
     id: "wtp-856",
     citation: "§856",
     notebookDate: "1885-1886",
@@ -182,6 +313,20 @@ export const willToPowerPassages = [
     companionPassageIds: ["bge-257", "bge-211", "bge-188"],
   },
   {
+    id: "wtp-866",
+    citation: "§866",
+    notebookDate: "Spring-Fall 1887; rev. Spring-Fall 1888",
+    book: "Book Four: Discipline and Breeding",
+    part: "I. Order of Rank",
+    title: "The overman as counter-movement",
+    summary:
+      "Nietzsche contrasts the leveling, specialized utility of modern humanity with the need for a higher type able to justify and redirect that process.",
+    whyItMatters:
+      "This is one of the page's strongest links between the overman, modern herd leveling, and Nietzsche's difficult language of future rank.",
+    themeIds: ["overman-transformation", "nobility-rank-higher-type", "herd-morality-last-man"],
+    companionPassageIds: ["z-prologue-3", "z-prologue-5", "bge-211"],
+  },
+  {
     id: "wtp-886",
     citation: "§886",
     notebookDate: "Spring-Fall 1887",
@@ -194,6 +339,34 @@ export const willToPowerPassages = [
       "It clarifies a difficult point: Nietzsche does not simply deny the herd's usefulness, but refuses to let herd standards rule every type.",
     themeIds: ["nobility-rank-higher-type", "herd-morality-last-man"],
     companionPassageIds: ["bge-287", "z-prologue-5", "eh-wise-6"],
+  },
+  {
+    id: "wtp-933",
+    citation: "§933",
+    notebookDate: "Spring-Fall 1887",
+    book: "Book Four: Discipline and Breeding",
+    part: "II. Dionysus, The Strong and the Weak",
+    title: "Dominating the passions",
+    summary:
+      "Nietzsche argues for command over the passions rather than their weakening, with greatness measured by power enough to enlist dangerous drives.",
+    whyItMatters:
+      "This passage helps prevent a moralistic misreading of discipline: discipline is not self-erasure, but the stronger ordering of abundant forces.",
+    themeIds: ["will-to-power-self-overcoming", "nobility-rank-higher-type", "overman-transformation"],
+    companionPassageIds: ["bge-188", "ti-maxims-8", "eh-wise-6"],
+  },
+  {
+    id: "wtp-1041",
+    citation: "§1041",
+    notebookDate: "1888",
+    book: "Book Four: Discipline and Breeding",
+    part: "II. Dionysus",
+    title: "The new path to a Yes",
+    summary:
+      "Nietzsche describes experimental philosophy as passing through nihilism toward Dionysian affirmation of the world without subtraction or exception.",
+    whyItMatters:
+      "This is one of the best late notebook bridges between amor fati, eternal recurrence, courage in truth, and the affirmative meaning of Dionysus.",
+    themeIds: ["dionysian-tragic-affirmation", "eternal-recurrence-amor-fati", "revaluation-philosophizing-with-hammer"],
+    companionPassageIds: ["eh-clever-9-10", "gs-341", "bt-24"],
   },
   {
     id: "wtp-1059",
