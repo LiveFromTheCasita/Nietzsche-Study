@@ -52,13 +52,13 @@ export default function ThemesPage() {
 
       <nav className="site-nav">
         <div className="site-nav__inner">
-          <Link href="/corpus" className="site-nav__brand">
+          <Link href="/" className="site-nav__brand">
             Nietzsche Study
           </Link>
           <div className="site-nav__links">
-            <Link href="/corpus">Corpus</Link>
-            <Link href="/corpus#theme-navigator">Navigator</Link>
-            <Link href="/corpus#lessons">Lessons</Link>
+            <Link href="/">Corpus</Link>
+            <Link href="/#theme-navigator">Navigator</Link>
+            <Link href="/#lessons">Lessons</Link>
           </div>
         </div>
       </nav>
@@ -66,7 +66,7 @@ export default function ThemesPage() {
       <section className="theme-study-hero">
         <div className="theme-study-hero__inner">
           <div className="theme-study-hero__copy">
-            <Link href="/corpus" className="text-link">
+            <Link href="/" className="text-link">
               Back to corpus
             </Link>
             <div className="chip-row">
@@ -89,7 +89,7 @@ export default function ThemesPage() {
                 Start with a concept, then move into the corpus navigator when you want the full passage network.
               </p>
             </div>
-            <Link href="/corpus#theme-navigator" className="button button--secondary">
+            <Link href="/#theme-navigator" className="button button--secondary">
               Open corpus navigator
             </Link>
           </aside>

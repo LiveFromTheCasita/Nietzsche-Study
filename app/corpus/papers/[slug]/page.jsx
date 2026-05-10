@@ -32,7 +32,7 @@ export default async function PaperPage({ params }) {
   return (
     <main className="paper-page">
       <div className="paper-shell">
-        <Link href="/corpus#themes" className="text-link">
+        <Link href="/#themes" className="text-link">
           Back to corpus
         </Link>
 

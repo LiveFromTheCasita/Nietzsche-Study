@@ -66,13 +66,13 @@ export default function ThemeStudyPage({ theme }) {
 
       <nav className="site-nav">
         <div className="site-nav__inner">
-          <Link href="/corpus" className="site-nav__brand">
+          <Link href="/" className="site-nav__brand">
             Nietzsche Study
           </Link>
           <div className="site-nav__links">
             <Link href="/themes">Themes</Link>
-            <Link href="/corpus#theme-navigator">Navigator</Link>
-            <Link href="/corpus#lessons">Lessons</Link>
+            <Link href="/#theme-navigator">Navigator</Link>
+            <Link href="/#lessons">Lessons</Link>
           </div>
         </div>
       </nav>

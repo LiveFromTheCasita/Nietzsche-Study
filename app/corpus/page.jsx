@@ -1,5 +1,5 @@
-import NietzscheStudySite from "../../components/NietzscheStudySite";
+import { permanentRedirect } from "next/navigation";
 
 export default function CorpusPage() {
-  return <NietzscheStudySite />;
+  permanentRedirect("/");
 }

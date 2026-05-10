@@ -18,7 +18,7 @@ export const metadata = {
   applicationName: siteName,
   keywords: siteKeywords,
   alternates: {
-    canonical: "/corpus",
+    canonical: "/",
   },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
@@ -29,7 +29,7 @@ export const metadata = {
           title: siteName,
           description: siteDescription,
           type: "website",
-          url: "/corpus",
+          url: "/",
           siteName,
           images: [
             {
