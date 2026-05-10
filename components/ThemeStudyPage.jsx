@@ -45,7 +45,7 @@ export default function ThemeStudyPage({ theme }) {
       return linkedPassage || getPassageById(id);
     })
     .filter(Boolean);
-  const corePassages = passages.filter((passage) => passage.relation === "core");
+  const corePassageCount = passages.filter((passage) => passage.relation === "core").length;
   const submittedPapers = submittedPapersByTheme[theme.id] || [];
   const relatedThemes = (meta.relatedThemeIds || [])
     .map((themeId) => getThemeById(themeId))
@@ -53,7 +53,7 @@ export default function ThemeStudyPage({ theme }) {
 
   const counts = {
     all: passages.length,
-    core: corePassages.length,
+    core: corePassageCount,
     essential: essentialPassages.length,
     papers: submittedPapers.length,
   };
@@ -166,32 +166,6 @@ export default function ThemeStudyPage({ theme }) {
                   })}
                 </div>
               </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="theme-study-section theme-study-section--split">
-          <div className="theme-study-section__intro">
-            <p className="section-kicker">Core Corpus</p>
-            <h2>The passages that carry the theme.</h2>
-            <p>
-              These core passages are the strongest anchors for the theme. The full navigator keeps the wider
-              direct, related, and background network available.
-            </p>
-            <Link href={`/corpus#theme-navigator`} className="button button--secondary">
-              Open corpus navigator
-            </Link>
-          </div>
-
-          <div className="theme-study-list">
-            {corePassages.map((passage, index) => (
-              <PassageReference
-                key={passage.id}
-                passage={passage}
-                relation={passage.relation}
-                relevance={passage.relevance}
-                index={index + 1}
-              />
             ))}
           </div>
         </section>
