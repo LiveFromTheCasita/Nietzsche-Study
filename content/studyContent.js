@@ -292,7 +292,19 @@ export const submittedPapersByTheme = {
   "ascetic-ideal-life-denial": [],
   "dionysian-tragic-affirmation": [],
   "revaluation-philosophizing-with-hammer": [],
-  "overman-transformation": [],
+  "overman-transformation": [
+    {
+      id: "ai-overman-last-man-paper-1",
+      slug: "ai-overman-and-last-man",
+      assetUrl: "/papers/exploring-overman-concept.pdf",
+      title: "AI, the Overman, and the Last Man: Nietzsche’s Human Future in the Age of Artificial Intelligence",
+      submittedOn: "May 30, 2026",
+      status: "Submitted",
+      type: "PDF",
+      summary:
+        "A paper arguing that AI cannot be Nietzsche’s Overman because it lacks will, suffering, and value-creation, but that it can become a decisive test of whether humanity moves toward self-overcoming or Last-Man passivity.",
+    },
+  ],
 };
 
 export const featuredThemeIds = [

@@ -41,12 +41,27 @@ export default async function PaperPage({ params }) {
             <span className="meta-chip meta-chip--amber">Submitted Paper</span>
             {paper.theme ? <span className="meta-chip">{paper.theme.title}</span> : null}
             {paper.submittedOn ? <span className="meta-chip">Submitted {paper.submittedOn}</span> : null}
+            {paper.type ? <span className="meta-chip">{paper.type}</span> : null}
           </div>
           <h1>{paper.title}</h1>
           {paper.summary ? <p className="paper-intro">{paper.summary}</p> : null}
         </header>
 
-        <article className="paper-prose" dangerouslySetInnerHTML={{ __html: paper.html }} />
+        {paper.html ? (
+          <article className="paper-prose" dangerouslySetInnerHTML={{ __html: paper.html }} />
+        ) : paper.assetUrl ? (
+          <section className="paper-file-viewer" aria-label={`${paper.title} PDF`}>
+            <div className="paper-file-viewer__actions">
+              <a href={paper.assetUrl} className="button button--primary">
+                Open PDF
+              </a>
+              <a href={paper.assetUrl} download className="button button--secondary">
+                Download
+              </a>
+            </div>
+            <iframe src={paper.assetUrl} title={`${paper.title} PDF`} className="paper-pdf-frame" />
+          </section>
+        ) : null}
       </div>
     </main>
   );
