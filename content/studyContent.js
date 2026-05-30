@@ -296,11 +296,11 @@ export const submittedPapersByTheme = {
     {
       id: "ai-overman-last-man-paper-1",
       slug: "ai-overman-and-last-man",
-      assetUrl: "/papers/exploring-overman-concept.pdf",
+      fileName: "ai-overman-and-last-man.md",
       title: "AI, the Overman, and the Last Man: Nietzsche’s Human Future in the Age of Artificial Intelligence",
       submittedOn: "May 30, 2026",
       status: "Submitted",
-      type: "PDF",
+      type: "Markdown",
       summary:
         "A paper arguing that AI cannot be Nietzsche’s Overman because it lacks will, suffering, and value-creation, but that it can become a decisive test of whether humanity moves toward self-overcoming or Last-Man passivity.",
     },
