@@ -7,6 +7,11 @@ import {
   willToPowerReadingPrinciples,
   willToPowerSource,
 } from "../../content/willToPowerData";
+import {
+  willToPowerEditorialCautions,
+  willToPowerReadingPaths,
+  willToPowerThemes,
+} from "../../content/willToPowerThemes";
 import { getPassageById } from "../../lib/corpus";
 import { getSiteUrl, siteDescription, siteName } from "../../lib/site";
 
@@ -14,7 +19,7 @@ const siteUrl = getSiteUrl();
 const ogImage = siteUrl ? `${siteUrl}/og-image.svg` : null;
 
 export const metadata = {
-  title: `The Will to Power | ${siteName}`,
+  title: "The Will to Power",
   description:
     "A dedicated study guide to Nietzsche's posthumous The Will to Power, with theme-linked section references and reading cautions.",
   alternates: {
@@ -87,6 +92,30 @@ function CompanionList({ passageIds }) {
   );
 }
 
+function PassageClusters({ clusters }) {
+  return (
+    <ul className="wtp-theme-cluster-list">
+      {clusters.map((cluster) => (
+        <li key={`${cluster.label}-${cluster.passages.join("-")}`}>
+          <span>{cluster.label}</span>
+          <strong>{cluster.passages.join(", ")}</strong>
+          {cluster.note ? <small>{cluster.note}</small> : null}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function FinishedWorks({ references }) {
+  return (
+    <ul className="wtp-finished-works-list">
+      {references.map((reference) => (
+        <li key={reference}>{reference}</li>
+      ))}
+    </ul>
+  );
+}
+
 export default function WillToPowerPage() {
   return (
     <main className="theme-study-page wtp-page">
@@ -145,17 +174,30 @@ export default function WillToPowerPage() {
                 <small>mapped sections</small>
               </div>
               <div className="theme-study-stat">
-                <span>{themes.length}</span>
-                <small>site themes</small>
+                <span>{willToPowerThemes.length}</span>
+                <small>thematic clusters</small>
               </div>
               <div className="theme-study-stat">
-                <span>1</span>
-                <small>central caution</small>
+                <span>{willToPowerReadingPaths.length}</span>
+                <small>reading paths</small>
               </div>
             </div>
             <div className="callout callout--amber">
               <strong>Reading caution:</strong> Treat this as a posthumous editorial arrangement, not as a book
               Nietzsche completed and authorized.
+            </div>
+            <ul className="wtp-caution-list">
+              {willToPowerEditorialCautions.map((caution) => (
+                <li key={caution}>{caution}</li>
+              ))}
+            </ul>
+            <div className="theme-card__actions">
+              <a href="#theme-index" className="button button--primary">
+                Browse themes
+              </a>
+              <a href="#reading-paths" className="button button--ghost">
+                Follow a path
+              </a>
             </div>
           </aside>
         </div>
@@ -197,6 +239,105 @@ export default function WillToPowerPage() {
                 </div>
                 <p>{book.focus}</p>
                 <ThemeLinks themeIds={book.themeIds} />
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="theme-index" className="theme-study-section">
+          <div className="theme-study-section__intro">
+            <p className="section-kicker">Theme Index</p>
+            <h2>Themes in The Will to Power.</h2>
+            <p>
+              Use the editorial books as a map, then move by theme. Each entry below gives the core question, passage
+              clusters, finished-work cross-references, and a caution where the theme is often misread.
+            </p>
+          </div>
+
+          <nav className="wtp-thematic-nav" aria-label="Themes in The Will to Power">
+            {willToPowerThemes.map((theme, index) => (
+              <a key={theme.id} href={`#${theme.id}`}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                {theme.title}
+              </a>
+            ))}
+          </nav>
+        </section>
+
+        <section id="reading-paths" className="theme-study-section">
+          <div className="theme-study-section__intro">
+            <p className="section-kicker">Reading Paths</p>
+            <h2>Four routes through the notebook material.</h2>
+            <p>
+              These routes keep the material from becoming a pile of forceful fragments. Each path follows a problem
+              and sends the reader back to the finished works for control and comparison.
+            </p>
+          </div>
+
+          <div className="wtp-reading-path-grid">
+            {willToPowerReadingPaths.map((path) => (
+              <article key={path.title} className="theme-study-panel">
+                <p className="notes-label">{path.title}</p>
+                <h3>{path.question}</h3>
+                <ol className="wtp-reading-path-list">
+                  {path.themeIds.map((themeId) => {
+                    const theme = willToPowerThemes.find((item) => item.id === themeId);
+                    return theme ? (
+                      <li key={theme.id}>
+                        <a href={`#${theme.id}`}>{theme.title}</a>
+                      </li>
+                    ) : null;
+                  })}
+                </ol>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="theme-study-section">
+          <div className="theme-study-section__intro">
+            <p className="section-kicker">Thematic Guide</p>
+            <h2>Passage clusters, questions, and cautions.</h2>
+            <p>
+              The entries are deliberately concise: no long quotations, no claim that the compilation is Nietzsche's
+              final system, and no conversion of workshop notes into settled doctrine.
+            </p>
+          </div>
+
+          <div className="wtp-theme-guide-list">
+            {willToPowerThemes.map((theme, index) => (
+              <article id={theme.id} key={theme.id} className="wtp-theme-guide-card">
+                <header className="wtp-theme-guide-card__header">
+                  <div>
+                    <p className="section-kicker">{String(index + 1).padStart(2, "0")}</p>
+                    <h3>{theme.title}</h3>
+                    <p>{theme.description}</p>
+                  </div>
+                  <a href="#theme-index" className="meta-chip">
+                    Index
+                  </a>
+                </header>
+
+                <div className="callout">
+                  <strong>Core question:</strong> {theme.coreQuestion}
+                </div>
+
+                <div className="wtp-theme-guide-card__body">
+                  <div>
+                    <p className="notes-label">Related Will to Power passages</p>
+                    <PassageClusters clusters={theme.passageClusters} />
+                  </div>
+                  <div>
+                    <p className="notes-label">Finished-work anchors</p>
+                    <FinishedWorks references={theme.readWith} />
+                  </div>
+                </div>
+
+                {theme.caution ? (
+                  <div className="callout callout--amber">
+                    <strong>Interpretive caution:</strong> {theme.caution}
+                  </div>
+                ) : null}
               </article>
             ))}
           </div>
