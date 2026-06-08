@@ -116,6 +116,58 @@ function FinishedWorks({ references }) {
   );
 }
 
+function ExpandedPassageMap({ map }) {
+  if (!map) return null;
+
+  return (
+    <div className="wtp-expanded-map">
+      {map.intro ? <p className="wtp-expanded-map__intro">{map.intro}</p> : null}
+
+      <div className="wtp-expanded-map__sections">
+        {map.sections.map((section) => (
+          <section key={section.title} className="wtp-expanded-map__section">
+            <div className="wtp-expanded-map__section-header">
+              <p className="notes-label">Expanded passage map</p>
+              <h4>{section.title}</h4>
+            </div>
+
+            <div className="wtp-expanded-map__rows">
+              {section.entries.map((entry) => (
+                <article key={`${section.title}-${entry.passage}`} className="wtp-expanded-map__row">
+                  <span className="meta-chip meta-chip--amber">{entry.passage}</span>
+                  <div>
+                    <strong>{entry.theme}</strong>
+                    <p>{entry.whyItMatters}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      {map.readingOrder ? (
+        <div className="wtp-expanded-map__reading">
+          <p className="notes-label">Recommended reading order inside The Will to Power</p>
+          <ol className="wtp-expanded-map__reading-list">
+            {map.readingOrder.map((item) => (
+              <li key={`${item.step}-${item.passages}`}>
+                <strong>{item.step}:</strong> {item.passages}
+              </li>
+            ))}
+          </ol>
+        </div>
+      ) : null}
+
+      {map.coreCluster ? (
+        <div className="callout callout--amber">
+          <strong>Single most important cluster:</strong> {map.coreCluster}. {map.coreClusterNote}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export default function WillToPowerPage() {
   return (
     <main className="theme-study-page wtp-page">
@@ -332,6 +384,8 @@ export default function WillToPowerPage() {
                     <FinishedWorks references={theme.readWith} />
                   </div>
                 </div>
+
+                <ExpandedPassageMap map={theme.expandedPassageMap} />
 
                 {theme.caution ? (
                   <div className="callout callout--amber">

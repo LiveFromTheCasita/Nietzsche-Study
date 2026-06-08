@@ -54,12 +54,290 @@ export const willToPowerThemes = [
       "A theme cluster around noble valuation, slave revolt, ressentiment, herd utility, equality, guilt, pity, and the inversion of values.",
     coreQuestion: "Whose will to power is expressed by morality?",
     passageClusters: [
-      { label: "Herd morality core", passages: ["§§274-287"] },
-      { label: "Christianity and priestly inversion", passages: ["§§145", "167", "172", "179", "202", "205-207", "215", "217", "221"] },
-      { label: "Ressentiment and revenge", passages: ["§§167", "172", "179", "350", "351", "765"] },
-      { label: "Good/evil, guilt, and the good man", passages: ["§§268", "295-296", "350-353"] },
-      { label: "Nobility, rank, and higher type", passages: ["§§317", "373", "400-401", "766-770", "773", "859-866"] },
+      { label: "Herd morality core", passages: ["§§274-287"], note: "The direct herd-morality arc: moral command, herd utility, exceptionality, altruism, and rank." },
+      { label: "Christianity and priestly inversion", passages: ["§§145", "167", "172", "179", "202", "205-207", "215", "217", "221"], note: "Priestly power, Christian ressentiment, pity, equality, and the negation of noble values." },
+      { label: "Ressentiment and revenge", passages: ["§§167", "172", "179", "350", "351", "765"], note: "Reactive ideals, blame-seeking, revenge, and the moral imagination of the underprivileged." },
+      { label: "Good/evil, guilt, and the good man", passages: ["§§268", "295-296", "350-353"], note: "Decadent morality, bad conscience, moralized pain, and the mutilation of stronger drives." },
+      { label: "Nobility, rank, and higher type", passages: ["§317", "§§373-374", "§§400-403", "§§765-773", "§784", "§§859-866"], note: "Rank, individual value-creation, anti-equality, anti-mediocrity, and higher-type formation." },
     ],
+    expandedPassageMap: {
+      intro:
+        "Read this theme as a cluster, not as one isolated idea. Master valuation begins by affirming itself as good, while slave valuation begins by naming the threatening other evil, then defines itself as good by contrast. The notebook passages below connect that opposition to ressentiment, herd morality, priestly values, Christianity, pity, equality, decadence, nobility, rank, suffering, cruelty, and revaluation.",
+      sections: [
+        {
+          title: "Core Will to Power passages for master/slave morality",
+          entries: [
+            {
+              passage: "§274",
+              theme: "Herd morality as will to power",
+              whyItMatters:
+                "One of the most important passages. Nietzsche asks whose will to power morality expresses, then identifies three forces behind moral domination: the herd against the strong, the suffering against the fortunate, and the mediocre against the exceptional.",
+            },
+            {
+              passage: "§275",
+              theme: "\"Thou shalt,\" equality, herd instinct",
+              whyItMatters:
+                "A major passage on the moral imperative. Nietzsche interprets the authority behind moral command not as God or pure reason, but as the herd instinct trying to become master.",
+            },
+            {
+              passage: "§276",
+              theme: "European morality as herd utility",
+              whyItMatters:
+                "Nietzsche says European morality is based on what is useful to the herd, and that higher, rarer men suffer because their distinguishing qualities are felt as discreditable.",
+            },
+            {
+              passage: "§284",
+              theme: "Virtues as herd-preservation",
+              whyItMatters:
+                "Nietzsche lists praised virtues such as peaceability, modesty, obedience, sympathy, and industry, then argues that they are valued because they serve society and the herd.",
+            },
+            {
+              passage: "§285",
+              theme: "The herd against criminals and higher types",
+              whyItMatters:
+                "The herd preserves one type and defends itself both against those beneath it and those above it. Herd morality is not only anti-criminal; it is also anti-exceptional.",
+            },
+            {
+              passage: "§286",
+              theme: "Altruism as herd-sign",
+              whyItMatters:
+                "Nietzsche says that if one hears the moral imperative in the altruistic sense, one belongs to the herd. This is a compressed critique of altruistic morality.",
+            },
+            {
+              passage: "§287",
+              theme: "Order of rank versus individualistic morality",
+              whyItMatters:
+                "Nietzsche explicitly says his philosophy aims at an ordering of rank, not individualistic morality. Herd ideas should rule in the herd, while leaders and independent types require different valuations.",
+            },
+          ],
+        },
+        {
+          title: "Ressentiment, revenge, and the slave revolt",
+          entries: [
+            {
+              passage: "§167",
+              theme: "Christianity in the seat of ressentiment",
+              whyItMatters:
+                "Nietzsche presents Christianity as beginning in a peace movement but being reversed by Paul into something that condemns, tortures, swears, and hates.",
+            },
+            {
+              passage: "§172",
+              theme: "Ressentiment and the underprivileged",
+              whyItMatters:
+                "Nietzsche says ressentiment among lowly placed people is gambled upon by Christian doctrine, close to Genealogy I's claim that priestly morality mobilizes ressentiment.",
+            },
+            {
+              passage: "§179",
+              theme: "Christianity's driving force as ressentiment",
+              whyItMatters:
+                "One of the clearest direct hits. Nietzsche describes Christianity's driving force as ressentiment, popular uprising, and the revolt of the underprivileged.",
+            },
+            {
+              passage: "§350",
+              theme: "Ressentiment ideals",
+              whyItMatters:
+                "Nietzsche says every ideal presupposes love and hate, reverence and contempt, and that hate and contempt are the primary motive in all ressentiment ideals.",
+            },
+            {
+              passage: "§351",
+              theme: "The good man as mutilated type",
+              whyItMatters:
+                "Nietzsche attacks the ideal of the purely good person and argues that strong life includes affirmation and negation, love and hate, gratitude and revenge.",
+            },
+            {
+              passage: "§765",
+              theme: "Pessimism of indignation",
+              whyItMatters:
+                "Nietzsche analyzes the desire to assign blame for one's condition to society, ruling classes, education, the Jews, the nobility, or the successful.",
+            },
+          ],
+        },
+        {
+          title: "Christianity, priestly inversion, and slave valuation",
+          entries: [
+            {
+              passage: "§145",
+              theme: "Religions of ruling and oppressed classes",
+              whyItMatters:
+                "Nietzsche contrasts affirmative religions of ruling classes with negative religions of oppressed classes, placing the New Testament in the latter category.",
+            },
+            {
+              passage: "§202",
+              theme: "Reversal of values",
+              whyItMatters:
+                "Nietzsche says a certain Christian type began to reverse values according to its own image, making itself the measure of God, truth, love, and wisdom.",
+            },
+            {
+              passage: "§205",
+              theme: "The noble soul against Christian modest virtues",
+              whyItMatters:
+                "Nietzsche says Jesus and Paul put ideas into the heads of little people, bringing more valuable qualities into disrepute and setting bad conscience against the noble soul's self-sufficiency.",
+            },
+            {
+              passage: "§206",
+              theme: "New Testament as rage for defamation",
+              whyItMatters:
+                "Nietzsche hears in the Gospels an indirect rage for defamation and destruction, and says they lack knowledge of higher nature.",
+            },
+            {
+              passage: "§207",
+              theme: "Primitive Christianity and abolition of rank",
+              whyItMatters:
+                "Nietzsche reads primitive Christianity as abolishing state, class distinction, self-defense, and worldly hierarchy, exposing the egalitarian and anti-aristocratic dimension of slave morality.",
+            },
+            {
+              passage: "§215",
+              theme: "Christianity as denaturalized herd morality",
+              whyItMatters:
+                "A major passage. Nietzsche explicitly calls Christianity a denaturalization of herd-animal morality and describes oppressed types as desiring power through imagined freedom, equal rights, privileges, and exclusive power.",
+            },
+            {
+              passage: "§217",
+              theme: "Against the Christian ideal",
+              whyItMatters:
+                "Nietzsche attacks the elevation of the simple, pure in heart, suffering, and unfortunate, linking the Christian ideal to the slave-moral glorification of weakness.",
+            },
+            {
+              passage: "§221",
+              theme: "The Christian ideal negates the noble ideal",
+              whyItMatters:
+                "Nietzsche lists what Christianity negates: pride, pathos of distance, responsibility, splendid animality, warlike and passionate instincts, knowledge, dangerousness, and the future-oriented human being.",
+            },
+          ],
+        },
+        {
+          title: "Good/evil, guilt, bad conscience, and moral psychology",
+          entries: [
+            {
+              passage: "§268",
+              theme: "Two types of morality",
+              whyItMatters:
+                "Nietzsche warns against confusing a morality by which healthy instinct defends itself against decadence with a morality by which decadence defines, justifies, and deepens itself.",
+            },
+            {
+              passage: "§295",
+              theme: "Bad conscience attached to natural inclinations",
+              whyItMatters:
+                "Nietzsche says natural inclinations have been joined to bad conscience and suggests the reverse experiment: attach bad conscience to world-slandering, anti-natural ideals.",
+            },
+            {
+              passage: "§296",
+              theme: "Great crimes in psychology",
+              whyItMatters:
+                "Nietzsche says pain has been moralized as guilt, strong pleasures branded sinful, weakness sanctified, greatness reinterpreted as selflessness, and love falsified as surrender.",
+            },
+            {
+              passage: "§352",
+              theme: "Power includes helping and harming",
+              whyItMatters:
+                "Nietzsche argues that morality poisons life when it separates the power to help from the power to harm, giving a compact critique of good/evil dualism.",
+            },
+            {
+              passage: "§353",
+              theme: "Critique of the good man",
+              whyItMatters:
+                "Nietzsche asks whether traits such as dignity, justice, honesty, humanity, and good conscience have value in themselves or only through their use and consequences.",
+            },
+          ],
+        },
+        {
+          title: "Nobility, rank, strength, and the higher type",
+          entries: [
+            {
+              passage: "§317",
+              theme: "Virtue as rare, aristocratic exception",
+              whyItMatters:
+                "Nietzsche says virtue should be defended from preachers of virtue because they turn it into an ideal for everyone and strip it of rarity, inimitability, exceptionalness, and aristocratic magic.",
+            },
+            {
+              passage: "§373",
+              theme: "Egoism and physiological rank",
+              whyItMatters:
+                "Nietzsche argues that egoism has different value depending on the physiological value of the person who possesses it. Ascending life has a different right to egoism than descending life.",
+            },
+            {
+              passage: "§400",
+              theme: "Morality as protest of the common, weak, and mediocre",
+              whyItMatters:
+                "Nietzsche summarizes moral history as the protest of the common person, the underprivileged, and the mediocre. Morality becomes biologically suspicious when it develops at the expense of rulers, independent types, and higher possibilities.",
+            },
+            {
+              passage: "§401",
+              theme: "Morality as revenge of the exhausted and disinherited",
+              whyItMatters:
+                "Nietzsche says morality as supreme value is the instinct of decadence: the exhausted and disinherited take revenge and play the master.",
+            },
+            {
+              passage: "§766",
+              theme: "The herd is a means, not the goal",
+              whyItMatters:
+                "Nietzsche says it is a basic error to place the goal in the herd rather than in single individuals, marking the constructive side of his anti-herd thought.",
+            },
+            {
+              passage: "§767",
+              theme: "Individual value-creation",
+              whyItMatters:
+                "Nietzsche says the individual derives the value of his acts from himself and creatively interprets inherited words and formulas.",
+            },
+            {
+              passage: "§770",
+              theme: "Freedom as positive power",
+              whyItMatters:
+                "Nietzsche defines freedom as the degree of resistance one must overcome to remain on top, close to the noble ideal of self-command rather than mere absence of constraint.",
+            },
+            {
+              passage: "§773",
+              theme: "Self-esteem, inequality, and individual self-reliance",
+              whyItMatters:
+                "Nietzsche explains how pride in rank, inequality, and distance can serve as a school for individual self-reliance.",
+            },
+            {
+              passage: "§§859-862",
+              theme: "Order of rank, anti-equality, anti-mediocrity",
+              whyItMatters:
+                "These severe passages are philosophically central: Nietzsche rejects equal freedom as the guiding problem and focuses instead on rank, power, and the production of a higher type.",
+            },
+            {
+              passage: "§863",
+              theme: "Stronger and weaker man",
+              whyItMatters:
+                "Nietzsche distinguishes the strong as accumulated force from the weak as fragmentation or decline; the mass reacts slowly, defends itself, and does not create.",
+            },
+            {
+              passage: "§§865-866",
+              theme: "No uniformity; higher type beyond leveling",
+              whyItMatters:
+                "Nietzsche rejects uniformity, describes virtue as a noble madness and beautiful exception, then opposes modern leveling with the production of a higher type.",
+            },
+          ],
+        },
+      ],
+      readingOrder: [
+        {
+          step: "Start with the herd-morality core",
+          passages: "§§274-287",
+        },
+        {
+          step: "Move to Christianity and priestly inversion",
+          passages: "§§145, 167, 172, 179, 202, 205-207, 215, 217, 221",
+        },
+        {
+          step: "Read the moral psychology of guilt and the good man",
+          passages: "§§268, 295-296, 350-353",
+        },
+        {
+          step: "Then read the revaluation and rank passages",
+          passages: "§§373-374, §§400-403",
+        },
+        {
+          step: "Finish with society, the individual, and the higher type",
+          passages: "§§765-773, §784, §§859-866",
+        },
+      ],
+      coreCluster: "§§274-287 + §§350-353 + §§400-401 + §§859-866",
+      coreClusterNote:
+        "This gives the whole arc: herd morality, ressentiment, good/evil dualism, attack on nobility, morality as disguised will to power, order of rank, and higher type.",
+    },
     readWith: ["Beyond Good and Evil §260", "Genealogy I", "Genealogy II", "The Antichrist"],
     caution:
       "Do not present master morality as Nietzsche's simple final ideal. His mature concern is the creation of higher types after nihilism, not a return to ancient brutality.",
