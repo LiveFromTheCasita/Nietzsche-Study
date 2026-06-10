@@ -123,6 +123,12 @@ function ExpandedPassageMap({ map }) {
     <div className="wtp-expanded-map">
       {map.intro ? <p className="wtp-expanded-map__intro">{map.intro}</p> : null}
 
+      {map.thesis ? (
+        <div className="callout">
+          <strong>Interpretive thesis:</strong> {map.thesis}
+        </div>
+      ) : null}
+
       <div className="wtp-expanded-map__sections">
         {map.sections.map((section) => (
           <section key={section.title} className="wtp-expanded-map__section">
@@ -156,12 +162,13 @@ function ExpandedPassageMap({ map }) {
               </li>
             ))}
           </ol>
+          {map.readingOrderNote ? <p>{map.readingOrderNote}</p> : null}
         </div>
       ) : null}
 
       {map.coreCluster ? (
         <div className="callout callout--amber">
-          <strong>Single most important cluster:</strong> {map.coreCluster}. {map.coreClusterNote}
+          <strong>{map.coreClusterLabel || "Single most important cluster"}:</strong> {map.coreCluster}. {map.coreClusterNote}
         </div>
       ) : null}
     </div>

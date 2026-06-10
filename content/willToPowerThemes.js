@@ -476,15 +476,522 @@ export const willToPowerThemes = [
     id: "strong-and-weak",
     title: "The Strong and the Weak",
     description:
-      "Nietzsche's distinction between ascending and descending life, accumulated force and fragmentation, strength and decadence.",
-    coreQuestion: "What is the difference between strength and weakness as forms of life?",
+      "Nietzsche's psychological and cultural distinction between ascending and declining forms of life: strength as accumulated force, self-command, discipline, risk, creative power, and the ability to incorporate suffering; weakness as fragmentation, exhaustion, ressentiment, herd dependence, and the moralization of vulnerability.",
+    coreQuestion: "What separates ascending life from declining life -- psychologically, morally, culturally, and spiritually?",
     passageClusters: [
-      { label: "Main range", passages: ["§§880-912"] },
-      { label: "Focused passages", passages: ["§§897-912"], note: "Strength as digestion, self-command, resistance, courage, and hard schooling." },
+      { label: "Primary passage cluster", passages: ["§§863-934"], note: "The editorial subsection under Book Four, Discipline and Breeding; the main range to attach to this theme." },
+      { label: "Strong/weak psychology", passages: ["§§863-870"], note: "Accumulated force, weakness, leveling, outlawed passions, and slavish morality." },
+      { label: "Mediocrity and exception", passages: ["§§881-891"], note: "The necessity of opposites, conditions for greatness, solitary types, and the social machinery of virtue." },
+      { label: "Strong of the future and hard schooling", passages: ["§§897-912"], note: "Reverse valuations, courage, responsibility, self-formation, suffering, discipline, and command." },
+      { label: "Will power and command of passions", passages: ["§§915-934"], note: "Naturalized asceticism, self-respect, degrees of strength, warlike instincts, plenitude, and domination of the passions." },
+      { label: "Broader related passages", passages: ["§56", "§268", "§§274-287", "§§382-385", "§§400-403", "§§684-685", "§§702-703", "§§765-770", "§§856-862", "§936", "§§953-957", "§§971-972", "§§995-1003", "§§1013-1014", "§1033", "§1050", "§1066"], note: "Ascending and declining life, herd valuation, order of rank, higher type, great health, and Dionysian strength." },
     ],
-    readWith: ["Twilight of the Idols", "The Antichrist", "On the Genealogy of Morals"],
+    expandedPassageMap: {
+      intro:
+        "In The Will to Power, The Strong and the Weak is an editorial subsection under Book Four, Discipline and Breeding. It begins at §863. The heading is useful for navigation, but the book's contents and headings are editorial, not Nietzsche's final authored structure.",
+      thesis:
+        "For Nietzsche, strong and weak are not simply social classes or physical categories. They name forms of life. The strong are those in whom force is gathered, organized, and capable of command. The weak are those in whom force is scattered, reactive, defensive, or dependent upon herd values. The deepest issue is not cruelty versus kindness, but whether a form of life creates, commands, transforms, and affirms, or whether it reacts, protects itself, moralizes, and negates.",
+      sections: [
+        {
+          title: "Direct passages: §§863-934",
+          entries: [
+            {
+              passage: "§863",
+              theme: "Basic definition of stronger and weaker life",
+              whyItMatters:
+                "The stronger person is a summation of inherited force; weakness is either as yet little force or no more force. Nietzsche contrasts the strong individual with the mass of the weak.",
+            },
+            {
+              passage: "§864",
+              theme: "Why the weak conquer",
+              whyItMatters:
+                "Nietzsche explains the cultural power of the sick, weak, interesting, changeable, malicious, decadent, and herdlike. This is one of the most important passages for the psychology of weakness.",
+            },
+            {
+              passage: "§865",
+              theme: "Against uniformity",
+              whyItMatters:
+                "Virtue is not average desirability, but a rare, costly, exceptional state.",
+            },
+            {
+              passage: "§866",
+              theme: "The stronger species and the Overman",
+              whyItMatters:
+                "The stronger species, higher type, and Overman are treated as a counter-movement to modern dwarfing, leveling, specialization, and adaptation.",
+            },
+            {
+              passage: "§867",
+              theme: "Decline and larger growth",
+              whyItMatters:
+                "Decline itself may be part of a larger growth in overall power; Nietzsche asks who bears the cost of great growth.",
+            },
+            {
+              passage: "§868",
+              theme: "The future European",
+              whyItMatters:
+                "Nietzsche describes the future European as intelligent, industrious, weak-willed, and chaotic, then asks how a stronger species could arise out of this condition.",
+            },
+            {
+              passage: "§869",
+              theme: "Outlawed powerful passions",
+              whyItMatters:
+                "Powerful passions have been outlawed, making powerful human beings feel evil, harmful, or forbidden.",
+            },
+            {
+              passage: "§870",
+              theme: "Slavish morality and creative natures",
+              whyItMatters:
+                "Slavish morality condemns ruling and creative natures, confusing the moderation of strength with the mediocrity of weakness.",
+            },
+            {
+              passage: "§871",
+              theme: "Equality before God and strong types",
+              whyItMatters:
+                "Equality before God damages the prerogatives of strongly constituted types; the strong are confused with the vicious and unbridled.",
+            },
+            {
+              passage: "§872",
+              theme: "Rights, duties, and tasks",
+              whyItMatters:
+                "Rights are related to duties and tasks in a harsh notebook fragment on higher and lower types. Use this passage with special caution.",
+            },
+            {
+              passage: "§873",
+              theme: "Ordinary egoism and noble egoism",
+              whyItMatters:
+                "Self-preservation means something different in common and rare natures.",
+            },
+            {
+              passage: "§874",
+              theme: "Degeneration of rulers",
+              whyItMatters:
+                "The degeneration of rulers allows slave virtues and Christian reversal to triumph.",
+            },
+            {
+              passage: "§875",
+              theme: "Higher man and herd man",
+              whyItMatters:
+                "When great human beings are lacking, people invent demigods, gods, parliaments, or collectivities.",
+            },
+            {
+              passage: "§876",
+              theme: "Distance of rank",
+              whyItMatters:
+                "The higher nature is defined by difference, incommunicability, and distance of rank, not by social usefulness or visible effect.",
+            },
+            {
+              passage: "§§877-878",
+              theme: "Value beyond utility",
+              whyItMatters:
+                "The value of a human being is not reducible to utility, morality, social benefit, or measurable effect.",
+            },
+            {
+              passage: "§879",
+              theme: "Morality and lower rank",
+              whyItMatters:
+                "Preoccupation with morality places a spirit in a lower order of rank; even moral critics may remain herd types.",
+            },
+            {
+              passage: "§880",
+              theme: "Beyond morality toward a goal",
+              whyItMatters:
+                "Nietzsche imagines replacing morality with the will to one's goal and the means to that goal.",
+            },
+            {
+              passage: "§881",
+              theme: "The necessity of opposites",
+              whyItMatters:
+                "The mediocre cannot understand the necessity of opposites. Growth requires the growth of both sides; greatness requires tension.",
+            },
+            {
+              passage: "§882",
+              theme: "Conditions for greatness",
+              whyItMatters:
+                "One cannot want Greek or Renaissance greatness without also willing the conditions that made such types possible.",
+            },
+            {
+              passage: "§883",
+              theme: "The great synthetic man",
+              whyItMatters:
+                "Modernity has chaos but not yet the great synthetic human being who can give that chaos world-creating form.",
+            },
+            {
+              passage: "§884",
+              theme: "Supple strength among antitheses",
+              whyItMatters:
+                "Nietzsche points to strong German types and treats strength as suppleness among antitheses and freedom from fixed doctrine.",
+            },
+            {
+              passage: "§885",
+              theme: "The rare human being and the many",
+              whyItMatters:
+                "Great and rare human beings cannot depend on the approval of the many.",
+            },
+            {
+              passage: "§886",
+              theme: "Personality versus herd",
+              whyItMatters:
+                "Solitary and gregarious types must be evaluated differently. Degeneration occurs when they approximate each other.",
+            },
+            {
+              passage: "§887",
+              theme: "Vulnerability of solitary strength",
+              whyItMatters:
+                "Stronger solitary natures are vulnerable because herd instincts and inherited values stand against them.",
+            },
+            {
+              passage: "§§888-889",
+              theme: "Virtue as social machinery",
+              whyItMatters:
+                "Society cultivates useful, mechanical, obedient states and makes disagreeable duties feel valuable.",
+            },
+            {
+              passage: "§890",
+              theme: "Dwarfing and the base for a stronger species",
+              whyItMatters:
+                "The dwarfing of humanity may create the broad base on which a stronger species can stand.",
+            },
+            {
+              passage: "§891",
+              theme: "Distance, gulf, and exceptionalness",
+              whyItMatters:
+                "Nietzsche insists on distance, gulf, and exceptionalness rather than idealistic resentment against mediocrity.",
+            },
+            {
+              passage: "§§892-894",
+              theme: "Mediocrity and the exception",
+              whyItMatters:
+                "The mediocre should remain mediocre; the exception depends on the continued existence of the rule.",
+            },
+            {
+              passage: "§§895-896",
+              theme: "Utility of the weak and danger of the exception",
+              whyItMatters:
+                "Preservation of the weak has economic and cultural utility, while society treats explosive exceptional individuals as dangerous accidents.",
+            },
+            {
+              passage: "§897",
+              theme: "Morality against the highest power of man",
+              whyItMatters:
+                "Morality obstructs the highest splendor and power of the type man; weaker and intermediate forms create counter-valuations against plenitude of life.",
+            },
+            {
+              passage: "§898",
+              theme: "The strong of the future",
+              whyItMatters:
+                "Conditions for a stronger type include distance, reverse valuations, self-assurance, responsibility, and the ability to posit goals.",
+            },
+            {
+              passage: "§§899-900",
+              theme: "New barbarians",
+              whyItMatters:
+                "Nietzsche imagines spiritually superior experimenters, conquerors, and ruling natures with an excess of strength.",
+            },
+            {
+              passage: "§901",
+              theme: "The lower type as base, not goal",
+              whyItMatters:
+                "The lower type is not the goal but the base upon which the higher species performs its own task. Nietzsche contrasts a strong or noble species with industrial masses.",
+            },
+            {
+              passage: "§902",
+              theme: "Shepherd versus master",
+              whyItMatters:
+                "The shepherd preserves the herd; the master is the end for which the herd exists.",
+            },
+            {
+              passage: "§903",
+              theme: "Reverse evaluations and stronger species",
+              whyItMatters:
+                "Social value-feelings may create the foundation for a stronger species; strength means being able to live under reverse evaluations and will them eternally.",
+            },
+            {
+              passage: "§904",
+              theme: "Discipline and type",
+              whyItMatters:
+                "The same discipline that strengthens a strong nature can shatter and wither a mediocre one.",
+            },
+            {
+              passage: "§905",
+              theme: "Modern souls and reverse evaluations",
+              whyItMatters:
+                "Nietzsche imagines modern souls strong enough to transform their qualities into health.",
+            },
+            {
+              passage: "§906",
+              theme: "The strong man as health",
+              whyItMatters:
+                "The strong person appears as physiological and psychological health: one who digests deeds as one digests food.",
+            },
+            {
+              passage: "§907",
+              theme: "Preparing conditions for higher types",
+              whyItMatters:
+                "We cannot fully engineer the highest types, but we can increase courage, insight, hardness, independence, and responsibility.",
+            },
+            {
+              passage: "§908",
+              theme: "Making the personal ideal real",
+              whyItMatters:
+                "The immediate task is to make the personal ideal prevail and become real.",
+            },
+            {
+              passage: "§909",
+              theme: "Eight questions of self-formation",
+              whyItMatters:
+                "Nietzsche frames self-formation through questions of simplicity or multiplicity, happiness or indifference, softness or hardness, prudence or ruthlessness, goal or no goal, being respected or feared, and tyrant, shepherd, or herd animal.",
+            },
+            {
+              passage: "§910",
+              theme: "Suffering as test",
+              whyItMatters:
+                "Suffering, defeat, humiliation, and self-mistrust become tests of endurance and worth.",
+            },
+            {
+              passage: "§911",
+              theme: "Mastering even virtue",
+              whyItMatters:
+                "Even virtue must be mastered; happiness and relaxation can dwarf the human type.",
+            },
+            {
+              passage: "§912",
+              theme: "Hard schooling",
+              whyItMatters:
+                "Hard schooling means discipline, command, obedience, danger over comfort, objective blame, and rare praise.",
+            },
+            {
+              passage: "§§913-914",
+              theme: "Beyond praise and tests of ripeness",
+              whyItMatters:
+                "Nietzsche turns to actions beyond praise, vows, and tests of ripeness.",
+            },
+            {
+              passage: "§915",
+              theme: "Naturalized asceticism",
+              whyItMatters:
+                "Asceticism is reinterpreted not as denial but as strengthening, gymnastics of the will, and testing strength.",
+            },
+            {
+              passage: "§916",
+              theme: "Education of will power",
+              whyItMatters:
+                "Temporary isolation, fasting, self-recovery, and accumulation of strength become practices for educating will power.",
+            },
+            {
+              passage: "§917",
+              theme: "Joy and strengthening",
+              whyItMatters:
+                "Joy is treated as feeling stronger; Nietzsche distinguishes artificial from genuine strengthening.",
+            },
+            {
+              passage: "§918",
+              theme: "Slow decisions and fidelity",
+              whyItMatters:
+                "One becomes stronger through slow decisions and tenacious fidelity to them, learning both command and obedience.",
+            },
+            {
+              passage: "§919",
+              theme: "Self-respect",
+              whyItMatters:
+                "Self-respect is presented as the beginning of strength.",
+            },
+            {
+              passage: "§920",
+              theme: "Degrees of strength",
+              whyItMatters:
+                "Nietzsche distinguishes the man of will, the man of desire, and the man of faith as degrees of strength.",
+            },
+            {
+              passage: "§921",
+              theme: "How a stronger species maintains itself",
+              whyItMatters:
+                "A stronger species maintains itself through exceptional actions, ascetic tests, silence, obedience, and refusal to universalize its own law.",
+            },
+            {
+              passage: "§§922-924",
+              theme: "Warlike and peaceful types",
+              whyItMatters:
+                "Nietzsche examines warlike versus peaceful types and what happens when the instincts of defense and attack disappear.",
+            },
+            {
+              passage: "§§925-927",
+              theme: "Against reciprocity and equality as universal rules",
+              whyItMatters:
+                "Nietzsche criticizes reciprocity, equality, and utilitarian moral rules; aristocratic action is not reducible to equal exchange.",
+            },
+            {
+              passage: "§§928-931",
+              theme: "Greatness as command over affects",
+              whyItMatters:
+                "Greatness is not lack of affects but command over them; life raised to a higher power seeks danger, resistance, and powerful affects.",
+            },
+            {
+              passage: "§932",
+              theme: "Beneficence from plenitude",
+              whyItMatters:
+                "Beneficence can come from plenitude rather than self-denial.",
+            },
+            {
+              passage: "§933",
+              theme: "Domination of the passions",
+              whyItMatters:
+                "The core formula is domination of the passions, not weakening or extirpation. The great human being has powerful desires and a greater power that presses them into service.",
+            },
+            {
+              passage: "§934",
+              theme: "Questions of strength",
+              whyItMatters:
+                "Nietzsche asks whether one can master suffering, pity, sickness, vice, truth, and even the good without being ruined by them.",
+            },
+          ],
+        },
+        {
+          title: "Broader related passages outside §§863-934",
+          entries: [
+            {
+              passage: "§56",
+              theme: "Ascending and declining values",
+              whyItMatters:
+                "Old values are born of declining life; new values belong to ascending life. This is one of the clearest ascending/declining life formulations.",
+            },
+            {
+              passage: "§268",
+              theme: "Healthy instinct and decadence",
+              whyItMatters:
+                "Nietzsche distinguishes a morality of healthy instinct from a morality by which decadence defines and deepens itself.",
+            },
+            {
+              passage: "§§274-287",
+              theme: "Herd morality cluster",
+              whyItMatters:
+                "Morality appears as the will to power of herd, suffering, mediocre, and weak types.",
+            },
+            {
+              passage: "§§382-385",
+              theme: "Commanding passions versus extirpating them",
+              whyItMatters:
+                "Moralists extirpate passions instead of commanding them; moral intolerance is a sign of weakness.",
+            },
+            {
+              passage: "§§400-403",
+              theme: "Weak and mediocre valuations",
+              whyItMatters:
+                "Declining instincts become master over ascending instincts; morality is a victory of weak or mediocre valuations, though Nietzsche also asks whether the weak serve life's preservation.",
+            },
+            {
+              passage: "§§684-685",
+              theme: "Life beyond adaptation",
+              whyItMatters:
+                "Life is expansion, incorporation, overpowering, and not mere adaptation or self-preservation.",
+            },
+            {
+              passage: "§§702-703",
+              theme: "Power requires resistance",
+              whyItMatters:
+                "Strength is tested through opposition; power requires resistance.",
+            },
+            {
+              passage: "§§765-770",
+              theme: "Individual versus herd",
+              whyItMatters:
+                "The individual creates values and extends force outward rather than taking the herd as the goal.",
+            },
+            {
+              passage: "§§856-862",
+              theme: "Order of rank and strengthening the strong",
+              whyItMatters:
+                "Order of rank, anti-equality, strengthening the strong, and critique of mediocrity and slavish evaluations prepare the strong/weak subsection.",
+            },
+            {
+              passage: "§936",
+              theme: "Aristocracy and autonomy",
+              whyItMatters:
+                "Aristocracy, rank, freedom, command, and the decline of autonomy under equality extend the strong/weak theme into social organization.",
+            },
+            {
+              passage: "§§953-957",
+              theme: "New aristocracy and masters of the earth",
+              whyItMatters:
+                "Nietzsche turns to new aristocracy, masters of the earth, leader animal versus herd animal, and the question of how humanity should be raised and trained.",
+            },
+            {
+              passage: "§§971-972",
+              theme: "The highest type as value-legislator",
+              whyItMatters:
+                "The highest type is not merely a knower, but a commander of a whither and wherefore.",
+            },
+            {
+              passage: "§§995-1003",
+              theme: "Great human being, highest man, Overman",
+              whyItMatters:
+                "These passages connect accumulated energy, rare higher humanity, and the one who grows stronger through danger and accident.",
+            },
+            {
+              passage: "§§1013-1014",
+              theme: "Great health",
+              whyItMatters:
+                "Great health is the power to incorporate sickness, danger, and contradiction.",
+            },
+            {
+              passage: "§1033, §1050, §1066",
+              theme: "Dionysian strength",
+              whyItMatters:
+                "Dionysian strength affirms becoming, destruction, suffering, recurrence, and the world as will to power.",
+            },
+          ],
+        },
+      ],
+      readingOrder: [
+        {
+          step: "Start with ascending and declining life",
+          passages: "§56",
+        },
+        {
+          step: "Move to morality as weak valuation",
+          passages: "§§400-403",
+        },
+        {
+          step: "Read order of rank",
+          passages: "§§856-862",
+        },
+        {
+          step: "Enter the direct strong/weak psychology",
+          passages: "§§863-870",
+        },
+        {
+          step: "Then read mediocrity and exception",
+          passages: "§§881-891",
+        },
+        {
+          step: "Move to the strong of the future and hard schooling",
+          passages: "§§897-912",
+        },
+        {
+          step: "Read discipline and self-formation",
+          passages: "§§915-921",
+        },
+        {
+          step: "Finish the direct cluster with command of the passions",
+          passages: "§§928-934",
+        },
+        {
+          step: "Extend the theme to higher-type culture",
+          passages: "§§953-957",
+        },
+        {
+          step: "Close with highest man and Overman",
+          passages: "§§995-1003",
+        },
+      ],
+      readingOrderNote:
+        "This sequence gives the intellectual arc: ascending and declining life, morality as weak valuation, order of rank, strong/weak psychology, mediocrity and exception, the strong of the future, discipline and self-formation, command of the passions, and the higher type.",
+      coreClusterLabel: "Primary Will to Power passage cluster",
+      coreCluster: "§§863-934",
+      coreClusterNote: "This is the direct core and the main passage range to attach to this theme.",
+    },
+    readWith: ["Beyond Good and Evil", "On the Genealogy of Morals", "Twilight of the Idols", "The Antichrist", "Ecce Homo"],
     caution:
-      "Strength is not loud aggression. In these notes it often means organization, endurance, digestion, and freedom from reactive poisoning.",
+      "Nietzsche's language in this cluster is among the most dangerous in The Will to Power. These notes should not be read as a simple political program, racial doctrine, or permission for cruelty. The real philosophical problem is the distinction between ascending and declining life: whether a form of life gathers, commands, creates, and affirms, or whether it reacts, protects, moralizes, and negates. Because The Will to Power is notebook material, these passages should be read alongside Beyond Good and Evil, On the Genealogy of Morals, Twilight of the Idols, The Antichrist, and Ecce Homo, not as Nietzsche's finished doctrine.",
   },
   {
     id: "higher-type-self-overcoming",
