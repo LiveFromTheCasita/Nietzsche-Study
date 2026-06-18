@@ -428,7 +428,18 @@ export const worksShelf = {
     note: "Ressentiment, guilt, bad conscience, ascetic ideal",
     edition: "Best entry for morality, method, and spiritual diagnosis.",
     essay: genealogyOfMoralityEssay,
-    essays: [genealogyOfMoralityEssay, genealogyNietzscheVoiceEssay],
+    essays: [
+      {
+        id: "genealogy-clear-guide",
+        title: "Clear Guide to the Three Essays",
+        content: genealogyOfMoralityEssay,
+      },
+      {
+        id: "genealogy-nietzsche-voice",
+        title: "Hypothetical Explanation in Nietzsche’s Voice",
+        content: genealogyNietzscheVoiceEssay,
+      },
+    ],
   },
   "twilight-of-the-idols": {
     note: "Compressed late critique and diagnosis",

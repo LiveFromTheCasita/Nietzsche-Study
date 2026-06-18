@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import CorpusNavigator from "./CorpusNavigator";
 import {
@@ -34,6 +34,11 @@ function scrollToSection(sectionId) {
 
 function getPhaseLabel(period) {
   return period === "mature" ? "Late" : period.charAt(0).toUpperCase() + period.slice(1);
+}
+
+function getWorkIdFromHash(hash) {
+  if (hash.startsWith("#development-genealogy-")) return "genealogy-of-morals";
+  return null;
 }
 
 const workEssaySubheadings = new Set([
@@ -79,6 +84,10 @@ function renderWorkEssayHeading(level, text, key) {
   if (level === 2) return <h2 key={key}>{renderInlineText(text)}</h2>;
   if (level === 3) return <h3 key={key}>{renderInlineText(text)}</h3>;
   return <h4 key={key}>{renderInlineText(text)}</h4>;
+}
+
+function stripInlineMarkdown(text) {
+  return text.replace(/^#{1,4}\s+/, "").replace(/\*\*/g, "").replace(/\*/g, "").trim();
 }
 
 function getWorkEssayBlocks(essay) {
@@ -133,10 +142,84 @@ function WorkEssay({ essay }) {
   );
 }
 
-function WorkEssays({ essay, essays }) {
-  const workEssays = essays || (essay ? [essay] : []);
+function getWorkEssayTitle(essay) {
+  const firstBlock = getWorkEssayBlocks(essay)[0] || "Essay";
+  return stripInlineMarkdown(firstBlock);
+}
 
-  return workEssays.map((item, index) => <WorkEssay key={`work-essay-${index}`} essay={item} />);
+function normalizeWorkEssays(essay, essays) {
+  const items = essays || (essay ? [essay] : []);
+
+  return items
+    .map((item, index) => {
+      const content = typeof item === "string" ? item : item.content;
+      if (!content) return null;
+
+      const id = typeof item === "string" ? `work-essay-${index + 1}` : item.id || `work-essay-${index + 1}`;
+
+      return {
+        id,
+        anchorId: `development-${id}`,
+        title: typeof item === "string" ? getWorkEssayTitle(content) : item.title || getWorkEssayTitle(content),
+        content,
+      };
+    })
+    .filter(Boolean);
+}
+
+function WorkEssays({ essay, essays }) {
+  const workEssays = useMemo(() => normalizeWorkEssays(essay, essays), [essay, essays]);
+  const [activeEssayIndex, setActiveEssayIndex] = useState(0);
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    const hashIndex = workEssays.findIndex((item) => item.anchorId === hash);
+
+    if (hashIndex >= 0) {
+      setActiveEssayIndex(hashIndex);
+      window.setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 0);
+    } else {
+      setActiveEssayIndex(0);
+    }
+  }, [workEssays]);
+
+  if (!workEssays.length) return null;
+
+  const activeEssay = workEssays[activeEssayIndex] || workEssays[0];
+
+  const openEssay = (event, index, anchorId) => {
+    event.preventDefault();
+    setActiveEssayIndex(index);
+    window.history.replaceState(null, "", `#${anchorId}`);
+    window.setTimeout(() => {
+      document.getElementById(anchorId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 0);
+  };
+
+  return (
+    <>
+      {workEssays.length > 1 && (
+        <nav className="work-essay-links" aria-label="Essays for this work">
+          {workEssays.map((item, index) => (
+            <a
+              key={item.id}
+              href={`#${item.anchorId}`}
+              className={`work-essay-link ${item.id === activeEssay.id ? "work-essay-link--active" : ""}`}
+              aria-current={item.id === activeEssay.id ? "page" : undefined}
+              onClick={(event) => openEssay(event, index, item.anchorId)}
+            >
+              {item.title}
+            </a>
+          ))}
+        </nav>
+      )}
+      <div id={activeEssay.anchorId}>
+        <WorkEssay essay={activeEssay.content} />
+      </div>
+    </>
+  );
 }
 
 function Card({ children, className = "" }) {
@@ -204,6 +287,18 @@ export default function NietzscheStudySite() {
   );
   const selectedWork = orderedWorks.find((work) => work.id === selectedWorkId) || orderedWorks[0] || null;
   const selectedWorkShelf = selectedWork ? worksShelf[selectedWork.id] : null;
+
+  useEffect(() => {
+    const syncWorkFromHash = () => {
+      const workId = getWorkIdFromHash(window.location.hash);
+      if (workId) setSelectedWorkId(workId);
+    };
+
+    syncWorkFromHash();
+    window.addEventListener("hashchange", syncWorkFromHash);
+
+    return () => window.removeEventListener("hashchange", syncWorkFromHash);
+  }, []);
 
   const openNavigatorTheme = (themeId, tab = "overview") => {
     if (!themeId) return;
@@ -398,7 +493,11 @@ export default function NietzscheStudySite() {
                       {getPhaseLabel(selectedWork.period)} phase
                     </span>
                   </div>
-                  <WorkEssays essay={selectedWorkShelf?.essay} essays={selectedWorkShelf?.essays} />
+                  <WorkEssays
+                    key={selectedWork.id}
+                    essay={selectedWorkShelf?.essay}
+                    essays={selectedWorkShelf?.essays}
+                  />
                 </Card>
               )}
             </div>
