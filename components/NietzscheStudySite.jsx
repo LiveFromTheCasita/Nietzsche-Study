@@ -169,25 +169,32 @@ function normalizeWorkEssays(essay, essays) {
 
 function WorkEssays({ essay, essays }) {
   const workEssays = useMemo(() => normalizeWorkEssays(essay, essays), [essay, essays]);
-  const [activeEssayIndex, setActiveEssayIndex] = useState(0);
+  const [activeEssayIndex, setActiveEssayIndex] = useState(null);
 
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    const hashIndex = workEssays.findIndex((item) => item.anchorId === hash);
+    const syncEssayFromHash = () => {
+      const hash = window.location.hash.slice(1);
+      const hashIndex = workEssays.findIndex((item) => item.anchorId === hash);
 
-    if (hashIndex >= 0) {
-      setActiveEssayIndex(hashIndex);
-      window.setTimeout(() => {
-        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 0);
-    } else {
-      setActiveEssayIndex(0);
-    }
+      if (hashIndex >= 0) {
+        setActiveEssayIndex(hashIndex);
+        window.setTimeout(() => {
+          document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 0);
+      } else {
+        setActiveEssayIndex(workEssays.length > 1 ? null : 0);
+      }
+    };
+
+    syncEssayFromHash();
+    window.addEventListener("hashchange", syncEssayFromHash);
+
+    return () => window.removeEventListener("hashchange", syncEssayFromHash);
   }, [workEssays]);
 
   if (!workEssays.length) return null;
 
-  const activeEssay = workEssays[activeEssayIndex] || workEssays[0];
+  const activeEssay = activeEssayIndex === null ? null : workEssays[activeEssayIndex] || workEssays[0];
 
   const openEssay = (event, index, anchorId) => {
     event.preventDefault();
@@ -206,8 +213,8 @@ function WorkEssays({ essay, essays }) {
             <a
               key={item.id}
               href={`#${item.anchorId}`}
-              className={`work-essay-link ${item.id === activeEssay.id ? "work-essay-link--active" : ""}`}
-              aria-current={item.id === activeEssay.id ? "page" : undefined}
+              className={`work-essay-link ${item.id === activeEssay?.id ? "work-essay-link--active" : ""}`}
+              aria-current={item.id === activeEssay?.id ? "page" : undefined}
               onClick={(event) => openEssay(event, index, item.anchorId)}
             >
               {item.title}
@@ -215,9 +222,11 @@ function WorkEssays({ essay, essays }) {
           ))}
         </nav>
       )}
-      <div id={activeEssay.anchorId}>
-        <WorkEssay essay={activeEssay.content} />
-      </div>
+      {activeEssay && (
+        <div id={activeEssay.anchorId}>
+          <WorkEssay essay={activeEssay.content} />
+        </div>
+      )}
     </>
   );
 }
@@ -306,6 +315,15 @@ export default function NietzscheStudySite() {
     setSelectedNavigatorThemeId(themeId);
     setSelectedNavigatorTab(tab);
     scrollToSection("theme-navigator");
+  };
+
+  const selectWork = (workId) => {
+    setSelectedWorkId(workId);
+
+    if ((worksShelf[workId]?.essays?.length || 0) > 1) {
+      window.history.replaceState(null, "", "#development");
+      window.dispatchEvent(new Event("hashchange"));
+    }
   };
 
   return (
@@ -466,7 +484,7 @@ export default function NietzscheStudySite() {
                     key={work.id}
                     type="button"
                     className={`navigator-theme-button ${selectedWork?.id === work.id ? "navigator-theme-button--active" : ""}`}
-                    onClick={() => setSelectedWorkId(work.id)}
+                    onClick={() => selectWork(work.id)}
                   >
                     <div className="navigator-theme-button__header">
                       <h3>
