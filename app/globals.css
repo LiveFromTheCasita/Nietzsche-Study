@@ -540,6 +540,42 @@ blockquote {
   gap: 1rem;
 }
 
+.work-essay {
+  display: grid;
+  gap: 0.95rem;
+  max-width: 78ch;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.work-essay h2 {
+  max-width: 18ch;
+  color: var(--text);
+  font-size: clamp(1.75rem, 3vw, 2.55rem);
+  line-height: 1.05;
+}
+
+.work-essay h3 {
+  margin-top: 1.2rem;
+  color: var(--accent-strong);
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  line-height: 1.12;
+}
+
+.work-essay h4 {
+  margin-top: 0.45rem;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.work-essay p {
+  color: var(--text-soft);
+  line-height: 1.78;
+  white-space: pre-line;
+}
+
 .period-question,
 .callout,
 .mini-panel {

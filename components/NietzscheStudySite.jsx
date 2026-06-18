@@ -36,6 +36,59 @@ function getPhaseLabel(period) {
   return period === "mature" ? "Late" : period.charAt(0).toUpperCase() + period.slice(1);
 }
 
+const workEssaySubheadings = new Set([
+  "Main Question",
+  "Summary",
+  "Key Concepts",
+  "Place in Nietzsche’s Larger Philosophy",
+]);
+
+function isWorkEssayMajorHeading(block) {
+  return /^Part (One|Two|Three):/.test(block) || block.startsWith("Final Reflection:");
+}
+
+function getWorkEssayBlocks(essay) {
+  return essay
+    .trim()
+    .split(/\n{2,}/)
+    .flatMap((block) => {
+      const lines = block.trim().split("\n");
+
+      if (lines.length > 1 && isWorkEssayMajorHeading(lines[0])) {
+        return [lines[0], lines.slice(1).join("\n").trim()].filter(Boolean);
+      }
+
+      return [block.trim()];
+    })
+    .filter(Boolean);
+}
+
+function WorkEssay({ essay }) {
+  if (!essay) return null;
+
+  const blocks = getWorkEssayBlocks(essay);
+
+  return (
+    <article className="work-essay">
+      {blocks.map((block, index) => {
+        if (index === 0) {
+          return <h2 key={`${index}-${block}`}>{block}</h2>;
+        }
+
+        if (isWorkEssayMajorHeading(block)) {
+          return <h3 key={`${index}-${block}`}>{block}</h3>;
+        }
+
+        if (workEssaySubheadings.has(block)) {
+          return <h4 key={`${index}-${block}`}>{block}</h4>;
+        }
+
+        return <p key={`${index}-${block.slice(0, 32)}`}>{block}</p>;
+      })}
+    </article>
+  );
+}
+
 function Card({ children, className = "" }) {
   return <div className={`card ${className}`.trim()}>{children}</div>;
 }
@@ -100,6 +153,7 @@ export default function NietzscheStudySite() {
     []
   );
   const selectedWork = orderedWorks.find((work) => work.id === selectedWorkId) || orderedWorks[0] || null;
+  const selectedWorkShelf = selectedWork ? worksShelf[selectedWork.id] : null;
 
   const openNavigatorTheme = (themeId, tab = "overview") => {
     if (!themeId) return;
@@ -287,13 +341,14 @@ export default function NietzscheStudySite() {
                     <div>
                       <h3>{selectedWork.title}</h3>
                       <p className="fine-print">Published {selectedWork.publicationYear}</p>
-                      <p>{worksShelf[selectedWork.id]?.note}</p>
-                      <p className="fine-print">{worksShelf[selectedWork.id]?.edition}</p>
+                      <p>{selectedWorkShelf?.note}</p>
+                      <p className="fine-print">{selectedWorkShelf?.edition}</p>
                     </div>
                     <span className="meta-chip">
                       {getPhaseLabel(selectedWork.period)} phase
                     </span>
                   </div>
+                  <WorkEssay essay={selectedWorkShelf?.essay} />
                 </Card>
               )}
             </div>
