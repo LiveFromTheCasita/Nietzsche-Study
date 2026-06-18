@@ -47,6 +47,40 @@ function isWorkEssayMajorHeading(block) {
   return /^Part (One|Two|Three):/.test(block) || block.startsWith("Final Reflection:");
 }
 
+function getMarkdownHeading(block) {
+  const match = block.match(/^(#{1,4})\s+(.+)$/);
+  if (!match) return null;
+  return { level: Math.min(Number(match[1].length) + 1, 4), text: match[2] };
+}
+
+function getBoldHeading(block) {
+  const match = block.match(/^\*\*(.+)\*\*$/);
+  if (!match) return null;
+  return { level: 3, text: match[1] };
+}
+
+function renderInlineText(text) {
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean);
+
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={`${index}-${part}`}>{part.slice(2, -2)}</strong>;
+    }
+
+    if (part.startsWith("*") && part.endsWith("*")) {
+      return <em key={`${index}-${part}`}>{part.slice(1, -1)}</em>;
+    }
+
+    return part;
+  });
+}
+
+function renderWorkEssayHeading(level, text, key) {
+  if (level === 2) return <h2 key={key}>{renderInlineText(text)}</h2>;
+  if (level === 3) return <h3 key={key}>{renderInlineText(text)}</h3>;
+  return <h4 key={key}>{renderInlineText(text)}</h4>;
+}
+
 function getWorkEssayBlocks(essay) {
   return essay
     .trim()
@@ -71,22 +105,38 @@ function WorkEssay({ essay }) {
   return (
     <article className="work-essay">
       {blocks.map((block, index) => {
+        const markdownHeading = getMarkdownHeading(block);
+        if (markdownHeading) {
+          return renderWorkEssayHeading(markdownHeading.level, markdownHeading.text, `${index}-${block}`);
+        }
+
+        const boldHeading = getBoldHeading(block);
+        if (boldHeading) {
+          return renderWorkEssayHeading(boldHeading.level, boldHeading.text, `${index}-${block}`);
+        }
+
         if (index === 0) {
-          return <h2 key={`${index}-${block}`}>{block}</h2>;
+          return <h2 key={`${index}-${block}`}>{renderInlineText(block)}</h2>;
         }
 
         if (isWorkEssayMajorHeading(block)) {
-          return <h3 key={`${index}-${block}`}>{block}</h3>;
+          return <h3 key={`${index}-${block}`}>{renderInlineText(block)}</h3>;
         }
 
         if (workEssaySubheadings.has(block)) {
-          return <h4 key={`${index}-${block}`}>{block}</h4>;
+          return <h4 key={`${index}-${block}`}>{renderInlineText(block)}</h4>;
         }
 
-        return <p key={`${index}-${block.slice(0, 32)}`}>{block}</p>;
+        return <p key={`${index}-${block.slice(0, 32)}`}>{renderInlineText(block)}</p>;
       })}
     </article>
   );
+}
+
+function WorkEssays({ essay, essays }) {
+  const workEssays = essays || (essay ? [essay] : []);
+
+  return workEssays.map((item, index) => <WorkEssay key={`work-essay-${index}`} essay={item} />);
 }
 
 function Card({ children, className = "" }) {
@@ -348,7 +398,7 @@ export default function NietzscheStudySite() {
                       {getPhaseLabel(selectedWork.period)} phase
                     </span>
                   </div>
-                  <WorkEssay essay={selectedWorkShelf?.essay} />
+                  <WorkEssays essay={selectedWorkShelf?.essay} essays={selectedWorkShelf?.essays} />
                 </Card>
               )}
             </div>

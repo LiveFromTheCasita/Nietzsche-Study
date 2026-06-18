@@ -1,4 +1,5 @@
 import { genealogyOfMoralityEssay } from "./genealogyOfMoralityEssay";
+import { genealogyNietzscheVoiceEssay } from "./genealogyNietzscheVoiceEssay";
 
 export const periods = [
   {
@@ -427,6 +428,7 @@ export const worksShelf = {
     note: "Ressentiment, guilt, bad conscience, ascetic ideal",
     edition: "Best entry for morality, method, and spiritual diagnosis.",
     essay: genealogyOfMoralityEssay,
+    essays: [genealogyOfMoralityEssay, genealogyNietzscheVoiceEssay],
   },
   "twilight-of-the-idols": {
     note: "Compressed late critique and diagnosis",
