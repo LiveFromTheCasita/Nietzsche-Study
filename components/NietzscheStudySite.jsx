@@ -90,6 +90,69 @@ function stripInlineMarkdown(text) {
   return text.replace(/^#{1,4}\s+/, "").replace(/\*\*/g, "").replace(/\*/g, "").trim();
 }
 
+function getCodeBlock(block) {
+  const match = block.match(/^(?:```|~~~)([\w-]+)?\n([\s\S]*?)\n(?:```|~~~)$/);
+  if (!match) return null;
+  return { language: match[1] || "text", code: match[2] };
+}
+
+function parseTableRow(line) {
+  return line
+    .trim()
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((cell) => cell.trim());
+}
+
+function getMarkdownTable(block) {
+  const lines = block
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (lines.length < 3 || !lines.every((line) => line.startsWith("|"))) return null;
+  if (!/^\|?\s*:?-{3,}/.test(lines[1])) return null;
+
+  return {
+    headers: parseTableRow(lines[0]),
+    rows: lines.slice(2).map(parseTableRow),
+  };
+}
+
+function WorkEssayCodeBlock({ codeBlock }) {
+  return (
+    <pre className={`work-essay-code work-essay-code--${codeBlock.language}`}>
+      <code>{codeBlock.code}</code>
+    </pre>
+  );
+}
+
+function WorkEssayTable({ table }) {
+  return (
+    <div className="work-essay-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            {table.headers.map((header) => (
+              <th key={header}>{renderInlineText(header)}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row, rowIndex) => (
+            <tr key={`row-${rowIndex}`}>
+              {row.map((cell, cellIndex) => (
+                <td key={`${rowIndex}-${cellIndex}`}>{renderInlineText(cell)}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function getWorkEssayBlocks(essay) {
   return essay
     .trim()
@@ -114,6 +177,16 @@ function WorkEssay({ essay }) {
   return (
     <article className="work-essay">
       {blocks.map((block, index) => {
+        const codeBlock = getCodeBlock(block);
+        if (codeBlock) {
+          return <WorkEssayCodeBlock key={`${index}-code`} codeBlock={codeBlock} />;
+        }
+
+        const table = getMarkdownTable(block);
+        if (table) {
+          return <WorkEssayTable key={`${index}-table`} table={table} />;
+        }
+
         const markdownHeading = getMarkdownHeading(block);
         if (markdownHeading) {
           return renderWorkEssayHeading(markdownHeading.level, markdownHeading.text, `${index}-${block}`);

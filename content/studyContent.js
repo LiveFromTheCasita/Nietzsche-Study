@@ -1,4 +1,5 @@
 import { genealogyOfMoralityEssay } from "./genealogyOfMoralityEssay";
+import { genealogyMadeClearEssay } from "./genealogyMadeClearEssay";
 import { genealogyNietzscheVoiceEssay } from "./genealogyNietzscheVoiceEssay";
 
 export const periods = [
@@ -438,6 +439,11 @@ export const worksShelf = {
         id: "genealogy-nietzsche-voice",
         title: "Hypothetical Explanation in Nietzsche’s Voice",
         content: genealogyNietzscheVoiceEssay,
+      },
+      {
+        id: "genealogy-made-clear",
+        title: "Nietzsche’s Genealogy Made Clear",
+        content: genealogyMadeClearEssay,
       },
     ],
   },
