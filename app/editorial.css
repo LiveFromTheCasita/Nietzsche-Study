@@ -1,0 +1,41 @@
+.reading-page { width: min(920px, calc(100% - 2rem)); margin: 0 auto; padding: clamp(2.5rem, 6vw, 5rem) 0; }
+.reading-page--wide { width: min(1120px, calc(100% - 2rem)); }
+.reading-page > header { max-width: 780px; margin-bottom: 2.5rem; }
+.reading-page h1 { font-size: clamp(2.35rem, 5vw, 4rem); line-height: 1.12; margin: .65rem 0 1rem; text-wrap: balance; }
+.reading-page h2 { font-size: clamp(1.65rem, 3vw, 2.2rem); line-height: 1.22; margin-bottom: 1rem; }
+.reading-page h3 { font-size: 1.35rem; margin-bottom: .65rem; }
+.reading-page p + p { margin-top: 1rem; }
+.reading-page .reading-byline { color: var(--accent); margin: 0 0 1rem; font-size: .9rem; }
+.reading-page .reading-kicker { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.reading-page .reading-prose { max-width: 74ch; }
+.reading-page section { margin-top: 2.5rem; }
+.reading-page a { color: var(--accent-strong); text-decoration: underline; text-underline-offset: .2em; }
+.reading-page a:hover { color: var(--text); }
+.reading-page ul, .reading-page ol { padding-left: 1.4rem; color: var(--text-soft); line-height: 1.75; }
+.reading-page li + li { margin-top: .7rem; }
+.reading-page nav ul { display: flex; flex-wrap: wrap; column-gap: 1.5rem; row-gap: .5rem; list-style: none; padding: 0; }
+.reading-page nav li + li { margin-top: 0; }
+.reading-page .reading-callout { padding: 1.35rem; border: 1px solid var(--line-strong); border-radius: 16px; background: var(--bg-panel); }
+.reading-page .reading-shelf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; list-style: none; padding: 0; }
+.reading-page .reading-shelf > li { margin: 0; padding: 1.5rem; border: 1px solid var(--line); border-radius: 18px; background: var(--bg-panel); }
+.reading-page .reading-shelf h2 { font-size: 1.65rem; margin: .5rem 0 .75rem; }
+.reading-page .reading-shelf p { line-height: 1.65; }
+.reading-page .reading-date { font-size: .86rem; color: var(--text-soft); }
+.reading-page .reading-translator { display: block; font-size: .9rem; color: var(--text-soft); }
+.reading-page .reading-glossary { display: grid; grid-template-columns: minmax(8rem, .3fr) 1fr; gap: 1rem 1.5rem; line-height: 1.7; }
+.reading-page .reading-glossary dt { color: var(--accent-strong); font-style: italic; }
+.reading-page .reading-glossary dd { margin: 0; color: var(--text-soft); }
+.reading-page .work-essay { margin-top: 1rem; padding-top: 1rem; }
+.reading-page .work-essay section { margin-top: 0; }
+.reading-page .work-essay-links { display: block; }
+.reading-page .work-essay-links li + li { margin-top: .8rem; }
+.reading-page .work-essay-holder { scroll-margin-top: 7rem; }
+.reading-page .work-essay-disclosure { padding: 1.25rem; border: 1px solid var(--line); border-radius: 16px; margin-top: 1rem; }
+.reading-page .work-essay-disclosure summary { cursor: pointer; color: var(--accent-strong); font-weight: 600; line-height: 1.5; }
+.reading-page .work-essay-disclosure[open] summary { margin-bottom: 1rem; }
+@media (max-width: 650px) {
+  .reading-page .reading-shelf { grid-template-columns: 1fr; }
+  .reading-page .reading-glossary { grid-template-columns: 1fr; gap: .35rem; }
+  .reading-page .reading-glossary dd { margin-bottom: 1rem; }
+  .reading-page .work-essay-disclosure { padding: 1rem; }
+}

@@ -10,7 +10,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "npm run build"
+    "test": "npm run check:content && npm run build",
+    "check:content": "node scripts/check-content.mjs"
   },
   "keywords": [],
   "author": "",

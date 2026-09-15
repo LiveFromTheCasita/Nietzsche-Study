@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
 
   if (!theme) {
     return {
-      title: `Theme Not Found | ${siteName}`,
+      title: "Theme Not Found",
     };
   }
 
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
   const description = theme.shortDescription || theme.overview;
   const title = `${theme.shortTitle || theme.title} | Nietzsche Theme Guide`;
   const siteUrl = getSiteUrl();
-  const ogImage = siteUrl ? `${siteUrl}/og-image.svg` : null;
+  const ogImage = siteUrl ? `${siteUrl}/opengraph-image` : null;
 
   return {
     title,

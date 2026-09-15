@@ -1,0 +1,252 @@
+{
+  "title": "Beginning Nietzsche: Values, Truth, and Affirmation",
+  "slug": "beginning-nietzsche",
+  "editor": "Bob Smith",
+  "summary": "Seven guided sessions move from the loss of inherited certainty through the criticism of philosophy and morality to the problems of human transformation and affirming life.",
+  "introduction": [
+    "Begin with a question: what happens when the beliefs that support our values become doubtful? This course follows several answers Nietzsche tries, without treating them as a finished system. You will read a small group of aphorisms, a sustained argument about morality, and a philosophical narrative. Each form asks for a different kind of attention.",
+    "The sequence follows an argument, not the order in which Nietzsche wrote the books. Dates accompany every assignment so that an effective teaching sequence does not become a misleading developmental history. This is an introduction to several central problems, not a survey of every Nietzschean theme or a substitute for reading the complete books."
+  ],
+  "estimatedTotal": "About 7–9 hours, including rereading, questions, and short writing exercises. Work across seven meetings or split the longer Genealogy sessions in two.",
+  "readingMethod": [
+    "Read the assignment once before consulting the commentary. Note the speaker, the question, and one point you cannot yet explain.",
+    "Read the commentary, then return to the assigned text. Mark the section numbers that support or challenge the explanation.",
+    "Answer the questions and write a short response. An objection counts as progress when it addresses the argument accurately.",
+    "Keep a record of section numbers rather than page numbers: pagination changes between editions."
+  ],
+  "translationGuidance": [
+    "The preferred reading editions for this course are Walter Kaufmann's translations of The Gay Science, Beyond Good and Evil, and Thus Spoke Zarathustra, and the Walter Kaufmann/R. J. Hollingdale translation of On the Genealogy of Morals. You can use another reputable complete translation; section numbering, rather than identical wording, organizes these lessons.",
+    "The free links lead to older public-domain translations: Thomas Common for The Joyful Wisdom (The Gay Science) and Thus Spake Zarathustra, Helen Zimmern for Beyond Good and Evil, and Horace B. Samuel for The Genealogy of Morals. These are reading alternatives, not online copies of the preferred editions. Their vocabulary and scholarly apparatus differ. Use the numbered locator printed beside each link.",
+    "Common's Superman and Kaufmann's overman translate Übermensch. Samuel often writes resentment where modern discussions retain ressentiment. Note the term your edition uses; the lessons do not assume that a single English word settles its meaning.",
+    "The lesson pages contain commentary and assignments rather than reproductions of the assigned primary passages. Open your own edition or the linked reading alongside the lesson."
+  ],
+  "sessions": [
+    {
+      "number": 1,
+      "slug": "the-crisis-of-value",
+      "title": "What Changes When God Is Dead?",
+      "centralQuestion": "Why might the loss of religious belief change more than a person's opinion about religion?",
+      "assignment": "The Gay Science, Book III §125, then Book V §343. Read both sections in full.",
+      "dating": "§125 belongs to the 1882 first edition. §343 was added with Book V in the expanded 1887 edition.",
+      "firstReadingTime": "10–15 minutes",
+      "totalStudyTime": "45–60 minutes, including reading",
+      "readings": [
+        {
+          "label": "Open §125 in Common's The Joyful Wisdom",
+          "url": "https://www.gutenberg.org/files/52881/52881-h/52881-h.htm#Page_167",
+          "locator": "The link opens printed page 167. Scroll just below §124 to §125, The Madman. Stop before §126."
+        },
+        {
+          "label": "Open §343 in Common's The Joyful Wisdom",
+          "url": "https://www.gutenberg.org/files/52881/52881-h/52881-h.htm#Page_275",
+          "locator": "Read §343, What our Cheerfulness Signifies. Stop before §344."
+        }
+      ],
+      "context": [
+        "The madman's audience already includes unbelievers. That detail makes the scene stranger than an announcement of atheism: the audience has abandoned a belief without confronting everything that may depend on it. Track the images of orientation and disorientation. Ask what a horizon or a sun does for a traveler, and then what an inherited framework does for moral judgment.",
+        "Read §343 as a later return to this problem. Its change of mood matters: the same event can threaten inherited morality and open new possibilities. The course begins with this tension because Nietzsche's criticism does not end with exposing mistakes. It leaves a question about how anyone will evaluate or act afterward."
+      ],
+      "questions": [
+        "Why does the madman consider himself too early when many listeners already reject belief in God? Identify two details from §125 that support your answer.",
+        "What becomes possible in §343, and what remains dangerous? Explain how its optimism differs from claiming that nothing matters."
+      ],
+      "objection": "A moral commitment might have developed within a religious culture and still have independent rational support. Does Nietzsche establish that losing belief in God undermines morality, or does he chiefly announce a problem that requires further argument?",
+      "writingExercise": "Write 150–200 words distinguishing the loss of a belief from the loss of its authority over a way of life. Use one section-specific observation from each assignment. End by naming a value whose justification you would want to investigate.",
+      "nextSlug": "the-suspicion-of-philosophy",
+      "nextReason": "If inherited authority has become doubtful, philosophy might promise firmer foundations. The next lesson asks what happens when Nietzsche turns suspicion on the philosophers themselves."
+    },
+    {
+      "number": 2,
+      "slug": "the-suspicion-of-philosophy",
+      "title": "What Do Philosophers Want?",
+      "centralQuestion": "Can a philosopher's pursuit of truth itself express a value or a desire?",
+      "assignment": "Beyond Good and Evil, Part I, §§1–6, in order and in full.",
+      "dating": "Published in 1886.",
+      "firstReadingTime": "15–20 minutes",
+      "totalStudyTime": "50–65 minutes, including reading",
+      "readings": [
+        {
+          "label": "Open Part I in Zimmern's Beyond Good and Evil",
+          "url": "https://www.gutenberg.org/files/4363/4363-h/4363-h.htm#link2HCH0001",
+          "locator": "Read the numbered paragraphs 1 through 6 under Chapter I, Prejudices of Philosophers. Stop before 7."
+        }
+      ],
+      "context": [
+        "Nietzsche begins by asking about the value of truth rather than simply asking which claims are true. Keep those questions distinct. Sections 2–4 then unsettle familiar assumptions about opposites, conscious reasoning, and the importance of error. He is testing the standards by which philosophers claim authority; a claim's usefulness and its truth are not automatically the same thing.",
+        "Sections 5–6 shift attention toward the person who philosophizes. Follow the movement from a stated argument to the needs or commitments it might express. Nietzsche's suspicion is powerful, but it also creates a problem for his own writing: discovering why someone believes a claim does not, by itself, show that the claim is false. Read his account as an argument that must answer that difficulty."
+      ],
+      "questions": [
+        "What is the difference between asking whether a judgment is true and asking what value truth has? Use §§1 and 4 to make the distinction precise.",
+        "What does §6 suggest a philosophy reveals about its author? Does Nietzsche apply his diagnosis equally to philosophers and specialized scholars?"
+      ],
+      "objection": "An explanation of a thinker's motives may leave the thinker's reasoning intact. What further evidence would Nietzsche need to move from identifying a motive to criticizing a philosophical conclusion?",
+      "writingExercise": "Choose one claim from §§1–6. In 180–220 words, state the claim, reconstruct its best supporting reason, and give the strongest objection you can. Include the section number and avoid substituting a judgment about Nietzsche's personality for an assessment of the argument.",
+      "nextSlug": "asking-about-moral-values",
+      "nextReason": "The question about what thought serves becomes a method for investigating morality: how did our values arise, and what have they done to us?"
+    },
+    {
+      "number": 3,
+      "slug": "asking-about-moral-values",
+      "title": "Why Ask Where Values Came From?",
+      "centralQuestion": "What can the history of a moral value tell us about whether that value deserves our allegiance?",
+      "assignment": "On the Genealogy of Morals: the complete Preface, §§1–8, followed by First Essay §§1–3.",
+      "dating": "Published in 1887; the Preface is dated July 1887.",
+      "firstReadingTime": "25–35 minutes",
+      "totalStudyTime": "65–85 minutes, including reading; optional break after the Preface",
+      "readings": [
+        {
+          "label": "Open the Preface in Samuel's Genealogy",
+          "url": "https://www.gutenberg.org/files/52319/52319-h/52319-h.htm#PREFACE",
+          "locator": "Read all eight numbered Preface sections, ending at the signature and date."
+        },
+        {
+          "label": "Open the First Essay in Samuel's Genealogy",
+          "url": "https://www.gutenberg.org/files/52319/52319-h/52319-h.htm#FIRST_ESSAY",
+          "locator": "Read First Essay §§1–3. Section numbering starts again at 1; stop before First Essay §4."
+        }
+      ],
+      "context": [
+        "The Preface connects Nietzsche's investigation to an earlier history of his own questions. Read especially carefully when he distinguishes an account of moral origins from an evaluation of morality. His target is not only an incorrect story about the past. He wants to ask what forms of human life inherited moral commitments encourage, constrain, or make possible. The demand for evidence in §7 should become a standard against which you test the essays.",
+        "The First Essay opens by challenging a rival explanation: that useful, unselfish actions acquired approval and were later called good. Nietzsche contests both its history and its psychology. Write down this rival account before following his alternative. Without it, the discussion of rank in the next session can look like a detached declaration instead of a competing explanation.",
+        "Preface §8 also explains how this course expects you to read. A compressed statement has not necessarily been understood when its words become familiar. Return to a difficult claim, ask how its parts fit, and distinguish an interpretation from a slogan."
+      ],
+      "questions": [
+        "In Preface §§3, 5–7, what distinguishes the question of origins from the question of value? What would count as evidence for each inquiry?",
+        "Reconstruct the explanation Nietzsche criticizes in First Essay §§2–3. What are his separate historical and psychological objections?"
+      ],
+      "objection": "A value's origin need not determine its present justification. A practice can outgrow the motives that produced it. What connection between origins, continuing effects, and present value must a persuasive genealogy establish?",
+      "writingExercise": "Write 200–250 words on the claim that discovering a morally troubling origin is enough to discredit a value. Give Nietzsche the strongest answer supported by the Preface, then identify a point his First Essay still needs to prove.",
+      "nextSlug": "rank-and-the-reversal-of-values",
+      "nextReason": "With the competing explanation clear, follow Nietzsche's alternative from aristocratic naming through priestly conflict to the emergence of ressentiment."
+    },
+    {
+      "number": 4,
+      "slug": "rank-and-the-reversal-of-values",
+      "title": "How Does a Reversal of Values Begin?",
+      "centralQuestion": "How could different positions in a social conflict produce different meanings of good?",
+      "assignment": "On the Genealogy of Morals, First Essay §§4–10, in order and in full.",
+      "dating": "Published in 1887.",
+      "firstReadingTime": "25–35 minutes",
+      "totalStudyTime": "65–85 minutes, including reading; optional break after §7",
+      "readings": [
+        {
+          "label": "Open the First Essay near §4 in Samuel's Genealogy",
+          "url": "https://www.gutenberg.org/files/52319/52319-h/52319-h.htm#Page_22",
+          "locator": "The page anchor opens near the end of §3. Scroll to the next numbered section, 4. Read §§4–10 and stop before section 11, whose number has no final period in this edition."
+        }
+      ],
+      "context": [
+        "Sections 4–5 offer linguistic evidence for an origin of good in social distinction. Sections 6–7 then introduce a conflict between priestly and warrior valuations. Keep these stages separate: the discussion of priestly reversal belongs to §§6–7, while §5 mainly develops Nietzsche's account of names and rank. His etymologies are historical claims, not facts that become established merely because they support a striking interpretation.",
+        "By §10 the argument becomes a comparison of ways of valuing. Ask where each begins: with a person's affirmation of a way of life, or with a hostile judgment about someone else. Ressentiment is doing more work here than naming an unpleasant feeling; Nietzsche makes it a process capable of producing values.",
+        "This argument also contains sweeping and hostile claims about peoples and religious traditions. Identify what explanatory work those claims perform and what evidence would be required to defend them. The psychological account deserves close examination, but a modern reader should not quietly turn the historical groups into harmless metaphors for personality types."
+      ],
+      "questions": [
+        "How do §§6–7 change the argument begun in §§4–5? Explain why aristocratic rank, priestly valuation, and ressentiment should not be treated as interchangeable terms.",
+        "In §10, compare the order in which the two modes of valuation form their positive and negative judgments. What difference does that order make?"
+      ],
+      "objection": "People who resist domination may recognize a real injustice rather than invent a morality to disguise weakness. What in Nietzsche's explanation would distinguish a justified moral protest from a creative act of ressentiment?",
+      "writingExercise": "Write 200–250 words reconstructing the transition from social rank to the reversal of values. Cite §§4–5, §§6–7, and §10 separately. End with one historical claim you would investigate independently and one philosophical question that remains even if that claim fails.",
+      "nextSlug": "judging-the-genealogy",
+      "nextReason": "The next session tests the value of this contrast, including the violence Nietzsche attributes to noble people and the account of responsibility used to justify blame."
+    },
+    {
+      "number": 5,
+      "slug": "judging-the-genealogy",
+      "title": "Does the Genealogy Justify Its Judgment?",
+      "centralQuestion": "What would make one way of valuing better than another?",
+      "assignment": "On the Genealogy of Morals, First Essay §§11–17, including the note following §17.",
+      "dating": "Published in 1887.",
+      "firstReadingTime": "25–35 minutes",
+      "totalStudyTime": "70–90 minutes, including reading; optional break after §14",
+      "readings": [
+        {
+          "label": "Open the First Essay in Samuel's Genealogy",
+          "url": "https://www.gutenberg.org/files/52319/52319-h/52319-h.htm#FIRST_ESSAY",
+          "locator": "Scroll to numbered section 11, immediately after §10. The numeral appears without a final period. Read through §17 and its final note; stop at Second Essay."
+        }
+      ],
+      "context": [
+        "Section 11 prevents a comfortable division between admirable nobles and merely spiteful opponents. Nietzsche describes noble violence as well as noble self-affirmation. Keep this material beside the previous lesson's psychological contrast: an account of how a value originates does not automatically decide whether we should endorse its bearers or its consequences.",
+        "Section 13 adds a difficult argument about action and agency. Separate its challenge to an independent doer from the moral use made of that challenge. Sections 14–15 then return to the production of moral ideals and to revenge. The question is whether the argument illuminates blame and responsibility or makes it harder to hold harmful conduct accountable.",
+        "The conclusion broadens the historical conflict and calls for further investigation. Return to the Preface's demand for a critique of values. Nietzsche has provided an interpretation with considerable psychological force; you must still ask how well its historical claims, evaluations, and standards of human possibility have been justified."
+      ],
+      "questions": [
+        "How does the account of noble violence in §11 complicate the comparison in §10? What judgment would be lost if we reduced nobility to confidence or self-discipline?",
+        "What argument about the relation between an agent and an action appears in §13? Distinguish that argument from the separate claim that a particular use of blame serves revenge."
+      ],
+      "objection": "Nietzsche may expose concealed revenge without showing that equality, compassion, or accountability are thereby objectionable. Does the essay establish a better evaluative standard, or does it rely on an insufficiently defended admiration for exceptional human power?",
+      "writingExercise": "Write a 250–300 word judgment of the First Essay. State one insight you think survives criticism, one conclusion you reject or reserve judgment on, and the evidence for each. Include a reason someone might reasonably disagree with your assessment.",
+      "nextSlug": "beyond-the-last-human",
+      "nextReason": "Having examined a struggle over inherited values, turn to a narrative about what humanity might become—and why its audience may prefer comfort to transformation."
+    },
+    {
+      "number": 6,
+      "slug": "beyond-the-last-human",
+      "title": "What Could Humanity Become?",
+      "centralQuestion": "What distinguishes creating a value from merely rejecting an inherited command?",
+      "assignment": "Thus Spoke Zarathustra: Prologue §§1–5, followed by the complete opening discourse of Part I, On the Three Metamorphoses (The Three Metamorphoses in Common). Do not substitute Ludovici's later editorial notes for Nietzsche's discourse.",
+      "dating": "Both assignments belong to Part I, published in 1883. We move backward from the 1887 Genealogy for a conceptual comparison, not a chronological sequence.",
+      "firstReadingTime": "20–30 minutes",
+      "totalStudyTime": "60–80 minutes, including reading",
+      "readings": [
+        {
+          "label": "Open Zarathustra's Prologue in Common's translation",
+          "url": "https://www.gutenberg.org/files/1998/1998-h/1998-h.htm#link2H_4_0004",
+          "locator": "Read numbered Prologue sections 1 through 5. Stop before Prologue §6, then use the next reading link."
+        },
+        {
+          "label": "Open The Three Metamorphoses in Common's translation",
+          "url": "https://www.gutenberg.org/files/1998/1998-h/1998-h.htm#link2H_4_0006",
+          "locator": "Read the complete discourse headed I. The Three Metamorphoses. Stop at II. The Academic Chairs of Virtue."
+        }
+      ],
+      "context": [
+        "A philosophical narrative requires attention to more than a speaker's statements. Zarathustra arrives intending to teach, but his audience responds in ways he does not anticipate. Ask what his failed encounter reveals about persuasion and about the kind of transformation he demands. The contrast between the overman and the last human sets out a conflict about human aims; it does not provide a complete program for resolving it.",
+        "The metamorphoses distinguish the capacities to bear demands, challenge their authority, and begin creating. Track what each figure can do that the preceding figure cannot. Then return to the crowd's response: why might the freedom to create be less attractive than the prospect of secure satisfaction? Read the images as proposals to interpret, not as a personality test or proof that the reader already belongs among the exceptional."
+      ],
+      "questions": [
+        "How does the audience's response in Prologue §5 complicate Zarathustra's account of what people should desire? Identify one reason the last human's life could seem attractive.",
+        "What can the lion accomplish that the camel cannot, and what remains for the child? Explain why rejecting a command does not yet specify a new value."
+      ],
+      "objection": "The demand for greatness may undervalue ordinary contentment and invite contempt toward people who do not share it. What argument could defend human transformation without treating other lives merely as instruments or failures?",
+      "writingExercise": "Write 200–250 words answering whether Zarathustra earns the authority to criticize his audience. Use both the scene in the Prologue and the metamorphoses. Distinguish what the character claims from what the narrative allows a reader to question.",
+      "nextSlug": "affirming-a-life",
+      "nextReason": "The final lesson asks what a transformed relation to life might demand when it includes what cannot be changed, erased, or redeemed by a future achievement."
+    },
+    {
+      "number": 7,
+      "slug": "affirming-a-life",
+      "title": "What Would It Mean to Affirm a Life?",
+      "centralQuestion": "Could a person affirm life without requiring its painful or unwanted parts to disappear?",
+      "assignment": "The Gay Science, Book IV §§276 and 341, in that order and in full. Then revisit your notes on §§125 and 343 from Session 1.",
+      "dating": "§§276 and 341 belong to the 1882 first edition. The review of §343 returns to a passage added in 1887.",
+      "firstReadingTime": "5–10 minutes for the new passages; 5–10 minutes to revisit Session 1",
+      "totalStudyTime": "60–75 minutes, including reading and the final writing exercise",
+      "readings": [
+        {
+          "label": "Open §276 in Common's The Joyful Wisdom",
+          "url": "https://www.gutenberg.org/files/52881/52881-h/52881-h.htm#Page_213",
+          "locator": "Read §276, For the New Year. Stop before §277."
+        },
+        {
+          "label": "Open near §341 in Common's The Joyful Wisdom",
+          "url": "https://www.gutenberg.org/files/52881/52881-h/52881-h.htm#Page_270",
+          "locator": "The link opens within §340. Scroll to the next section, §341, The Heaviest Burden. Stop before §342."
+        }
+      ],
+      "context": [
+        "Treat §276 as an aspiration to examine. What kind of response to necessity does it ask the speaker to cultivate? Compare that aspiration with §341, which presents a hypothetical encounter and asks how a person might receive it. The short assignment leaves time for a difficult comparison: accepting what occurred, wanting it, and wanting its recurrence are different demands.",
+        "Use recurrence here as a test presented by this passage; the assignment does not establish a cosmological theory. Neither should affirmation become a demand that another person welcome suffering. Ask whether the thought can deepen responsibility for a life while leaving room to change harmful circumstances. The course closes with a problem to pursue, not a requirement to accept Nietzsche's answer."
+      ],
+      "questions": [
+        "How does §276 describe an aspiration, and how does §341 stage a test? Explain what connects them without treating them as identical claims.",
+        "Return to the open horizon of §343. Does affirmation provide a basis for evaluating life after inherited certainty weakens, or does it presuppose a value Nietzsche has not justified?"
+      ],
+      "objection": "A demand to affirm every event could excuse preventable suffering or silence justified protest. Can Nietzsche's proposal distinguish affirming existence from approving each action and institution within it? What in these passages supports your answer?",
+      "writingExercise": "Write 300–400 words answering the course question: what remains possible after inherited values become doubtful? Connect one passage from The Gay Science, one from Beyond Good and Evil or Genealogy, and one from Zarathustra. Present a thesis, a serious objection, and a revised or defended conclusion. Agreement with Nietzsche is not a completion requirement.",
+      "nextSlug": null,
+      "nextReason": "Choose a complete book as your next project. Continue Genealogy with the Second and Third Essays if the moral argument interests you; return to Beyond Good and Evil from its Preface if the problem of truth interests you; continue Zarathustra with the rest of its Prologue if the narrative form interests you."
+    }
+  ],
+  "completionStandard": "You can distinguish a diagnosis from an endorsement, explain an argument with section-specific evidence, notice a change of genre or publication date, and raise an objection without replacing Nietzsche's position with a slogan."
+}

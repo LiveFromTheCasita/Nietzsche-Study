@@ -82,10 +82,11 @@ export const themeMeta = {
   "master-slave-ressentiment": {
     tag: "morality",
     period: "late",
-    difficulty: "essential",
+    difficulty: "beginner",
+    priority: "essential",
     question: "Do values arise from strength that names itself good, or from weakness that condemns its opposite?",
     misreading:
-      "Do not translate this into a simple praise of cruelty or class hierarchy. Nietzsche is diagnosing types of valuation and their psychological origins.",
+      "Distinguish Nietzsche’s account of psychological types from endorsement of those types. His argument also invokes aristocratic hierarchy and slavery; a psychological reading must still confront those claims.",
     relatedThemeIds: [
       "bad-conscience-guilt",
       "herd-morality-last-man",
@@ -96,7 +97,8 @@ export const themeMeta = {
   "death-of-god-nihilism": {
     tag: "nihilism",
     period: "middle → late",
-    difficulty: "essential",
+    difficulty: "beginner",
+    priority: "essential",
     question: "What happens when the highest inherited source of value loses authority?",
     misreading:
       "Do not read the death of God as a simple atheist slogan. Nietzsche is asking what happens to value, truth, purpose, and culture after belief loses authority.",
@@ -112,9 +114,10 @@ export const themeMeta = {
     tag: "psychology",
     period: "late",
     difficulty: "advanced",
+    priority: "further study",
     question: "What drives interpretation, growth, resistance, command, and self-overcoming?",
     misreading:
-      "Do not flatten will to power into brute domination. Nietzsche uses it to interpret growth, ordering, incorporation, and transformation.",
+      "Power includes interpretation and self-formation, but Nietzsche also discusses appropriation, exploitation, and domination. Whether these uses constitute one doctrine remains disputed.",
     relatedThemeIds: [
       "overman-transformation",
       "nobility-rank-higher-type",
@@ -127,9 +130,10 @@ export const themeMeta = {
     tag: "affirmation",
     period: "middle → late",
     difficulty: "advanced",
+    priority: "further study",
     question: "Could you will the whole of your life again, exactly as it has been?",
     misreading:
-      "Do not reduce eternal recurrence too quickly to a cosmological doctrine. Its existential force is the test of whether one can affirm life without reservation.",
+      "The published texts present a thought experiment and dramatic confrontations; cosmological and existential readings remain debated. Ask what each reading explains before treating one as settled.",
     relatedThemeIds: [
       "death-of-god-nihilism",
       "will-to-power-self-overcoming",
@@ -141,6 +145,7 @@ export const themeMeta = {
     tag: "truth",
     period: "middle → late",
     difficulty: "advanced",
+    priority: "further study",
     question: "What becomes of truth when knowing is always embodied, interested, and interpretive?",
     misreading:
       "Do not confuse perspectivism with lazy relativism. Nietzsche asks how interpretations are formed, ranked, strengthened, and tested.",
@@ -155,9 +160,10 @@ export const themeMeta = {
     tag: "modernity",
     period: "middle → late",
     difficulty: "intermediate",
+    priority: "further study",
     question: "What kind of humanity wants comfort more than greatness?",
     misreading:
-      "Do not read this as simple contempt for ordinary people. Nietzsche is diagnosing a value-orientation that makes comfort the highest goal.",
+      "The critique of comfort and conformity is connected with Nietzsche’s attacks on democracy and equality. Ask which parts of the psychological diagnosis survive criticism of that politics.",
     relatedThemeIds: [
       "death-of-god-nihilism",
       "master-slave-ressentiment",
@@ -169,9 +175,10 @@ export const themeMeta = {
     tag: "culture",
     period: "late",
     difficulty: "advanced",
+    priority: "further study",
     question: "What conditions make higher culture, excellence, and spiritual distance possible?",
     misreading:
-      "Do not reduce order of rank to crude social snobbery. Nietzsche is asking what kinds of discipline, distance, and valuation make higher forms of life possible.",
+      "Read inward rank together with the explicit social hierarchy in BGE §257. A theory of cultivation does not by itself justify the treatment of people whose labor supports higher culture.",
     relatedThemeIds: [
       "master-slave-ressentiment",
       "will-to-power-self-overcoming",
@@ -183,6 +190,7 @@ export const themeMeta = {
     tag: "psychology",
     period: "late",
     difficulty: "advanced",
+    priority: "further study",
     question: "What happens when blocked aggression becomes moral judgment against the self?",
     misreading:
       "Do not treat bad conscience as simple remorse. Nietzsche is tracing a historical structure of internalized cruelty, guilt, and debt.",
@@ -196,9 +204,10 @@ export const themeMeta = {
     tag: "religion",
     period: "late",
     difficulty: "advanced",
+    priority: "further study",
     question: "When does a moral ideal become a will against life?",
     misreading:
-      "Do not reduce Nietzsche’s critique to simple unbelief. His deepest target is the moral interpretation of suffering and the type of human being it cultivates.",
+      "The ascetic ideal can preserve damaged life while deepening hostility to life. Read this paradox through to III §§23–28, where the ideal’s relation to science and truth becomes central.",
     relatedThemeIds: [
       "bad-conscience-guilt",
       "master-slave-ressentiment",
@@ -209,7 +218,8 @@ export const themeMeta = {
   "dionysian-tragic-affirmation": {
     tag: "art",
     period: "early → late",
-    difficulty: "essential",
+    difficulty: "beginner",
+    priority: "essential",
     question: "How do form and rapture together make tragic affirmation possible?",
     misreading:
       "Do not treat the Apollonian and Dionysian as a simple good-versus-bad opposition. Their tension is productive; tragedy arises from their difficult union.",
@@ -223,6 +233,7 @@ export const themeMeta = {
     tag: "method",
     period: "middle → late",
     difficulty: "advanced",
+    priority: "further study",
     question: "How can inherited values be judged, overturned, and recreated?",
     misreading:
       "Do not treat revaluation as a new list of commandments. Nietzsche is asking what our values are worth and what kinds of life they serve.",
@@ -236,7 +247,8 @@ export const themeMeta = {
   "overman-transformation": {
     tag: "self-overcoming",
     period: "late",
-    difficulty: "essential",
+    difficulty: "beginner",
+    priority: "essential",
     question: "What kind of human being could create values after the collapse of old ideals?",
     misreading:
       "Do not turn the overman into a comic-book strongman. The issue is a higher form of value-creation and self-discipline.",
@@ -256,34 +268,34 @@ export const submittedPapersByTheme = {
       id: "master-morality-slave-morality-ressentiment-paper-1",
       slug: "master-morality-slave-morality-and-ressentiment-in-nietzsche",
       fileName: "master-morality-slave-morality-and-ressentiment-in-nietzsche.md",
-      title: "Master Morality, Slave Morality, and Ressentiment in Nietzsche",
+      title: "Ressentiment and the Making of Moral Values",
       submittedOn: "May 3, 2026",
       status: "Submitted",
       type: "Markdown",
       summary:
-        "A paper on Nietzsche’s distinction between master morality and slave morality as two fundamentally different ways of valuing, with ressentiment as the reactive psychological engine that turns suffering, blocked action, and revenge into moral judgment.",
+        "An introductory argument about how ressentiment creates values: it follows noble self-affirmation, blocked revenge, moral blame, and the possibility of self-overcoming.",
     },
     {
       id: "master-morality-slave-morality-ressentiment-paper-2",
       slug: "nietzsche-on-master-morality-slave-morality-and-ressentiment",
       fileName: "nietzsche-on-master-morality-slave-morality-and-ressentiment.md",
-      title: "Nietzsche on Master Morality, Slave Morality, and Ressentiment",
+      title: "Reading Ressentiment Across Nietzsche’s Works",
       submittedOn: "May 3, 2026",
       status: "Submitted",
       type: "Markdown",
       summary:
-        "A research-style synthesis of Nietzsche’s account of master morality, slave morality, and ressentiment across the corpus, with primary-text references and a dedicated sources section.",
+        "A chronological reading essay tracing the development from the free-spirit works through Zarathustra and the Genealogy to the polemics written in 1888.",
     },
     {
       id: "master-morality-slave-morality-ressentiment-paper-3",
       slug: "master-morality-slave-morality-and-ressentiment-in-nietzsches-thought",
       fileName: "master-morality-slave-morality-and-ressentiment-in-nietzsches-thought.md",
-      title: "Master Morality, Slave Morality and Ressentiment in Nietzsche’s Thought",
+      title: "Aristocracy, Rank, and Reactive Valuation",
       submittedOn: "May 3, 2026",
       status: "Submitted",
       type: "Markdown",
       summary:
-        "A longer essay tracing Nietzsche’s genealogical project through master morality, slave morality, herd morality, priestly valuation, and the problem of ressentiment across the major texts.",
+        "A focused examination of aristocracy, social hierarchy, and inward rank, testing the relation between Nietzsche’s psychology of valuation and his political commitments.",
     },
   ],
   "death-of-god-nihilism": [],
@@ -306,7 +318,7 @@ export const submittedPapersByTheme = {
       status: "Submitted",
       type: "Markdown",
       summary:
-        "A paper arguing that AI cannot be Nietzsche’s Overman because it lacks will, suffering, and value-creation, but that it can become a decisive test of whether humanity moves toward self-overcoming or Last-Man passivity.",
+        "An interpretive essay arguing that technical performance alone does not establish Nietzschean self-overcoming, and asking whether present AI use supports human judgment or encourages passivity. It leaves possible future machine experience open.",
     },
   ],
 };
@@ -399,7 +411,7 @@ export const studyTracks = [
 export const worksShelf = {
   "birth-of-tragedy": {
     note: "Art, Greek tragedy, Apollo and Dionysus",
-    edition: "Read together with Nietzsche’s later self-criticism in Ecce Homo.",
+    edition: "Read the original 1872 text beside An Attempt at Self-Criticism, added in 1886, and Twilight’s What I Owe to the Ancients §5.",
   },
   "untimely-meditations": {
     note: "Culture, history, education, and the uses of untimeliness",
@@ -415,7 +427,7 @@ export const worksShelf = {
   },
   "gay-science": {
     note: "Death of God, experiment, cheerfulness, recurrence",
-    edition: "Central for §125, §341, and §344.",
+    edition: "Books I–IV appeared in 1882; the new preface and Book V, including §§343–344 and §374, appeared in 1887.",
   },
   zarathustra: {
     note: "Overman, recurrence, self-overcoming, poetic philosophy",

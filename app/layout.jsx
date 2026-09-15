@@ -1,5 +1,8 @@
 import "./globals.css";
 
+import SiteHeader from "../components/SiteHeader";
+import SiteFooter from "../components/SiteFooter";
+
 import GoogleAnalytics from "../components/GoogleAnalytics";
 import { getSiteUrl, siteDescription, siteKeywords, siteName } from "../lib/site";
 
@@ -33,7 +36,7 @@ export const metadata = {
           siteName,
           images: [
             {
-              url: "/og-image.svg",
+              url: "/opengraph-image",
               width: 1200,
               height: 630,
               alt: `${siteName} social preview`,
@@ -44,7 +47,7 @@ export const metadata = {
           card: "summary_large_image",
           title: siteName,
           description: siteDescription,
-          images: ["/og-image.svg"],
+          images: ["/opengraph-image"],
         },
       }
     : {}),
@@ -54,7 +57,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <SiteHeader />
         {children}
+        <SiteFooter />
         <GoogleAnalytics measurementId={gaMeasurementId} />
       </body>
     </html>

@@ -1,15 +1,15 @@
 import Link from "next/link";
 
 import { themes } from "../../content/corpusData";
-import { submittedPapersByTheme, themeMeta } from "../../content/studyContent";
+import { submittedPapersByTheme, themeMeta, themeWeb } from "../../content/studyContent";
 import { getThemePassages } from "../../lib/corpus";
 import { getSiteUrl, siteName } from "../../lib/site";
 
 const siteUrl = getSiteUrl();
-const ogImage = siteUrl ? `${siteUrl}/og-image.svg` : null;
+const ogImage = siteUrl ? `${siteUrl}/opengraph-image` : null;
 
 export const metadata = {
-  title: `Nietzsche Themes | ${siteName}`,
+  title: "Nietzsche Themes",
   description:
     "A directory of Nietzsche study themes, including nihilism, ressentiment, eternal recurrence, will to power, perspectivism, and revaluation.",
   alternates: {
@@ -45,30 +45,14 @@ export const metadata = {
 
 export default function ThemesPage() {
   return (
-    <main className="theme-study-page">
-      <a href="#content" className="skip-link">
-        Skip to content
-      </a>
+    <main id="content" tabIndex={-1} className="theme-study-page">
 
-      <nav className="site-nav">
-        <div className="site-nav__inner">
-          <Link href="/" className="site-nav__brand">
-            Nietzsche Study
-          </Link>
-          <div className="site-nav__links">
-            <Link href="/">Corpus</Link>
-            <Link href="/the-will-to-power">Will to Power</Link>
-            <Link href="/#theme-navigator">Navigator</Link>
-            <Link href="/#lessons">Lessons</Link>
-          </div>
-        </div>
-      </nav>
 
       <section className="theme-study-hero">
         <div className="theme-study-hero__inner">
           <div className="theme-study-hero__copy">
             <Link href="/" className="text-link">
-              Back to corpus
+              Back to home
             </Link>
             <div className="chip-row">
               <span className="meta-chip meta-chip--amber">Theme directory</span>
@@ -87,17 +71,17 @@ export default function ThemesPage() {
             <div className="theme-study-summary__block">
               <h2>Use this as the map.</h2>
               <p>
-                Start with a concept, then move into the corpus navigator when you want the full passage network.
+                Start with a concept, then move into the passage navigator when you want the full passage network.
               </p>
             </div>
-            <Link href="/#theme-navigator" className="button button--secondary">
-              Open corpus navigator
+            <Link href="/navigator" className="button button--secondary">
+              Open passage navigator
             </Link>
           </aside>
         </div>
       </section>
 
-      <div id="content" className="theme-study-content">
+      <div className="theme-study-content">
         <section className="theme-study-section">
           <div className="theme-grid">
             {themes.map((theme) => {
@@ -110,11 +94,11 @@ export default function ThemesPage() {
                   <div className="theme-card__body">
                     <div className="card-header">
                       <div>
-                        <h3>
+                        <h2>
                           <Link href={`/themes/${theme.id}`} className="theme-card__title-link">
                             {theme.title}
                           </Link>
-                        </h3>
+                        </h2>
                         {meta.question ? <p className="theme-card__question">{meta.question}</p> : null}
                       </div>
                       <span className="meta-chip meta-chip--amber">{meta.tag || theme.category}</span>
@@ -122,7 +106,8 @@ export default function ThemesPage() {
 
                     <div className="chip-row">
                       {meta.period ? <span className="meta-chip">{meta.period}</span> : null}
-                      {meta.difficulty ? <span className="meta-chip">{meta.difficulty}</span> : null}
+                      {meta.difficulty ? <span className="meta-chip">Level: {meta.difficulty}</span> : null}
+                      {meta.priority ? <span className="meta-chip">Priority: {meta.priority}</span> : null}
                       <span className="meta-chip">{passageCount} passages</span>
                       {paperCount > 0 ? <span className="meta-chip">{paperCount} papers</span> : null}
                     </div>
@@ -136,6 +121,27 @@ export default function ThemesPage() {
                 </article>
               );
             })}
+          </div>
+        </section>
+        <section id="connections" className="theme-study-section" aria-labelledby="connections-heading">
+          <div className="section-header">
+            <p className="section-kicker">Theme connections</p>
+            <h2 id="connections-heading">Follow the question into another guide</h2>
+            <p>These connections suggest comparisons. Read the passages before assuming that the concepts agree.</p>
+          </div>
+          <div className="theme-grid">
+            {themeWeb.map((connection) => (
+              <article className="card card--padded" key={connection.centerThemeId}>
+                <h3><Link href={`/themes/${connection.centerThemeId}`}>{connection.idea}</Link></h3>
+                <p>{connection.note}</p>
+                <div className="theme-reference-list">
+                  {connection.connects.map((id) => {
+                    const related = themes.find((theme) => theme.id === id);
+                    return related ? <Link key={id} className="theme-reference" href={`/themes/${id}`}>{related.shortTitle || related.title}</Link> : null;
+                  })}
+                </div>
+              </article>
+            ))}
           </div>
         </section>
       </div>

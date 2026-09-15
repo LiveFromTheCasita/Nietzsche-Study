@@ -1,6 +1,6 @@
-export const genealogyOfMoralityEssay = String.raw`On the Genealogy of Morality: A Clear Guide to Nietzsche’s Three Essays
+export const genealogyOfMoralityEssay = String.raw`# On the Genealogy of Morality: A Clear Guide to Nietzsche’s Three Essays
 
-On the Genealogy of Morals belongs to Nietzsche’s late period and was published in 1887. It is one of his clearest attacks on inherited morality, especially the moral ideals that modern Europe received from Christianity. The site’s development map rightly places it among Nietzsche’s late works and links it with ressentiment, guilt, bad conscience, and the ascetic ideal.
+On the Genealogy of Morals belongs to Nietzsche’s late period and was published in 1887. It is one of his clearest attacks on inherited morality, especially the moral ideals that modern Europe received from Christianity. Its three essays connect ressentiment, guilt, bad conscience, and the ascetic ideal.
 
 Nietzsche does not simply ask, “What is morality?” He asks a more dangerous question: Where did our moral values come from, and what have they done to us?
 
@@ -33,8 +33,8 @@ Nietzsche wants to know whether another kind of meaning is possible. A meaning t
 
 That is why On the Genealogy of Morals is not only a critique. It is also preparation. Nietzsche clears the ground. He exposes the hidden history of our values so that new values may become possible.
 
-Part One: “Good and Evil,” “Good and Bad”
-Main Question
+## Part One: “Good and Evil,” “Good and Bad”
+### Main Question
 
 The first essay asks a simple but explosive question:
 
@@ -89,7 +89,7 @@ Nietzsche especially associates this revolt with priestly values and with the mo
 
 This is why Nietzsche thinks the Christian moral world is revolutionary. It reverses older aristocratic values. It does not merely protect the weak. It teaches the weak to judge the strong. It gives weakness a moral crown.
 
-One of Nietzsche’s most striking examples is the contrast between “blond beasts” and the moral language of guilt. His language here is deliberately provocative and often uncomfortable. He is not giving a simple political program. He is not saying that cruelty is good or that domination is morally admirable. He is trying to show that older noble cultures did not understand themselves through guilt in the way later moral cultures did. They expressed power more directly. They did not first ask whether their strength could be justified before a universal moral tribunal.
+One of Nietzsche’s most striking examples is the contrast between “blond beasts” and the moral language of guilt. His language here is deliberately provocative and often uncomfortable. He describes the violence of noble cultures with a mixture of admiration and recognition of its horror. This is neither a neutral account nor a harmless metaphor for personal growth. Read it beside BGE §257, where he explicitly links higher culture to social hierarchy and slavery. His account also suggests that older noble cultures did not understand themselves through guilt in the way later moral cultures did. They expressed power more directly. They did not first ask whether their strength could be justified before a universal moral tribunal.
 
 For Nietzsche, the decisive change comes when the noble person is no longer called merely dangerous or frightening, but evil. Once that happens, morality has become revenge by other means.
 
@@ -103,7 +103,7 @@ Can there be values that are neither brutal nor life-denying?
 
 That is the problem Nietzsche leaves us with.
 
-Key Concepts
+### Key Concepts
 
 The first key concept is genealogy.
 
@@ -125,7 +125,7 @@ The fifth key concept is moral inversion.
 
 A moral inversion happens when older values are reversed. What was once noble becomes evil. What was once low becomes good. This is not just a change in vocabulary. It is a transformation in the way human beings experience themselves, their instincts, and their enemies.
 
-Place in Nietzsche’s Larger Philosophy
+### Place in Nietzsche’s Larger Philosophy
 
 The first essay belongs to Nietzsche’s larger project of revaluation of values.
 
@@ -141,8 +141,8 @@ The first essay therefore sets up the rest of the book. It shows that morality m
 
 That is the question of the second essay.
 
-Part Two: “Guilt,” “Bad Conscience,” and Related Matters
-Main Question
+## Part Two: “Guilt,” “Bad Conscience,” and Related Matters
+### Main Question
 
 The second essay asks:
 
@@ -202,7 +202,7 @@ But Nietzsche also suggests that bad conscience need not remain trapped in guilt
 
 This is one of the hidden hopes of the second essay.
 
-Key Concepts
+### Key Concepts
 
 The first key concept is memory of the will.
 
@@ -228,7 +228,7 @@ The sixth key concept is moralized cruelty.
 
 Nietzsche thinks cruelty does not disappear when civilization becomes more moral. It changes form. It becomes spiritual, psychological, and self-directed. People may stop enjoying public torture, yet still enjoy guilt, accusation, shame, moral superiority, and punishment of the self or others. Cruelty becomes refined.
 
-Place in Nietzsche’s Larger Philosophy
+### Place in Nietzsche’s Larger Philosophy
 
 The second essay connects with Nietzsche’s lifelong interest in the body, instinct, and culture.
 
@@ -253,8 +253,8 @@ Nietzsche does not give a simple program. But he points toward a possibility: th
 
 The third essay asks why guilt and suffering were given their most powerful meaning through the ascetic ideal.
 
-Part Three: What Do Ascetic Ideals Mean?
-Main Question
+## Part Three: What Do Ascetic Ideals Mean?
+### Main Question
 
 The third essay asks:
 
@@ -331,7 +331,7 @@ It gives discipline.
 It gives suffering a story.
 But the story says: life itself is the problem.
 
-Key Concepts
+### Key Concepts
 
 The first key concept is the ascetic ideal.
 
@@ -357,7 +357,7 @@ The sixth key concept is nihilism.
 
 Nihilism appears when the highest values turn against life or lose their authority. The ascetic ideal is both a response to nihilism and a form of nihilism. It gives meaning, but the meaning it gives is hostile to life. It prevents total collapse, but it does so by preserving a will against existence.
 
-Place in Nietzsche’s Larger Philosophy
+### Place in Nietzsche’s Larger Philosophy
 
 The third essay stands at the center of Nietzsche’s late philosophy.
 
@@ -383,7 +383,7 @@ This is why On the Genealogy of Morals belongs beside Thus Spoke Zarathustra, Be
 
 The third essay leaves us with a hard truth. Human beings do not easily live without ideals. Destroy an ideal, and another will take its place. The question is not whether we will serve ideals. The question is which ideals we will serve, and what they will make of us.
 
-Final Reflection: What On the Genealogy of Morals Can Mean for Us Today
+## Final Reflection: What On the Genealogy of Morals Can Mean for Us Today
 
 On the Genealogy of Morals is not an easy book to like. It is sharp. It is suspicious. It wounds many of our moral instincts. It asks whether some of our most cherished values may have darker origins than we want to admit.
 

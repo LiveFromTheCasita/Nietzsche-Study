@@ -16,7 +16,7 @@ import { getPassageById } from "../../lib/corpus";
 import { getSiteUrl, siteDescription, siteName } from "../../lib/site";
 
 const siteUrl = getSiteUrl();
-const ogImage = siteUrl ? `${siteUrl}/og-image.svg` : null;
+const ogImage = siteUrl ? `${siteUrl}/opengraph-image` : null;
 
 export const metadata = {
   title: "The Will to Power",
@@ -177,24 +177,8 @@ function ExpandedPassageMap({ map }) {
 
 export default function WillToPowerPage() {
   return (
-    <main className="theme-study-page wtp-page">
-      <a href="#content" className="skip-link">
-        Skip to content
-      </a>
+    <main id="content" tabIndex={-1} className="theme-study-page wtp-page">
 
-      <nav className="site-nav">
-        <div className="site-nav__inner">
-          <Link href="/" className="site-nav__brand">
-            Nietzsche Study
-          </Link>
-          <div className="site-nav__links">
-            <Link href="/">Corpus</Link>
-            <Link href="/themes">Themes</Link>
-            <Link href="/#theme-navigator">Navigator</Link>
-            <Link href="/#lessons">Lessons</Link>
-          </div>
-        </div>
-      </nav>
 
       <section className="theme-study-hero wtp-hero">
         <div className="theme-study-hero__inner">
@@ -262,7 +246,7 @@ export default function WillToPowerPage() {
         </div>
       </section>
 
-      <div id="content" className="theme-study-content">
+      <div className="theme-study-content">
         <section className="theme-study-section theme-study-section--split">
           <div className="theme-study-section__intro">
             <p className="section-kicker">Orientation</p>
