@@ -13,12 +13,13 @@ export async function generateMetadata({ params }) {
 
   if (!paper) {
     return {
-      title: "Paper Not Found | Nietzsche Study",
+      title: "Paper Not Found",
     };
   }
 
   return {
-    title: `${paper.title} | Nietzsche Study`,
+    title: paper.title,
+    alternates: { canonical: `/corpus/papers/${slug}` },
     description: paper.summary,
   };
 }
@@ -30,10 +31,10 @@ export default async function PaperPage({ params }) {
   if (!paper) notFound();
 
   return (
-    <main className="paper-page">
+    <main id="content" tabIndex={-1} className="paper-page">
       <div className="paper-shell">
-        <Link href="/#themes" className="text-link">
-          Back to corpus
+        <Link href="/themes" className="text-link">
+          Back to themes
         </Link>
 
         <header className="paper-header">
@@ -44,6 +45,7 @@ export default async function PaperPage({ params }) {
             {paper.type ? <span className="meta-chip">{paper.type}</span> : null}
           </div>
           <h1>{paper.title}</h1>
+          <p className="fine-print">Site editor: <Link href="/about">Bob Smith</Link></p>
           {paper.summary ? <p className="paper-intro">{paper.summary}</p> : null}
         </header>
 

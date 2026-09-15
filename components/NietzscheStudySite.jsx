@@ -1,845 +1,101 @@
-"use client";
-
 import Link from "next/link";
-import React, { useEffect, useMemo, useState } from "react";
+import { themes } from "../content/corpusData";
+import LegacyHomeLinks from "./LegacyHomeLinks";
 
-import CorpusNavigator from "./CorpusNavigator";
-import {
-  aphorisms,
-  beginnerReadingPath,
-  editionNotes,
-  periods,
-  principles,
-  startingPoints,
-  studyTracks,
-  themeMeta,
-  themeWeb,
-  worksShelf,
-} from "../content/studyContent";
-import { willToPowerPassages } from "../content/willToPowerData";
-import { themes, works } from "../content/corpusData";
-import { getPassageById } from "../lib/corpus";
-
-const themeById = new Map(themes.map((theme) => [theme.id, theme]));
-
-function getStudyTheme(themeId) {
-  const theme = themeById.get(themeId);
-  if (!theme) return null;
-  return { ...theme, ...(themeMeta[theme.id] || {}) };
-}
-
-function scrollToSection(sectionId) {
-  document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function getPhaseLabel(period) {
-  return period === "mature" ? "Late" : period.charAt(0).toUpperCase() + period.slice(1);
-}
-
-function getWorkIdFromHash(hash) {
-  if (hash.startsWith("#development-genealogy-")) return "genealogy-of-morals";
-  return null;
-}
-
-const workEssaySubheadings = new Set([
-  "Main Question",
-  "Summary",
-  "Key Concepts",
-  "Place in Nietzsche’s Larger Philosophy",
-]);
-
-function isWorkEssayMajorHeading(block) {
-  return /^Part (One|Two|Three):/.test(block) || block.startsWith("Final Reflection:");
-}
-
-function getMarkdownHeading(block) {
-  const match = block.match(/^(#{1,4})\s+(.+)$/);
-  if (!match) return null;
-  return { level: Math.min(Number(match[1].length) + 1, 4), text: match[2] };
-}
-
-function getBoldHeading(block) {
-  const match = block.match(/^\*\*(.+)\*\*$/);
-  if (!match) return null;
-  return { level: 3, text: match[1] };
-}
-
-function renderInlineText(text) {
-  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean);
-
-  return parts.map((part, index) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={`${index}-${part}`}>{part.slice(2, -2)}</strong>;
-    }
-
-    if (part.startsWith("*") && part.endsWith("*")) {
-      return <em key={`${index}-${part}`}>{part.slice(1, -1)}</em>;
-    }
-
-    return part;
-  });
-}
-
-function renderWorkEssayHeading(level, text, key) {
-  if (level === 2) return <h2 key={key}>{renderInlineText(text)}</h2>;
-  if (level === 3) return <h3 key={key}>{renderInlineText(text)}</h3>;
-  return <h4 key={key}>{renderInlineText(text)}</h4>;
-}
-
-function stripInlineMarkdown(text) {
-  return text.replace(/^#{1,4}\s+/, "").replace(/\*\*/g, "").replace(/\*/g, "").trim();
-}
-
-function getCodeBlock(block) {
-  const match = block.match(/^(?:```|~~~)([\w-]+)?\n([\s\S]*?)\n(?:```|~~~)$/);
-  if (!match) return null;
-  return { language: match[1] || "text", code: match[2] };
-}
-
-function parseTableRow(line) {
-  return line
-    .trim()
-    .replace(/^\|/, "")
-    .replace(/\|$/, "")
-    .split("|")
-    .map((cell) => cell.trim());
-}
-
-function getMarkdownTable(block) {
-  const lines = block
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean);
-
-  if (lines.length < 3 || !lines.every((line) => line.startsWith("|"))) return null;
-  if (!/^\|?\s*:?-{3,}/.test(lines[1])) return null;
-
-  return {
-    headers: parseTableRow(lines[0]),
-    rows: lines.slice(2).map(parseTableRow),
-  };
-}
-
-function WorkEssayCodeBlock({ codeBlock }) {
-  return (
-    <pre className={`work-essay-code work-essay-code--${codeBlock.language}`}>
-      <code>{codeBlock.code}</code>
-    </pre>
-  );
-}
-
-function WorkEssayTable({ table }) {
-  return (
-    <div className="work-essay-table-wrap">
-      <table>
-        <thead>
-          <tr>
-            {table.headers.map((header) => (
-              <th key={header}>{renderInlineText(header)}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {table.rows.map((row, rowIndex) => (
-            <tr key={`row-${rowIndex}`}>
-              {row.map((cell, cellIndex) => (
-                <td key={`${rowIndex}-${cellIndex}`}>{renderInlineText(cell)}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function getWorkEssayBlocks(essay) {
-  return essay
-    .trim()
-    .split(/\n{2,}/)
-    .flatMap((block) => {
-      const lines = block.trim().split("\n");
-
-      if (lines.length > 1 && isWorkEssayMajorHeading(lines[0])) {
-        return [lines[0], lines.slice(1).join("\n").trim()].filter(Boolean);
-      }
-
-      return [block.trim()];
-    })
-    .filter(Boolean);
-}
-
-function WorkEssay({ essay }) {
-  if (!essay) return null;
-
-  const blocks = getWorkEssayBlocks(essay);
-
-  return (
-    <article className="work-essay">
-      {blocks.map((block, index) => {
-        const codeBlock = getCodeBlock(block);
-        if (codeBlock) {
-          return <WorkEssayCodeBlock key={`${index}-code`} codeBlock={codeBlock} />;
-        }
-
-        const table = getMarkdownTable(block);
-        if (table) {
-          return <WorkEssayTable key={`${index}-table`} table={table} />;
-        }
-
-        const markdownHeading = getMarkdownHeading(block);
-        if (markdownHeading) {
-          return renderWorkEssayHeading(markdownHeading.level, markdownHeading.text, `${index}-${block}`);
-        }
-
-        const boldHeading = getBoldHeading(block);
-        if (boldHeading) {
-          return renderWorkEssayHeading(boldHeading.level, boldHeading.text, `${index}-${block}`);
-        }
-
-        if (index === 0) {
-          return <h2 key={`${index}-${block}`}>{renderInlineText(block)}</h2>;
-        }
-
-        if (isWorkEssayMajorHeading(block)) {
-          return <h3 key={`${index}-${block}`}>{renderInlineText(block)}</h3>;
-        }
-
-        if (workEssaySubheadings.has(block)) {
-          return <h4 key={`${index}-${block}`}>{renderInlineText(block)}</h4>;
-        }
-
-        return <p key={`${index}-${block.slice(0, 32)}`}>{renderInlineText(block)}</p>;
-      })}
-    </article>
-  );
-}
-
-function getWorkEssayTitle(essay) {
-  const firstBlock = getWorkEssayBlocks(essay)[0] || "Essay";
-  return stripInlineMarkdown(firstBlock);
-}
-
-function normalizeWorkEssays(essay, essays) {
-  const items = essays || (essay ? [essay] : []);
-
-  return items
-    .map((item, index) => {
-      const content = typeof item === "string" ? item : item.content;
-      if (!content) return null;
-
-      const id = typeof item === "string" ? `work-essay-${index + 1}` : item.id || `work-essay-${index + 1}`;
-
-      return {
-        id,
-        anchorId: `development-${id}`,
-        title: typeof item === "string" ? getWorkEssayTitle(content) : item.title || getWorkEssayTitle(content),
-        content,
-      };
-    })
-    .filter(Boolean);
-}
-
-function WorkEssays({ essay, essays }) {
-  const workEssays = useMemo(() => normalizeWorkEssays(essay, essays), [essay, essays]);
-  const [activeEssayIndex, setActiveEssayIndex] = useState(null);
-
-  useEffect(() => {
-    const syncEssayFromHash = () => {
-      const hash = window.location.hash.slice(1);
-      const hashIndex = workEssays.findIndex((item) => item.anchorId === hash);
-
-      if (hashIndex >= 0) {
-        setActiveEssayIndex(hashIndex);
-        window.setTimeout(() => {
-          document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 0);
-      } else {
-        setActiveEssayIndex(workEssays.length > 1 ? null : 0);
-      }
-    };
-
-    syncEssayFromHash();
-    window.addEventListener("hashchange", syncEssayFromHash);
-
-    return () => window.removeEventListener("hashchange", syncEssayFromHash);
-  }, [workEssays]);
-
-  if (!workEssays.length) return null;
-
-  const activeEssay = activeEssayIndex === null ? null : workEssays[activeEssayIndex] || workEssays[0];
-
-  const openEssay = (event, index, anchorId) => {
-    event.preventDefault();
-    setActiveEssayIndex(index);
-    window.history.replaceState(null, "", `#${anchorId}`);
-    window.setTimeout(() => {
-      document.getElementById(anchorId)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 0);
-  };
-
-  return (
-    <>
-      {workEssays.length > 1 && (
-        <nav className="work-essay-links" aria-label="Essays for this work">
-          {workEssays.map((item, index) => (
-            <a
-              key={item.id}
-              href={`#${item.anchorId}`}
-              className={`work-essay-link ${item.id === activeEssay?.id ? "work-essay-link--active" : ""}`}
-              aria-current={item.id === activeEssay?.id ? "page" : undefined}
-              onClick={(event) => openEssay(event, index, item.anchorId)}
-            >
-              {item.title}
-            </a>
-          ))}
-        </nav>
-      )}
-      {activeEssay && (
-        <div id={activeEssay.anchorId}>
-          <WorkEssay essay={activeEssay.content} />
-        </div>
-      )}
-    </>
-  );
-}
-
-function Card({ children, className = "" }) {
-  return <div className={`card ${className}`.trim()}>{children}</div>;
-}
-
-function SectionKicker({ children }) {
-  return <p className="section-kicker">{children}</p>;
-}
-
-function ThemeNotes({ theme }) {
-  const essentialPassages = theme.essentialPassageIds.map((id) => getPassageById(id)).filter(Boolean);
-
-  return (
-    <div className="theme-notes">
-      <div className="notes-panel">
-        <p className="notes-label">Reading path</p>
-        <ol className="notes-list">
-          {essentialPassages.map((passage, index) => (
-            <li key={passage.id} className="notes-list__item">
-              <span className="notes-index">{index + 1}</span>
-              <div>
-                <p className="notes-title">{passage.title}</p>
-                <p className="notes-copy">
-                  <em>{passage.work}</em> {passage.citation}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      <div className="notes-panel">
-        <p className="notes-label">Development</p>
-        <ul className="notes-bullets">
-          {theme.developmentalArc.map((phase) => (
-            <li key={phase.phase}>
-              <span className="notes-bullets__title">{phase.phase}</span>
-              <span>{phase.description}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="callout callout--amber">
-        <strong>Misreading to avoid:</strong> {theme.misreading}
-      </div>
-    </div>
-  );
-}
+const featuredIds = ["death-of-god-nihilism", "master-slave-ressentiment", "eternal-recurrence-amor-fati"];
 
 export default function NietzscheStudySite() {
-  const [openThemeId, setOpenThemeId] = useState("death-of-god-nihilism");
-  const [selectedNavigatorThemeId, setSelectedNavigatorThemeId] = useState("death-of-god-nihilism");
-  const [selectedNavigatorTab, setSelectedNavigatorTab] = useState("overview");
-  const [selectedWorkId, setSelectedWorkId] = useState(works[0]?.id ?? "");
-
-  const studyThemes = useMemo(
-    () => themes.map((theme) => ({ ...theme, ...(themeMeta[theme.id] || {}) })),
-    []
-  );
-  const orderedWorks = useMemo(
-    () => [...works].sort((left, right) => left.publicationOrder - right.publicationOrder),
-    []
-  );
-  const selectedWork = orderedWorks.find((work) => work.id === selectedWorkId) || orderedWorks[0] || null;
-  const selectedWorkShelf = selectedWork ? worksShelf[selectedWork.id] : null;
-
-  useEffect(() => {
-    const syncWorkFromHash = () => {
-      const workId = getWorkIdFromHash(window.location.hash);
-      if (workId) setSelectedWorkId(workId);
-    };
-
-    syncWorkFromHash();
-    window.addEventListener("hashchange", syncWorkFromHash);
-
-    return () => window.removeEventListener("hashchange", syncWorkFromHash);
-  }, []);
-
-  const openNavigatorTheme = (themeId, tab = "overview") => {
-    if (!themeId) return;
-    setOpenThemeId(themeId);
-    setSelectedNavigatorThemeId(themeId);
-    setSelectedNavigatorTab(tab);
-    scrollToSection("theme-navigator");
-  };
-
-  const selectWork = (workId) => {
-    setSelectedWorkId(workId);
-
-    if ((worksShelf[workId]?.essays?.length || 0) > 1) {
-      window.history.replaceState(null, "", "#development");
-      window.dispatchEvent(new Event("hashchange"));
-    }
-  };
-
+  const featuredThemes = featuredIds.map((id) => themes.find((theme) => theme.id === id)).filter(Boolean);
   return (
-    <main className="study-site">
-      <a href="#content" className="skip-link">
-        Skip to content
-      </a>
-
-      <nav className="site-nav">
-        <div className="site-nav__inner">
-          <a href="#top" className="site-nav__brand">
-            Nietzsche Study
-          </a>
-          <div className="site-nav__links">
-            <a href="#start">Start</a>
-            <a href="#development">Development</a>
-            <Link href="/themes">Themes</Link>
-            <Link href="/the-will-to-power">Will to Power</Link>
-            <a href="#theme-web">Theme web</a>
-            <a href="#lessons">Lessons</a>
-          </div>
-        </div>
-      </nav>
-
-      <section id="top" className="hero-shell">
+    <main id="content" tabIndex={-1} className="study-site home-page">
+      <LegacyHomeLinks />
+      <section className="hero-shell">
         <div className="hero-shell__backdrop" />
         <div className="hero-grid">
           <div className="hero-copy">
-            <div className="eyebrow">A serious guide to Nietzsche, not a slogan machine</div>
-            <h1 className="hero-title">
-              Read Nietzsche as a provocation and a discipline.
-            </h1>
+            <p className="eyebrow">An independent guide to reading Nietzsche</p>
+            <h1 className="hero-title">Read closely.<br />Think for yourself.</h1>
             <p className="hero-summary">
-              A study hub for tracing Nietzsche’s movement from tragedy and art, through the free-spirit critique
-              of morality, into the late philosophy of revaluation, eternal recurrence, and life-affirmation.
+              Work through Nietzsche’s questions about morality, truth, suffering, and affirmation.
+              Begin with a guided course, then follow the arguments across his books.
             </p>
             <div className="hero-actions">
-              <a href="#start" className="button button--primary">
-                Start here
-              </a>
-              <Link href="/themes" className="button button--secondary">
-                Explore themes
-              </Link>
-              <Link href="/the-will-to-power" className="button button--secondary">
-                Study The Will to Power
-              </Link>
+              <Link href="/lessons" className="button button--primary">Begin the course</Link>
+              <Link href="/themes" className="button button--secondary">Explore themes</Link>
             </div>
+            <p className="home-editor">Edited by <Link href="/about">Bob Smith</Link></p>
           </div>
-
-          <aside className="quote-panel" aria-label="Selected Nietzsche aphorisms">
-            <div className="quote-panel__header">
-              <span className="quote-mark">❝</span>
-              <span>Aphorism desk</span>
-            </div>
-            <div className="quote-stack">
-              {aphorisms.map((item) => (
-                <figure key={item.source} className="quote-card">
-                  <blockquote>{item.line}</blockquote>
-                  <figcaption>{item.source}</figcaption>
-                </figure>
-              ))}
-            </div>
+          <aside className="home-reading-card" aria-label="Your first reading">
+            <p className="section-kicker">Your first reading</p>
+            <h2>What happens when inherited values lose their authority?</h2>
+            <p>Begin with the madman in <em>The Gay Science</em> §125, then compare §343. Read the scene before deciding what the “death of God” means.</p>
+            <div className="chip-row"><span className="meta-chip">Session 1 of 7</span><span className="meta-chip">45–60 minutes</span></div>
+            <Link href="/lessons/the-crisis-of-value" className="text-link">Open the first lesson <span aria-hidden="true">→</span></Link>
           </aside>
         </div>
       </section>
 
-      <div id="content">
-        <section id="start" className="content-section section-border">
-          <div className="section-inner">
-            <div className="section-header">
-              <SectionKicker>Start here</SectionKicker>
-              <h2>Choose the door that matches your purpose.</h2>
-            </div>
-
-            <div className="card-grid card-grid--three">
-              {startingPoints.map((item) => (
-                <Card key={item.title} className="card--padded">
-                  <div className="card-header">
-                    <h3>{item.title}</h3>
-                    <span className="meta-chip">{item.marker}</span>
-                  </div>
-                  <p>{item.instruction}</p>
-                </Card>
-              ))}
-            </div>
-
-            <div className="feature-panel">
-              <div className="feature-panel__header">
-                <div>
-                  <p className="feature-panel__label">Beginner reading path</p>
-                  <h3>A five-step route into the main problem.</h3>
-                </div>
-                <a href="#lessons" className="text-link">
-                  Turn this into lessons
-                </a>
-              </div>
-
-              <div className="step-grid">
-                {beginnerReadingPath.map((item, index) => (
-                  <div key={item.reading} className="step-card">
-                    <div className="step-card__header">
-                      <span className="step-card__index">{index + 1}</span>
-                      <p>{item.step}</p>
-                    </div>
-                    <h3>{item.reading}</h3>
-                    <p>{item.purpose}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+      <section className="content-section" aria-labelledby="course-heading">
+        <div className="section-inner home-course">
+          <div>
+            <p className="section-kicker">A place to begin</p>
+            <h2 id="course-heading">Values, truth, and affirmation</h2>
+            <p>Seven sessions, from the crisis of value to the question of affirming a life. Each offers an exact reading assignment, context, questions, an objection, and a short writing exercise.</p>
           </div>
-        </section>
-
-        <section id="development" className="content-section">
-          <div className="section-inner">
-            <div className="section-header section-header--split">
-              <div>
-                <SectionKicker>Development &amp; Works</SectionKicker>
-                <h2>Nietzsche changes. Track the movement through the books.</h2>
-              </div>
-              <p className="section-sidecopy">
-                The same term can mean different things across the early, middle, and late works. Good reading
-                begins by locating the period.
-              </p>
-            </div>
-
-            <div className="period-grid">
-              {periods.map((period) => (
-                <Card key={period.name} className="period-card">
-                  <div className={`period-card__bar period-card__bar--${period.accent}`} />
-                  <div className="period-card__body">
-                    <div className="card-header">
-                      <h3>{period.name}</h3>
-                      <span className="meta-chip">{period.years}</span>
-                    </div>
-                    <p>{period.focus}</p>
-                    <div className="period-question">{period.question}</div>
-                    <p className="fine-print">{period.works}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-
-            <div className="feature-panel">
-              <div className="feature-panel__header">
-                <div>
-                  <p className="feature-panel__label">Works in order</p>
-                  <h3>Read the books chronologically.</h3>
-                </div>
-                <p className="section-sidecopy">
-                  Click a work to see its phase, its central concern, and why it matters in the sequence.
-                </p>
-              </div>
-
-              <div className="works-grid">
-                {orderedWorks.map((work) => (
-                  <button
-                    key={work.id}
-                    type="button"
-                    className={`navigator-theme-button ${selectedWork?.id === work.id ? "navigator-theme-button--active" : ""}`}
-                    onClick={() => selectWork(work.id)}
-                  >
-                    <div className="navigator-theme-button__header">
-                      <h3>
-                        {work.publicationOrder}. {work.title}
-                      </h3>
-                      <span>{getPhaseLabel(work.period)}</span>
-                    </div>
-                    <p className="navigator-theme-button__category">Published {work.publicationYear}</p>
-                    <p className="navigator-theme-button__summary">{worksShelf[work.id]?.note}</p>
-                  </button>
-                ))}
-              </div>
-
-              {selectedWork && (
-                <Card className="card--padded">
-                  <div className="card-header">
-                    <div>
-                      <h3>{selectedWork.title}</h3>
-                      <p className="fine-print">Published {selectedWork.publicationYear}</p>
-                      <p>{selectedWorkShelf?.note}</p>
-                      <p className="fine-print">{selectedWorkShelf?.edition}</p>
-                    </div>
-                    <span className="meta-chip">
-                      {getPhaseLabel(selectedWork.period)} phase
-                    </span>
-                  </div>
-                  <WorkEssays
-                    key={selectedWork.id}
-                    essay={selectedWorkShelf?.essay}
-                    essays={selectedWorkShelf?.essays}
-                  />
-                </Card>
-              )}
-            </div>
+          <div className="home-course__action">
+            <p>7–9 hours at your own pace.<br />Use your own edition or the linked texts.</p>
+            <Link href="/lessons" className="button button--primary">View the seven sessions</Link>
           </div>
-        </section>
-
-        <section id="will-to-power" className="content-section section-border section-muted">
-          <div className="section-inner section-inner--split">
-            <div>
-              <SectionKicker>Dedicated Work Guide</SectionKicker>
-              <h2>The Will to Power now has its own reading room.</h2>
-              <p className="section-copy">
-                Because the domain names this posthumous compilation, the site now treats it directly: as a
-                powerful notebook archive to read alongside the finished books, not as Nietzsche's completed system.
-              </p>
-            </div>
-
-            <Card className="card--padded">
-              <div className="card-header">
-                <div>
-                  <h3>Passages in conversation</h3>
-                  <p>
-                    Start with mapped sections from The Will to Power, then follow each one into the site's themes
-                    and companion passages from Nietzsche's published works.
-                  </p>
-                </div>
-                <span className="meta-chip meta-chip--amber">{willToPowerPassages.length} notes</span>
-              </div>
-              <Link href="/the-will-to-power" className="button button--primary">
-                Open the guide
-              </Link>
-            </Card>
-          </div>
-        </section>
-
-        <section id="themes" className="content-section section-border section-muted">
-          <div className="section-inner">
-            <div className="section-header">
-              <div>
-                <SectionKicker>Themes &amp; Navigator</SectionKicker>
-                <h2>Map the themes, then open the passages.</h2>
-                <p className="section-copy">
-                  Use the theme cards to orient yourself, then jump straight into the passage-based navigator for
-                  the full route through the corpus.
-                </p>
-              </div>
-            </div>
-
-            <div className="theme-grid">
-              {studyThemes.map((theme) => {
-                const isOpen = openThemeId === theme.id;
-
-                return (
-                  <Card key={theme.id} className="theme-card">
-                    <div className="theme-card__body">
-                      <div className="card-header">
-                        <div>
-                          <h3>
-                            <Link href={`/themes/${theme.id}`} className="theme-card__title-link">
-                              {theme.title}
-                            </Link>
-                          </h3>
-                          <p className="theme-card__question">{theme.question}</p>
-                        </div>
-                        <span className="meta-chip meta-chip--amber">{theme.tag}</span>
-                      </div>
-
-                      <div className="chip-row">
-                        <span className="meta-chip">{theme.period}</span>
-                        <span className="meta-chip">{theme.difficulty}</span>
-                      </div>
-
-                      <p>{theme.shortDescription}</p>
-
-                      <button
-                        type="button"
-                        className="button button--ghost button--full"
-                        onClick={() => setOpenThemeId(isOpen ? "" : theme.id)}
-                      >
-                        {isOpen ? "Hide study notes" : "Open study notes"}
-                      </button>
-
-                      {isOpen && <ThemeNotes theme={theme} />}
-
-                      <div className="theme-card__actions">
-                        <Link href={`/themes/${theme.id}`} className="button button--primary button--full">
-                          Read theme page
-                        </Link>
-                        <button
-                          type="button"
-                          className="button button--ghost button--full"
-                          onClick={() => openNavigatorTheme(theme.id, "overview")}
-                        >
-                          Open in theme navigator
-                        </button>
-                      </div>
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-
-            <div id="theme-navigator" className="section-inner theme-navigator-shell">
-              <div className="section-header section-header--split theme-navigator-header">
-                <div>
-                  <SectionKicker>Theme navigator</SectionKicker>
-                  <h2>Move from theme to passage to cross-reference.</h2>
-                </div>
-                <p className="section-sidecopy">
-                  Choose a theme, open the essential path, then widen into the full corpus view and development arc.
-                </p>
-              </div>
-
-              <CorpusNavigator
-                initialThemeId={selectedNavigatorThemeId}
-                initialTab={selectedNavigatorTab}
-                showHero={false}
-              />
-            </div>
-          </div>
-          </section>
-
-        <section id="theme-web" className="content-section section-border section-muted">
-          <div className="section-inner">
-            <div className="section-header section-header--split">
-              <div>
-                <SectionKicker>Theme web</SectionKicker>
-                <h2>Nietzsche’s ideas do not stand alone.</h2>
-              </div>
-              <p className="section-sidecopy">
-                This turns the site from a list of topics into a conceptual map. Each node shows how one problem pulls other problems into its orbit.
-              </p>
-            </div>
-
-            <div className="theme-web-grid">
-              {themeWeb.map((node) => {
-                const centerTheme = getStudyTheme(node.centerThemeId);
-                return (
-                  <Card key={node.centerThemeId} className="card--padded">
-                    <p className="feature-panel__label">{node.idea}</p>
-                    <h3>{centerTheme?.title}</h3>
-                    <p>{node.note}</p>
-                    <div className="theme-reference-list">
-                      {node.connects.map((themeId) => {
-                        const relatedTheme = getStudyTheme(themeId);
-                        return relatedTheme ? (
-                          <Link
-                            key={themeId}
-                            href={`/themes/${themeId}`}
-                            className="theme-reference"
-                          >
-                            <span>{relatedTheme.title}</span>
-                            <small>Read theme guide</small>
-                          </Link>
-                        ) : null;
-                      })}
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section id="method" className="content-section">
-          <div className="section-inner section-inner--split">
-            <div>
-              <SectionKicker>Method</SectionKicker>
-              <h2>How to read without flattening him.</h2>
-              <p className="section-copy">
-                This site treats Nietzsche as a philosopher of culture, psychology, nihilism, self-overcoming, and life-affirmation. The goal is to resist the reduction of the books into detached quotations.
-              </p>
-            </div>
-
-            <div className="principles-grid">
-              {principles.map((principle, index) => (
-                <Card key={principle} className="card--padded">
-                  <div className="number-badge">{index + 1}</div>
-                  <p>{principle}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="lessons" className="content-section section-border section-muted">
-          <div className="section-inner">
-            <div className="section-header">
-              <SectionKicker>Lessons</SectionKicker>
-              <h2>Three ways into Nietzsche.</h2>
-              <p className="section-copy">
-                Keep the lesson section lean by focusing on clear reading paths instead of format templates.
-              </p>
-            </div>
-
-            <div className="card-grid card-grid--three">
-              {studyTracks.map((track) => (
-                <Card key={track.title} className="card--padded">
-                  <div className="card-header">
-                    <h3>{track.title}</h3>
-                    <span className="meta-chip meta-chip--amber">{track.level}</span>
-                  </div>
-                  <p>{track.description}</p>
-                  <div className="reading-list">
-                    {track.readings.map((reading, index) => (
-                      <div key={reading} className="reading-list__item">
-                        <span className="reading-list__index">{index + 1}</span>
-                        <span>{reading}</span>
-                      </div>
-                    ))}
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="editions" className="content-section">
-          <div className="section-inner section-inner--split">
-            <div>
-              <SectionKicker>Edition notes</SectionKicker>
-              <h2>Build accuracy into the site from the beginning.</h2>
-              <p className="section-copy">
-                This gives the public site scholarly discipline without making it feel dry or forbidding.
-              </p>
-            </div>
-
-            <div className="principles-grid">
-              {editionNotes.map((note, index) => (
-                <Card key={note} className="card--padded">
-                  <div className="number-badge">{index + 1}</div>
-                  <p>{note}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <footer className="site-footer">
-        <div className="site-footer__inner">
-          <div className="site-footer__seal">⛰</div>
-          <h2>The task is not to admire Nietzsche. It is to learn how to read him.</h2>
-          <p>
-            Follow the aphorisms, compare the periods, resist easy slogans, and keep asking what kind of life a value serves.
-          </p>
-          <a href="#start" className="button button--footer">
-            Return to the beginning
-          </a>
         </div>
-      </footer>
+      </section>
+
+      <section className="content-section section-border section-muted" aria-labelledby="questions-heading">
+        <div className="section-inner">
+          <div className="section-header section-header--split">
+            <div><p className="section-kicker">Follow a question</p><h2 id="questions-heading">Three ways into the arguments</h2></div>
+            <Link href="/themes" className="text-link">All {themes.length} theme guides <span aria-hidden="true">→</span></Link>
+          </div>
+          <div className="card-grid card-grid--three home-themes">
+            {featuredThemes.map((theme) => (
+              <article key={theme.id} className="card card--padded">
+                <p className="section-kicker">{theme.category}</p>
+                <h3><Link href={`/themes/${theme.id}`}>{theme.shortTitle || theme.title}</Link></h3>
+                <p>{theme.shortDescription}</p>
+                <Link href={`/themes/${theme.id}`} className="text-link">Read the guide <span aria-hidden="true">→</span></Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="content-section" aria-labelledby="reading-tools-heading">
+        <div className="section-inner">
+          <div className="section-header"><p className="section-kicker">Go further</p><h2 id="reading-tools-heading">Keep the passage in view</h2></div>
+          <div className="card-grid card-grid--three home-tools">
+            <article>
+              <h3>Read through the books</h3>
+              <p>Place a passage in its work and historical setting. Follow Nietzsche’s changing concerns from tragedy to his final writings.</p>
+              <Link href="/works" className="text-link">Browse book guides <span aria-hidden="true">→</span></Link>
+            </article>
+            <article>
+              <h3>Trace a passage</h3>
+              <p>Search the indexed selections by theme, work, and period. Follow connections and return to a saved reading view.</p>
+              <Link href="/navigator" className="text-link">Open the passage navigator <span aria-hidden="true">→</span></Link>
+            </article>
+            <article>
+              <h3>The Will to Power</h3>
+              <p>Explore the posthumous notebook compilation with editorial cautions and companion references to Nietzsche’s finished works.</p>
+              <Link href="/the-will-to-power" className="text-link">Read the compilation guide <span aria-hidden="true">→</span></Link>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section className="home-method section-border">
+        <div className="section-inner">
+          <h2>A guide to interpretation, with room for disagreement.</h2>
+          <p>Distinguish the text, the commentary, and your own judgment. Our <Link href="/method">reading method</Link> explains the approach; the <Link href="/editions">editions guide</Link> explains the references and translations.</p>
+        </div>
+      </section>
     </main>
   );
 }

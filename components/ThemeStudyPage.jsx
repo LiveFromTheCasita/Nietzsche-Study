@@ -32,6 +32,8 @@ function PassageReference({ passage, relation, relevance, index }) {
           <em>{passage.work}</em> {passage.citation}
         </p>
         <p>{relevance || passage.summary}</p>
+        <p className="fine-print">Published {passage.publicationYear}{passage.dateNote ? ` · ${passage.dateNote}` : ""}</p>
+        <Link href={`/works/${passage.workId}`} className="text-link">Book guide and reading edition →</Link>
       </div>
     </article>
   );
@@ -61,24 +63,8 @@ export default function ThemeStudyPage({ theme }) {
   };
 
   return (
-    <main className="theme-study-page">
-      <a href="#content" className="skip-link">
-        Skip to content
-      </a>
+    <main id="content" tabIndex={-1} className="theme-study-page">
 
-      <nav className="site-nav">
-        <div className="site-nav__inner">
-          <Link href="/" className="site-nav__brand">
-            Nietzsche Study
-          </Link>
-          <div className="site-nav__links">
-            <Link href="/themes">Themes</Link>
-            <Link href="/the-will-to-power">Will to Power</Link>
-            <Link href="/#theme-navigator">Navigator</Link>
-            <Link href="/#lessons">Lessons</Link>
-          </div>
-        </div>
-      </nav>
 
       <section className="theme-study-hero">
         <div className="theme-study-hero__inner">
@@ -88,11 +74,14 @@ export default function ThemeStudyPage({ theme }) {
             </Link>
             <div className="chip-row">
               <span className="meta-chip meta-chip--amber">{theme.category}</span>
-              {meta.difficulty ? <span className="meta-chip">{meta.difficulty}</span> : null}
+              {meta.difficulty ? <span className="meta-chip">Level: {meta.difficulty}</span> : null}
+              {meta.priority ? <span className="meta-chip">Priority: {meta.priority}</span> : null}
               {meta.period ? <span className="meta-chip">{meta.period}</span> : null}
             </div>
             <h1>{theme.title}</h1>
             <p className="theme-study-lede">{theme.overview}</p>
+            <p className="fine-print">Edited by <Link href="/about">Bob Smith</Link></p>
+            <Link href={`/navigator?theme=${theme.id}&tab=corpus`} className="button button--secondary">Search this theme’s indexed passages</Link>
           </div>
 
           <aside className="theme-study-summary" aria-label="Theme summary">
@@ -118,7 +107,7 @@ export default function ThemeStudyPage({ theme }) {
         </div>
       </section>
 
-      <div id="content" className="theme-study-content">
+      <div className="theme-study-content">
         <section className="theme-study-section theme-study-section--split">
           <div className="theme-study-section__intro">
             <p className="section-kicker">Essential Path</p>
@@ -238,7 +227,7 @@ export default function ThemeStudyPage({ theme }) {
         <section className="theme-study-section theme-study-section--network">
           <div className="theme-study-section__intro">
             <p className="section-kicker">Submitted Papers</p>
-            <h2>Student and research papers under this theme.</h2>
+            <h2>Essays for further discussion.</h2>
           </div>
 
           {submittedPapers.length === 0 ? (

@@ -1,5 +1,5 @@
 import { permanentRedirect } from "next/navigation";
 
 export default function CorpusPage() {
-  permanentRedirect("/");
+  permanentRedirect("/navigator");
 }
